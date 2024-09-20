@@ -9,7 +9,7 @@ public enum Race {
     GITHYANKI(List.of()),
     ORC(List.of()),
     HALF_ORC(List.of()),
-    DRAGON(List.of()), //subraces
+    DRAGON(List.of()), //subraces, subraces have different sizes
     GOBLIN(List.of()), //subraces? (goblin, hobgoblin, bugbear)
     KOBOLD(List.of()), //subraces
     MINOTAUR(List.of()),
@@ -51,27 +51,36 @@ public enum Race {
 
 
 enum Subrace {
-    PLACEHOLDER1(Ability.INT),
-    PLACEHOLDER2(Ability.CON),
-    HIGH_ELF(Ability.INT),
-    WOOD_ELF(Ability.INT),
-    DROW(Ability.CHA),
-    HALF_ELF(Ability.INT),
-    HALF_ELF_DROW_DESCENDANT(Ability.CHA),
-    DUERGAR(Ability.NONE),
-    HILL_DWARF(Ability.NONE),
-    MOUNTAIN_DWARF(Ability.NONE),
-    VAMPIRE(Ability.CHA), //add more undead
-    SOLAR(Ability.WIS),
-    AASIMON(Ability.WIS),
-    ELADRIN(Ability.WIS),
-    DEVIL(Ability.CHA),
-    DEMON(Ability.STR);
+    PLACEHOLDER1(Ability.INT, Size.Medium),
+    PLACEHOLDER2(Ability.CON, Size.Medium),
+    HIGH_ELF(Ability.INT, Size.Medium),
+    WOOD_ELF(Ability.INT, Size.Medium),
+    DROW(Ability.CHA, Size.Medium),
+    HALF_ELF(Ability.INT, Size.Medium),
+    HALF_ELF_DROW_DESCENDANT(Ability.CHA, Size.Medium),
+    DUERGAR(Ability.NONE, Size.Medium),
+    HILL_DWARF(Ability.NONE, Size.Medium),
+    MOUNTAIN_DWARF(Ability.NONE, Size.Medium),
+    VAMPIRE(Ability.CHA, Size.Medium), //add more undead
+    SOLAR(Ability.WIS, Size.Medium),
+    AASIMON(Ability.WIS, Size.Medium),
+    ELADRIN(Ability.WIS, Size.Medium),
+    DEVIL(Ability.CHA, Size.Medium),
+    DEMON(Ability.STR, Size.Medium);
 
 
     final Ability SPELLCASTING_ABILITY; //for racial spells
 
-    Subrace(Ability spellcastingAbility){
+    Subrace(Ability spellcastingAbility, Size size){
         this.SPELLCASTING_ABILITY = spellcastingAbility;
     }
+}
+
+enum Size{
+    Tiny,
+    Small,
+    Medium,
+    Large,
+    Huge,
+    Gargantuan
 }

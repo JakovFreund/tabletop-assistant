@@ -21,7 +21,6 @@ class Creature{
 
         //prepared spells (class?)
 
-
         // move this to CharacterDefault dataclass or something and loop through it, add and sort race and class counters to different object/class and levels
 
         turnResources.add(new TurnResource("Action", 1, 1, RefillRate.TURN));
@@ -62,6 +61,8 @@ class Creature{
         turnResources.add(new TurnResource("Wild Shape Charge", 0, 0, RefillRate.SHORT_REST));
 
         turnResources.add(new TurnResource("Luck Point", 0, 0, RefillRate.LONG_REST)); // lucky feat
+
+        turnResources.add(new TurnResource("Mage Hand", 0, 0, RefillRate.SHORT_REST));
 
         // TODO race counters if any? (there is Faerie Fire atleast)
 
@@ -109,6 +110,8 @@ class Creature{
 
         // TODO proc poisons, saving throws or whatever, this needs to be an if tree with calculations
 
+
+
         // remove 1 duration from effects
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffects){
@@ -124,6 +127,7 @@ class Creature{
 
     void endCombat(){
         // loop proc all turnDuration effects to the end
+        // TODO prompt auto go into turn based mode on death saving throws
     }
 
     void shortRest(){
@@ -182,6 +186,9 @@ class Creature{
     }
 
 
+    // add Summons/Objects (Dancing Lights)
+
+    // add Class and Race to Creature
 
     // need to implement smart dice addition for multiple of the same ItemEffects addition
 
@@ -190,6 +197,8 @@ class Creature{
     // add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 
     // Item image
+
+    // fix subrace sizes
 
     // finish races & subraces enums, classes and sublclasses enums
 
@@ -208,6 +217,8 @@ class Creature{
 
     // go through actual dnd (not bg3) subraces, subclasses, spells and add/modify the ones you have
 
+    // levelups are done manually !!!
+
     // --- WEBAPP RESEARCH & CONVERSION TIME --- 
 
     // finish all spells list
@@ -223,7 +234,7 @@ class Creature{
 
 
 
-    // player inventory actions come as requests to me with checkmark or x to approve or dissmiss
+    // player inventory actions come as requests to me with checkmark or x to approve or dissmiss (ability to lock each inventory)
 
     // add trading: buying and selling items (trader has buy and sell modifiers that can be changed by spells )
 

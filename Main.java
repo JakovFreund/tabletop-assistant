@@ -7,13 +7,22 @@ public static void main(String[] args) {
     System.out.println(a.inventory.get(0));
     System.out.println(StatusEffect.BLINDED.DESCRIPTION);
     System.out.println(Spell.get("Sacred Flame").getDescription(1, 4));
+    //testSpells();
 }
 
 
 
-// admin can lock each inventory from player interaction
-// add console interface to run commands
-
+static void testSpells(){
+    int testlevel;
+    for (Spell spell : Spell.SPELLS){
+        System.out.println(spell.NAME+" level "+spell.LEVEL+":\n"+spell.getDescription(spell.LEVEL, 1));
+        if(spell.FORMULAS.size()>0){
+            testlevel = spell.LEVEL + 1;
+            System.out.println(spell.NAME+" level "+testlevel+":\n"+spell.getDescription(testlevel, 1));
+        }
+        System.err.println("###\n");
+    }
+}
 
 
 

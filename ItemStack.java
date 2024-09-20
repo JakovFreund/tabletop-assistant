@@ -151,7 +151,8 @@ enum EffectType {
     DAMAGE,
     HEAL,
     AC,
-    LEARN_SPELL // (EffectType.LEARN_SPELL,"Haste 2") add function to Spell class to convert string to enum
+    LEARN_SPELL, // (EffectType.LEARN_SPELL,"Haste 2") add function to Spell class to convert string to enum
+    LIGHT
     // TODO add more
 }
 
