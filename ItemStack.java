@@ -90,7 +90,7 @@ class Item {
 
 enum ItemType {
     WOODEN_SWORD ("Wooden sword", ItemCategory.WEAPON, Rarity.UNCOMMON, "Just a wooden sword", 30, 10, List.of(new ItemEffect(EffectType.DAMAGE,"d6"))),
-    ENGLISH_CHESTPLATE("English Chestplate", ItemCategory.WEARABLE, Rarity.RARE, "abc", 50, 15, List.of(new ItemEffect(EffectType.AC,"10"))),
+    RANDOM_CHESTPLATE("Random Chestplate", ItemCategory.WEARABLE, Rarity.RARE, "abc", 50, 15, List.of(new ItemEffect(EffectType.AC,"10"))),
 
 
     //https://5e.tools/lootgen.html

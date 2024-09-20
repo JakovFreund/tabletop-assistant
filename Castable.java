@@ -105,8 +105,8 @@ class Spell extends Castable{
         return string;
     }
 
-    String getDescription(int level, int creatureLevel){
-        if (this.LEVEL > level || this.UPCAST == false && this.LEVEL != level){
+    String getDescription(int requestedSpellLevel, int creatureLevel){
+        if (this.LEVEL > requestedSpellLevel || this.UPCAST == false && this.LEVEL != requestedSpellLevel){
             return "Spell cannot be cast at this level.";
         }
         
@@ -115,7 +115,7 @@ class Spell extends Castable{
             int result = 0;
             String formula = new String(FORMULA);
             
-            formula = replaceVariables(formula, this.LEVEL, level, creatureLevel, calculatedFormulas);
+            formula = replaceVariables(formula, this.LEVEL, requestedSpellLevel, creatureLevel, calculatedFormulas);
             
             // Evaluate the expression
             try {
@@ -130,12 +130,12 @@ class Spell extends Castable{
         ArrayList<String> calculatedCosts = new ArrayList<String>();
         for (String COST : this.COST){
             String cost = new String(COST);
-            cost = replaceVariables(cost, this.LEVEL, level, creatureLevel, calculatedFormulas);
+            cost = replaceVariables(cost, this.LEVEL, requestedSpellLevel, creatureLevel, calculatedFormulas);
             calculatedCosts.add(cost);
         }
 
         String description = new String(this.DESCRIPTION);
-        description = replaceVariables(description, this.LEVEL, level, creatureLevel, calculatedFormulas);
+        description = replaceVariables(description, this.LEVEL, requestedSpellLevel, creatureLevel, calculatedFormulas);
 
         String finalDescription = new String();
         finalDescription += this.NAME + "\n";
