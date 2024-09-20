@@ -25,6 +25,7 @@ abstract class Castable {
     }
 }
 
+// TODO move ClassAction and Spell to seperate files
 
 class ClassAction extends Castable {
     //final Class CLASS;
@@ -53,6 +54,16 @@ class ClassAction extends Castable {
 
 }
 
+enum SchoolOfMagic{
+    ABJURATIOM,
+    CONJURATION,
+    DIVINATION,
+    ENCHANTMENT,
+    EVOCATION,
+    ILLUSION,
+    NECROMANCY,
+    TRANSMUTATION;
+}
 
 class Spell extends Castable{
     final int LEVEL;
@@ -179,15 +190,3 @@ class Spell extends Castable{
     );
  
 }
-
-enum SchoolOfMagic{
-    ABJURATIOM,
-    CONJURATION,
-    DIVINATION,
-    ENCHANTMENT,
-    EVOCATION,
-    ILLUSION,
-    NECROMANCY,
-    TRANSMUTATION;
-}
-

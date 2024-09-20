@@ -1,7 +1,7 @@
 import java.util.List;
 
 public enum Race {
-    HUMAN(List.of(Subrace.ENGLISH, Subrace.VIKING)),
+    HUMAN(List.of(Subrace.PLACEHOLDER1, Subrace.PLACEHOLDER2)),
     ELF(List.of(Subrace.WOOD_ELF, Subrace.HIGH_ELF, Subrace.DROW)),
     HALF_ELF(List.of(Subrace.HALF_ELF)),
     DWARF(List.of(Subrace.HILL_DWARF, Subrace.MOUNTAIN_DWARF, Subrace.DUERGAR)),
@@ -51,8 +51,8 @@ public enum Race {
 
 
 enum Subrace {
-    ENGLISH(Ability.INT),
-    VIKING(Ability.CON),
+    PLACEHOLDER1(Ability.INT),
+    PLACEHOLDER2(Ability.CON),
     HIGH_ELF(Ability.INT),
     WOOD_ELF(Ability.INT),
     DROW(Ability.CHA),
