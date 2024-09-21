@@ -30,10 +30,11 @@ public enum Race {
     //myconid
     //ooze?
     
-    // animals? (owlbear, griffin...)
+    // TODO add more animals (and group them to Beast)
+    // Bear, Cat, Dog, Frog, Rat, Boar, Spider, Wolf, Bird, Bat, Other
 
-    // maybe group Minotaurs, Aarakocra, Satyr, Leonin, Tabaxi to Chimera/Beast
-    // Pegasus also to Chimera or Air Elemental
+    // group to Beast: Minotaurs, Aarakocra, Satyr, Leonin, Tabaxi, Pegasus, Owlbear, Griffin, Displacer Beast
+    //  also to Chimera or Air Elemental
     ;
 
     //https://5e.tools/races.html

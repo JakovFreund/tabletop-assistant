@@ -186,7 +186,7 @@ class Creature{
     }
 
 
-    // add Summons/Objects (Dancing Lights)
+    // add Dancing Lights creature (Construct? Spell? Summon? Object?)
 
     // add Class and Race to Creature
 
