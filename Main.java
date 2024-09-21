@@ -6,7 +6,7 @@ public static void main(String[] args) {
     a.inventory.add(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
     System.out.println(a.inventory.get(0));
     System.out.println(StatusEffect.BLINDED.DESCRIPTION);
-    System.out.println(Spell.get("Sacred Flame").getDescription(1, 4));
+    System.out.println(Spell.get("Eldritch Blast").getDescription(0, 5));
     //testSpells();
 }
 

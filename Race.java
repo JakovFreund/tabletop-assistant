@@ -52,22 +52,22 @@ public enum Race {
 
 
 enum Subrace {
-    PLACEHOLDER1(Ability.INT, Size.Medium),
-    PLACEHOLDER2(Ability.CON, Size.Medium),
-    HIGH_ELF(Ability.INT, Size.Medium),
-    WOOD_ELF(Ability.INT, Size.Medium),
-    DROW(Ability.CHA, Size.Medium),
-    HALF_ELF(Ability.INT, Size.Medium),
-    HALF_ELF_DROW_DESCENDANT(Ability.CHA, Size.Medium),
-    DUERGAR(Ability.NONE, Size.Medium),
-    HILL_DWARF(Ability.NONE, Size.Medium),
-    MOUNTAIN_DWARF(Ability.NONE, Size.Medium),
-    VAMPIRE(Ability.CHA, Size.Medium), //add more undead
-    SOLAR(Ability.WIS, Size.Medium),
-    AASIMON(Ability.WIS, Size.Medium),
-    ELADRIN(Ability.WIS, Size.Medium),
-    DEVIL(Ability.CHA, Size.Medium),
-    DEMON(Ability.STR, Size.Medium);
+    PLACEHOLDER1(Ability.INT, Size.MEDIUM),
+    PLACEHOLDER2(Ability.CON, Size.MEDIUM),
+    HIGH_ELF(Ability.INT, Size.MEDIUM),
+    WOOD_ELF(Ability.INT, Size.MEDIUM),
+    DROW(Ability.CHA, Size.MEDIUM),
+    HALF_ELF(Ability.INT, Size.MEDIUM),
+    HALF_ELF_DROW_DESCENDANT(Ability.CHA, Size.MEDIUM),
+    DUERGAR(Ability.NONE, Size.MEDIUM),
+    HILL_DWARF(Ability.NONE, Size.MEDIUM),
+    MOUNTAIN_DWARF(Ability.NONE, Size.MEDIUM),
+    VAMPIRE(Ability.CHA, Size.MEDIUM), //add more undead
+    SOLAR(Ability.WIS, Size.MEDIUM),
+    AASIMON(Ability.WIS, Size.MEDIUM),
+    ELADRIN(Ability.WIS, Size.MEDIUM),
+    DEVIL(Ability.CHA, Size.MEDIUM),
+    DEMON(Ability.STR, Size.MEDIUM);
 
 
     final Ability SPELLCASTING_ABILITY; //for racial spells
@@ -78,10 +78,10 @@ enum Subrace {
 }
 
 enum Size{
-    Tiny,
-    Small,
-    Medium,
-    Large,
-    Huge,
-    Gargantuan
+    TINY,
+    SMALL,
+    MEDIUM,
+    LARGE,
+    HUGE,
+    GARGANTUAN
 }

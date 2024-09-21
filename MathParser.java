@@ -3,6 +3,7 @@ import java.util.Stack;
 public class MathParser {
 
     public static void main(String[] args) {
+        /*
         int upcast = 2;
         String formula = "(1+{upcast})*3/6*2";
         
@@ -16,6 +17,7 @@ public class MathParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
     }
 
     // Evaluate expression with integers and basic operations (+, -, *, /, parentheses)
