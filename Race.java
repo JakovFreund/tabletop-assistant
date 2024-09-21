@@ -25,6 +25,7 @@ public enum Race {
     CELESTIAL(List.of(Subrace.SOLAR, Subrace.AASIMON, Subrace.ELADRIN)),
     FIEND(List.of(Subrace.DEVIL, Subrace.DEMON)),
     ELEMENTAL(List.of()), //phoenix, instead of elementals try to find an appropriate being, Fire Genasi,
+    SUMMON(List.of(Subrace.SPELL))
     //fairy
     //siren
     //myconid
@@ -52,32 +53,36 @@ public enum Race {
 
 
 enum Subrace {
-    PLACEHOLDER1(Ability.INT, Size.MEDIUM),
-    PLACEHOLDER2(Ability.CON, Size.MEDIUM),
-    HIGH_ELF(Ability.INT, Size.MEDIUM),
-    WOOD_ELF(Ability.INT, Size.MEDIUM),
-    DROW(Ability.CHA, Size.MEDIUM),
-    HALF_ELF(Ability.INT, Size.MEDIUM),
-    HALF_ELF_DROW_DESCENDANT(Ability.CHA, Size.MEDIUM),
-    DUERGAR(Ability.NONE, Size.MEDIUM),
-    HILL_DWARF(Ability.NONE, Size.MEDIUM),
-    MOUNTAIN_DWARF(Ability.NONE, Size.MEDIUM),
-    VAMPIRE(Ability.CHA, Size.MEDIUM), //add more undead
-    SOLAR(Ability.WIS, Size.MEDIUM),
-    AASIMON(Ability.WIS, Size.MEDIUM),
-    ELADRIN(Ability.WIS, Size.MEDIUM),
-    DEVIL(Ability.CHA, Size.MEDIUM),
-    DEMON(Ability.STR, Size.MEDIUM);
+    PLACEHOLDER1(Ability.INT, CreatureSize.MEDIUM),
+    PLACEHOLDER2(Ability.CON, CreatureSize.MEDIUM),
+    HIGH_ELF(Ability.INT, CreatureSize.MEDIUM),
+    WOOD_ELF(Ability.INT, CreatureSize.MEDIUM),
+    DROW(Ability.CHA, CreatureSize.MEDIUM),
+    HALF_ELF(Ability.INT, CreatureSize.MEDIUM),
+    HALF_ELF_DROW_DESCENDANT(Ability.CHA, CreatureSize.MEDIUM),
+    DUERGAR(Ability.NONE, CreatureSize.MEDIUM),
+    HILL_DWARF(Ability.NONE, CreatureSize.MEDIUM),
+    MOUNTAIN_DWARF(Ability.NONE, CreatureSize.MEDIUM),
+    VAMPIRE(Ability.CHA, CreatureSize.MEDIUM), //add more undead
+    SOLAR(Ability.WIS, CreatureSize.MEDIUM),
+    AASIMON(Ability.WIS, CreatureSize.MEDIUM),
+    ELADRIN(Ability.WIS, CreatureSize.MEDIUM),
+    DEVIL(Ability.CHA, CreatureSize.MEDIUM),
+    DEMON(Ability.STR, CreatureSize.MEDIUM),
+
+    SPELL(Ability.NONE, CreatureSize.SMALL);
 
 
     final Ability SPELLCASTING_ABILITY; //for racial spells
+    final CreatureSize CREATURE_SIZE;
 
-    Subrace(Ability spellcastingAbility, Size size){
+    Subrace(Ability spellcastingAbility, CreatureSize creatureSize){
         this.SPELLCASTING_ABILITY = spellcastingAbility;
+        this.CREATURE_SIZE = creatureSize;
     }
 }
 
-enum Size{
+enum CreatureSize{
     TINY,
     SMALL,
     MEDIUM,

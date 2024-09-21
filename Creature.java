@@ -186,21 +186,21 @@ class Creature{
     }
 
 
-    // add Dancing Lights creature (Construct? Spell? Summon? Object?)
 
-    // add Class and Race to Creature
 
-    // need to implement smart dice addition for multiple of the same ItemEffects addition
+    // use DiceNotation.addDice() for multiple of the same ItemEffects addition
 
     // change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)
 
-    // add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
+    // check subrace creature sizes
 
-    // Item image
-
-    // fix subrace sizes
+    // add gnomes, halflings
 
     // finish races & subraces enums, classes and sublclasses enums
+
+    // add Class and Race to Creature
+
+    // add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 
     // finish all statuseffects enum
 
@@ -220,6 +220,8 @@ class Creature{
     // levelups are done manually !!!
 
     // --- WEBAPP RESEARCH & CONVERSION TIME --- 
+
+    // Item image
 
     // finish all spells list
 
