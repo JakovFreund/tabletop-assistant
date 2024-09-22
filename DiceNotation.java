@@ -21,7 +21,8 @@ public class DiceNotation {
         for (String diceType : diceMap.keySet()) {
             int count = diceMap.get(diceType);
             if (count > 0) {
-                if (result.length() > 0) result.append("+");
+                if (result.length() > 0)
+                    result.append("+");
                 result.append(count).append(diceType);
             }
         }

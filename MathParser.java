@@ -4,28 +4,30 @@ public class MathParser {
 
     public static void main(String[] args) {
         /*
-        int upcast = 2;
-        String formula = "(1+{upcast})*3/6*2";
-        
-        // Replace the variable
-        formula = formula.replace("{upcast}", Integer.toString(upcast));
-        
-        // Evaluate the expression
-        try {
-            int result = evaluateExpression(formula);
-            System.out.println("Result: " + result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+         * int upcast = 2;
+         * String formula = "(1+{upcast})*3/6*2";
+         * 
+         * // Replace the variable
+         * formula = formula.replace("{upcast}", Integer.toString(upcast));
+         * 
+         * // Evaluate the expression
+         * try {
+         * int result = evaluateExpression(formula);
+         * System.out.println("Result: " + result);
+         * } catch (Exception e) {
+         * e.printStackTrace();
+         * }
+         */
     }
 
-    // Evaluate expression with integers and basic operations (+, -, *, /, parentheses)
+    // Evaluate expression with integers and basic operations (+, -, *, /,
+    // parentheses)
     public static int evaluateExpression(String expression) throws Exception {
         return evaluatePostfix(infixToPostfix(expression));
     }
 
-    // Convert infix expression to postfix expression (RPN - Reverse Polish Notation)
+    // Convert infix expression to postfix expression (RPN - Reverse Polish
+    // Notation)
     private static String infixToPostfix(String expression) throws Exception {
         StringBuilder result = new StringBuilder();
         Stack<Character> stack = new Stack<>();
@@ -50,7 +52,8 @@ public class MathParser {
             else if (c == '(') {
                 stack.push(c);
             }
-            // If the character is ')', pop and add to output from the stack until '(' is found
+            // If the character is ')', pop and add to output from the stack until '(' is
+            // found
             else if (c == ')') {
                 while (!stack.isEmpty() && stack.peek() != '(')
                     result.append(stack.pop()).append(' ');
@@ -98,7 +101,8 @@ public class MathParser {
                 i--; // Step back since the loop went one step too far
                 stack.push(num);
             }
-            // If the character is an operator, pop two elements from the stack and apply the operator
+            // If the character is an operator, pop two elements from the stack and apply
+            // the operator
             else if (isOperator(c)) {
                 int val2 = stack.pop();
                 int val1 = stack.pop();

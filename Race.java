@@ -19,7 +19,7 @@ public enum Race {
     CENTAUR(List.of()),
     LEONIN(List.of()),
     AARAKOCRA(List.of()),
-    BEHOLDER(List.of()),//add subraces
+    BEHOLDER(List.of()), //add subraces
     UNDEAD(List.of()), //skeleton, zombie, wraith...?
     AASIMAR(List.of()),
     CELESTIAL(List.of(Subrace.SOLAR, Subrace.AASIMON, Subrace.ELADRIN)),
@@ -30,7 +30,7 @@ public enum Race {
     //siren
     //myconid
     //ooze?
-    
+
     // TODO add more animals (and group them to Beast)
     // Bear, Cat, Dog, Frog, Rat, Boar, Spider, Wolf, Bird, Bat, Other
 
@@ -44,13 +44,11 @@ public enum Race {
 
     final List<Subrace> SUBRACES;
 
-
-    Race(List<Subrace> subraceList){
+    Race(List<Subrace> subraceList) {
         this.SUBRACES = subraceList;
     }
 
 }
-
 
 enum Subrace {
     PLACEHOLDER1(Ability.INT, CreatureSize.MEDIUM),
@@ -72,17 +70,16 @@ enum Subrace {
 
     SPELL(Ability.NONE, CreatureSize.SMALL);
 
-
     final Ability SPELLCASTING_ABILITY; //for racial spells
     final CreatureSize CREATURE_SIZE;
 
-    Subrace(Ability spellcastingAbility, CreatureSize creatureSize){
+    Subrace(Ability spellcastingAbility, CreatureSize creatureSize) {
         this.SPELLCASTING_ABILITY = spellcastingAbility;
         this.CREATURE_SIZE = creatureSize;
     }
 }
 
-enum CreatureSize{
+enum CreatureSize {
     TINY,
     SMALL,
     MEDIUM,

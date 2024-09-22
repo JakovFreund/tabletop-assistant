@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class Creature{
+class Creature {
     int STR;
     int DEX;
     int CON;
@@ -10,10 +10,9 @@ class Creature{
     ArrayList<StatusEffectInstance> statusEffects;
     ArrayList<TurnResource> turnResources;
     ArrayList<ItemStack> inventory;
-    ItemStack equiped [];
+    ItemStack equiped[];
 
-
-    public Creature () {
+    public Creature() {
         statusEffects = new ArrayList<StatusEffectInstance>();
         turnResources = new ArrayList<TurnResource>();
         inventory = new ArrayList<ItemStack>();
@@ -66,58 +65,50 @@ class Creature{
 
         // TODO race counters if any? (there is Faerie Fire atleast)
 
-
-
     }
 
-
-    TurnResource getTurnResource(String name){
-        for (TurnResource turnResource : turnResources){
-            if (turnResource.name == name){
+    TurnResource getTurnResource(String name) {
+        for (TurnResource turnResource : turnResources) {
+            if (turnResource.name == name) {
                 return turnResource;
             }
         }
         return null;
     }
 
-    ArrayList<TurnResource> getTurnResources(RefillRate refillRate){
+    ArrayList<TurnResource> getTurnResources(RefillRate refillRate) {
         ArrayList<TurnResource> refillRateTurnResources = new ArrayList<TurnResource>();
-        for (TurnResource turnResource : turnResources){
-            if (turnResource.refillRate == refillRate){
+        for (TurnResource turnResource : turnResources) {
+            if (turnResource.refillRate == refillRate) {
                 refillRateTurnResources.add(turnResource);
             }
         }
         return refillRateTurnResources;
     }
 
-    public void setTurnResourceAmount(String name, int amount){
+    public void setTurnResourceAmount(String name, int amount) {
         TurnResource turnResource = getTurnResource(name);
-        if (turnResource != null){
+        if (turnResource != null) {
             turnResource.amount = amount;
-        }
-        else {
+        } else {
             System.out.println("turnResource doesn't exist");
         }
     }
 
-
-    void myTurn(){
+    void myTurn() {
         // refresh action, bonus action, reaction
-        for (TurnResource turnResource : getTurnResources(RefillRate.TURN)){
+        for (TurnResource turnResource : getTurnResources(RefillRate.TURN)) {
             turnResource.amount = turnResource.maxAmount;
         }
 
-
         // TODO proc poisons, saving throws or whatever, this needs to be an if tree with calculations
-
-
 
         // remove 1 duration from effects
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : statusEffects){
-            if (statusEffectInstance.duration == null){
+        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+            if (statusEffectInstance.duration == null) {
                 statusEffectInstance.roundsDuration -= 1;
-                if (statusEffectInstance.roundsDuration == 0){
+                if (statusEffectInstance.roundsDuration == 0) {
                     toRemove.add(statusEffectInstance);
                 }
             }
@@ -125,68 +116,69 @@ class Creature{
         statusEffects.removeAll(toRemove);
     }
 
-    void endCombat(){
+    void endCombat() {
         // loop proc all turnDuration effects to the end
         // TODO prompt auto go into turn based mode on death saving throws
     }
 
-    void shortRest(){
+    void shortRest() {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : statusEffects){
-            if (statusEffectInstance.duration == Duration.SHORT_REST){
+        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+            if (statusEffectInstance.duration == Duration.SHORT_REST) {
                 toRemove.add(statusEffectInstance);
             }
         }
         statusEffects.removeAll(toRemove);
     }
 
-    void longRest(){
+    void longRest() {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : statusEffects){
-            if (statusEffectInstance.duration == Duration.LONG_REST){ //probably need to refresh all, not just LONG_REST
+        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+            if (statusEffectInstance.duration == Duration.LONG_REST) { //probably need to refresh all, not just LONG_REST
                 toRemove.add(statusEffectInstance);
             }
         }
         statusEffects.removeAll(toRemove);
     }
 
-    void giveItems(ArrayList<ItemStack> items){
-        for(ItemStack item : items){
+    void giveItems(ArrayList<ItemStack> items) {
+        for (ItemStack item : items) {
             this.giveItem(item);
         }
     }
 
-    void giveItem(ItemStack item){
+    void giveItem(ItemStack item) {
         inventory.add(item);
     }
 
-    void equipItem(int inventoryIndex, EquipSlot equipSlot){
+    void equipItem(int inventoryIndex, EquipSlot equipSlot) {
         // remove buffs from previous in that slot
         equiped[equipSlot.ordinal()] = inventory.get(inventoryIndex);
 
     }
 
-    void consumeItem(int inventoryIndex){
+    void consumeItem(int inventoryIndex) {
         // TODO
         // if type.CONSUMABLE
     }
 
-    void damage(int amount){
+    void damage(int amount) {
         getTurnResource("HP").amount -= amount;
     }
 
-    void setHP(int amount){
+    void setHP(int amount) {
         getTurnResource("HP").amount = amount;
     }
 
-    void setMaxHP(int amount){
+    void setMaxHP(int amount) {
         getTurnResource("HP").maxAmount = amount;
     }
 
+    // Move 2 files to /util
 
-
+    // move all static final lists to 1 file (new record), in Castable: SPELLS = Dataclass.SPELLS
 
     // use DiceNotation.addDice() for multiple of the same ItemEffects addition
 
@@ -210,7 +202,6 @@ class Creature{
 
     // Creature.spellbook (will need source of learned spell (which class) to calculate save DC), sort spellbook by school, ability to favourite spells
 
-
     // Creature.cast() players can ping spells and attacks (Flint casts Icebolt and it does 3d6+5 frost damage) (Flint uses melee attack and it does 3d6+5 bludgeoning damage)
 
     // sort race and class TurnResource counters to different objects/classes
@@ -219,7 +210,9 @@ class Creature{
 
     // levelups are done manually !!!
 
-    // --- WEBAPP RESEARCH & CONVERSION TIME --- 
+    // Postman website and vsc extension for POST requests
+
+    // --- WEBAPP RESEARCH & CONVERSION TIME ---
 
     // Item image
 
@@ -227,14 +220,9 @@ class Creature{
 
     // Item can be lootable, add ability to save inventories (probably to database) outside player's inventories (if they intentionally drop some bag), print out its location coordinates and inventories recursively 
 
-
-
     // add sorting options for inventory
 
     // print shit out and save it to a log file simultaneously
-
-
-
 
     // player inventory actions come as requests to me with checkmark or x to approve or dissmiss (ability to lock each inventory)
 
@@ -247,9 +235,6 @@ class Creature{
     // COMBAT TAB with quick resource counter control for all
 
     // SCENE TAB with Items
-
-
-
 
 }
 
@@ -267,7 +252,7 @@ enum EquipSlot {
     RANGED
 }
 
-enum Ability{
+enum Ability {
     NONE,
     STR,
     DEX,
@@ -275,8 +260,9 @@ enum Ability{
     INT,
     WIS,
     CHA;
+
     static int toModifier(int AbilityPoint) {
-        int result = AbilityPoint/2;
-        return result-5;
+        int result = AbilityPoint / 2;
+        return result - 5;
     }
 }

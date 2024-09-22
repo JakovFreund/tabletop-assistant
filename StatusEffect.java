@@ -1,4 +1,4 @@
-enum StatusEffect{
+enum StatusEffect {
     //Conditions
     BLINDED("blind description"),
     CHARMED("charmed description"),
@@ -19,7 +19,6 @@ enum StatusEffect{
     // Debuffs
     // Features (proficiencies, traits)
     // Feats // Character.addFeat(FEAT.blabla); Character.addBuff(Buff.STR_IMPROVEMENT, Duration.UNLIMITED) - increases STR by 1
-
 
     final String DESCRIPTION;
 
@@ -43,13 +42,11 @@ enum StatusEffect{
         ));
     */
 
-    StatusEffect(String description){
+    StatusEffect(String description) {
         this.DESCRIPTION = description;
     }
 
 }
-
-
 
 enum Duration {
     SHORT_REST,
@@ -63,16 +60,13 @@ class StatusEffectInstance {
     int roundsDuration; // maybe change to turnsDuration
     int Amount; //TODO to String for dice values
 
-    
-    
-
-    public StatusEffectInstance (StatusEffect statusEffect, Duration duration, int Amount){ // probably change to 1 constructor with default Duration.TURN 
+    public StatusEffectInstance(StatusEffect statusEffect, Duration duration, int Amount) { // probably change to 1 constructor with default Duration.TURN 
         this.statusEffect = statusEffect;
         this.duration = duration;
         this.Amount = Amount;
     }
 
-    public StatusEffectInstance (StatusEffect statusEffect, int roundsDuration, int Amount){
+    public StatusEffectInstance(StatusEffect statusEffect, int roundsDuration, int Amount) {
         this.statusEffect = statusEffect;
         this.roundsDuration = roundsDuration;
         this.Amount = Amount;
