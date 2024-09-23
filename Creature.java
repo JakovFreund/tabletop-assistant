@@ -176,10 +176,7 @@ class Creature {
         getTurnResource("HP").maxAmount = amount;
     }
 
-    // Move 2 files to /util
-
-    // move all static final lists to 1 file (new record), in Castable: SPELLS = Dataclass.SPELLS
-
+    
     // use DiceNotation.addDice() for multiple of the same ItemEffects addition
 
     // change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)

@@ -1,3 +1,5 @@
+import util.DiceNotation;
+
 class Main {
 
     public static void main(String[] args) {
