@@ -253,3 +253,46 @@ public final class GameData {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 }
+
+enum ItemType {
+        WOODEN_SWORD("Wooden sword", ItemCategory.WEAPON, Rarity.UNCOMMON, "Just a wooden sword", 30, 10,
+                List.of(new ItemEffect(EffectType.DAMAGE, "d6"))),
+        RANDOM_CHESTPLATE("Random Chestplate", ItemCategory.WEARABLE, Rarity.RARE, "abc", 50, 15,
+                List.of(new ItemEffect(EffectType.AC, "10"))),
+    
+        //https://5e.tools/lootgen.html
+    
+        GOLD("Gold", ItemCategory.MISC, Rarity.COMMON, "Currency of Alarién", 0, 1);
+        // TODO change inlore name of gold
+    
+        //
+        final String NAME;
+        final ItemCategory TYPE;
+        final Rarity BASE_RARITY;
+        final String DESCRIPTION;
+        final int WEIGHT;
+        final int BASE_VALUE;
+        final List<ItemEffect> BASE_EFFECTS;
+    
+        ItemType(String name, ItemCategory type, Rarity rarity, String description, int weight, int value,
+                List<ItemEffect> baseEffects) {
+            this.NAME = name;
+            this.TYPE = type;
+            this.BASE_RARITY = rarity;
+            this.DESCRIPTION = description;
+            this.WEIGHT = weight;
+            this.BASE_VALUE = value;
+            this.BASE_EFFECTS = baseEffects;
+            // TODO weapons can have various properties such as Heavy, Finesse, Light, and so on, Armour has Light, Heavy, 
+        }
+    
+        ItemType(String name, ItemCategory type, Rarity rarity, String description, int weight, int value) {
+            this.NAME = name;
+            this.TYPE = type;
+            this.BASE_RARITY = rarity;
+            this.DESCRIPTION = description;
+            this.WEIGHT = weight;
+            this.BASE_VALUE = value;
+            this.BASE_EFFECTS = null;
+        }
+    }

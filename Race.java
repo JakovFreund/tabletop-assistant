@@ -15,7 +15,7 @@ public enum Race {
     MINOTAUR(List.of()),
     SATYR(List.of()),
     GIANT(List.of()), //ogre, cyclops subrace?
-    ILITHID(List.of()),
+    ILITHID(List.of()), // add elder brain
     CENTAUR(List.of()),
     LEONIN(List.of()),
     AARAKOCRA(List.of()),
@@ -25,7 +25,7 @@ public enum Race {
     CELESTIAL(List.of(Subrace.SOLAR, Subrace.AASIMON, Subrace.ELADRIN)),
     FIEND(List.of(Subrace.DEVIL, Subrace.DEMON)),
     ELEMENTAL(List.of()), //phoenix, instead of elementals try to find an appropriate being, Fire Genasi,
-    SUMMON(List.of(Subrace.SPELL))
+    OBJECT(List.of(Subrace.SPELL));
     //fairy
     //siren
     //myconid
@@ -36,7 +36,7 @@ public enum Race {
 
     // group to Beast: Minotaurs, Aarakocra, Satyr, Leonin, Tabaxi, Pegasus, Owlbear, Griffin, Displacer Beast
     //  also to Chimera or Air Elemental
-    ;
+    
 
     //https://5e.tools/races.html
     //http://dndroll.wikidot.com/races
@@ -58,14 +58,14 @@ enum Subrace {
     DROW(Ability.CHA, CreatureSize.MEDIUM),
     HALF_ELF(Ability.INT, CreatureSize.MEDIUM),
     HALF_ELF_DROW_DESCENDANT(Ability.CHA, CreatureSize.MEDIUM),
-    DUERGAR(Ability.NONE, CreatureSize.MEDIUM),
-    HILL_DWARF(Ability.NONE, CreatureSize.MEDIUM),
-    MOUNTAIN_DWARF(Ability.NONE, CreatureSize.MEDIUM),
+    DUERGAR(Ability.NONE, CreatureSize.SMALL),
+    HILL_DWARF(Ability.NONE, CreatureSize.SMALL),
+    MOUNTAIN_DWARF(Ability.NONE, CreatureSize.SMALL),
     VAMPIRE(Ability.CHA, CreatureSize.MEDIUM), //add more undead
-    SOLAR(Ability.WIS, CreatureSize.MEDIUM),
-    AASIMON(Ability.WIS, CreatureSize.MEDIUM),
-    ELADRIN(Ability.WIS, CreatureSize.MEDIUM),
-    DEVIL(Ability.CHA, CreatureSize.MEDIUM),
+    SOLAR(Ability.WIS, CreatureSize.LARGE),
+    AASIMON(Ability.WIS, CreatureSize.LARGE),
+    ELADRIN(Ability.WIS, CreatureSize.LARGE),
+    DEVIL(Ability.CHA, CreatureSize.LARGE),
     DEMON(Ability.STR, CreatureSize.MEDIUM),
 
     SPELL(Ability.NONE, CreatureSize.SMALL);

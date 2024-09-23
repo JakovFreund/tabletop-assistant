@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class Creature {
     int STR;
@@ -7,16 +8,29 @@ class Creature {
     int INT;
     int WIS;
     int CHA;
+    Race race;
+    Subrace subrace;
+    HashMap<GameClass, Integer> classes;
+    ArrayList<Subclass> subclasses;
     ArrayList<StatusEffectInstance> statusEffects;
     ArrayList<TurnResource> turnResources;
     ArrayList<ItemStack> inventory;
     ItemStack equiped[];
 
     public Creature() {
-        statusEffects = new ArrayList<StatusEffectInstance>();
-        turnResources = new ArrayList<TurnResource>();
-        inventory = new ArrayList<ItemStack>();
-        equiped = new ItemStack[EquipSlot.values().length];
+        this.classes = new HashMap<GameClass, Integer>();
+        this.statusEffects = new ArrayList<StatusEffectInstance>();
+        this.turnResources = new ArrayList<TurnResource>();
+        this.inventory = new ArrayList<ItemStack>();
+        this.equiped = new ItemStack[EquipSlot.values().length];
+        this.subrace = Subrace.HALF_ELF;
+        for (Race race : Race.values()) {
+            for (Subrace subrace : race.SUBRACES) {
+                if (this.subrace == subrace) {
+                    this.race = race;
+                }
+            }
+        }
 
         //prepared spells (class?)
 
@@ -67,6 +81,16 @@ class Creature {
 
     }
 
+    void levelUp(GameClass gameClass) { // TODO optional add subclasses
+        if (this.classes.containsKey(gameClass)) {
+            this.classes.put(gameClass, this.classes.get(gameClass) + 1);
+        } else{
+            this.classes.put(gameClass, 1);
+        }
+    }
+
+    // TODO void resetLevel() also reset classes and subclasses
+
     TurnResource getTurnResource(String name) {
         for (TurnResource turnResource : turnResources) {
             if (turnResource.name == name) {
@@ -94,6 +118,8 @@ class Creature {
             System.out.println("turnResource doesn't exist");
         }
     }
+
+    // addTurnResource custom for endpoint ?
 
     void myTurn() {
         // refresh action, bonus action, reaction
@@ -176,16 +202,11 @@ class Creature {
         getTurnResource("HP").maxAmount = amount;
     }
 
-    
-    // use DiceNotation.addDice() for multiple of the same ItemEffects addition
-
-    // change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)
-
-    // check subrace creature sizes
-
     // add gnomes, halflings
 
     // finish races & subraces enums, classes and sublclasses enums
+
+    // flying, darkvision... bool passives
 
     // add Class and Race to Creature
 
@@ -195,7 +216,7 @@ class Creature {
 
     // make a playable races list
 
-    // add like 20 spells and ClassActions to list
+    // add like 10 ClassActions to list
 
     // Creature.spellbook (will need source of learned spell (which class) to calculate save DC), sort spellbook by school, ability to favourite spells
 
@@ -213,6 +234,10 @@ class Creature {
 
     // Item image
 
+    // change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)
+
+    // highlight item in inventory on move/modify
+
     // finish all spells list
 
     // Item can be lootable, add ability to save inventories (probably to database) outside player's inventories (if they intentionally drop some bag), print out its location coordinates and inventories recursively 
@@ -228,6 +253,10 @@ class Creature {
     // Go through each class, subclass, race and subrace and imagine trying to level them up
 
     // do i even need a Creature class or a PlayableCharacter class ?
+
+    // display resistances & relevant passives in combat (like minecraft)
+
+    // add "pop" sound (similiar to minecraft item pickup) to equip and inventory actions
 
     // COMBAT TAB with quick resource counter control for all
 

@@ -1,6 +1,6 @@
 import java.util.List;
 
-public enum Class {
+public enum GameClass {
     BARBARIAN(Ability.NONE, List.of(Subclass.BERSERKER, Subclass.WILDHEART, Subclass.WILD_MAGIC)),
     BARD(Ability.CHA, List.of(Subclass.COLLEGE_OF_LORE, Subclass.COLLEGE_OF_VALOUR, Subclass.COLLEGE_OF_SWORDS)),
     CLERIC(Ability.WIS,
@@ -21,7 +21,7 @@ public enum Class {
     //final Boolean SPELLCASTER;
     //final Ability SPELLCASTING_ABILITY;
 
-    Class(Ability spellcastingAbility, List<Subclass> subclassList) {
+    GameClass(Ability spellcastingAbility, List<Subclass> subclassList) {
         this.SPELLCASTING_ABILITY = spellcastingAbility;
         this.SUBCLASSES = subclassList;
     }
