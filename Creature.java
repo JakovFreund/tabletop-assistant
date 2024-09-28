@@ -15,22 +15,16 @@ class Creature {
     ArrayList<StatusEffectInstance> statusEffects;
     ArrayList<TurnResource> turnResources;
     ArrayList<ItemStack> inventory;
-    ItemStack equiped[];
+    int equiped[]; // stores inventory indexes of equiped items
 
     public Creature() {
         this.classes = new HashMap<GameClass, Integer>();
         this.statusEffects = new ArrayList<StatusEffectInstance>();
         this.turnResources = new ArrayList<TurnResource>();
         this.inventory = new ArrayList<ItemStack>();
-        this.equiped = new ItemStack[EquipSlot.values().length];
+        this.equiped = new int[EquipSlot.values().length];
         this.subrace = Subrace.HALF_ELF;
-        for (Race race : Race.values()) {
-            for (Subrace subrace : race.SUBRACES) {
-                if (this.subrace == subrace) {
-                    this.race = race;
-                }
-            }
-        }
+        this.race = this.subrace.RACE;
 
         //prepared spells (class?)
 
@@ -75,9 +69,12 @@ class Creature {
 
         turnResources.add(new TurnResource("Luck Point", 0, 0, RefillRate.LONG_REST)); // lucky feat
 
+        turnResources.add(new TurnResource("Faerie Fire", 0, 0, RefillRate.SHORT_REST)); // drow race trait
         turnResources.add(new TurnResource("Mage Hand", 0, 0, RefillRate.SHORT_REST));
+        turnResources.add(new TurnResource("Benign Transposition: Teleport", 0, 0, RefillRate.LONG_REST));
 
-        // TODO race counters if any? (there is Faerie Fire atleast)
+
+        
 
     }
 
@@ -133,8 +130,8 @@ class Creature {
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffects) {
             if (statusEffectInstance.duration == null) {
-                statusEffectInstance.roundsDuration -= 1;
-                if (statusEffectInstance.roundsDuration == 0) {
+                statusEffectInstance.turnsDuration -= 1;
+                if (statusEffectInstance.turnsDuration == 0) {
                     toRemove.add(statusEffectInstance);
                 }
             }
@@ -181,7 +178,7 @@ class Creature {
 
     void equipItem(int inventoryIndex, EquipSlot equipSlot) {
         // remove buffs from previous in that slot
-        equiped[equipSlot.ordinal()] = inventory.get(inventoryIndex);
+        equiped[equipSlot.ordinal()] = inventoryIndex;
 
     }
 
@@ -202,33 +199,33 @@ class Creature {
         getTurnResource("HP").maxAmount = amount;
     }
 
-    // add gnomes, halflings
+    // https://bg3.wiki/w/index.php?title=Special:CargoQuery&limit=1500&offset=0&tables=conditions&fields=_pageName+%3D+page%2C+name%2C+icon%2C+effects&order_by=name&format=template&default=%3Ctr%3E%3Ctd+colspan%3D%222%22+style%3D%22text-align%3A+center%3B%22%3E%27%27None%27%27%3C%2Ftd%3E%3C%2Ftr%3E&template=ConditionsTableRow&named+args=yes
+
+    // add statusEffects from page (flying, darkvision... bool passives)
 
     // finish races & subraces enums, classes and sublclasses enums
 
-    // flying, darkvision... bool passives
-
-    // add Class and Race to Creature
+    // https://bg3.wiki/wiki/Weapon_actions
 
     // add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 
     // finish all statuseffects enum
 
-    // make a playable races list
+    // make a static playable races list in Race enum
 
     // add like 10 ClassActions to list
 
-    // Creature.spellbook (will need source of learned spell (which class) to calculate save DC), sort spellbook by school, ability to favourite spells
+    // promjeni spell upcastove u true na lv1 spellovima gdje treba
+
+    // Creature.spellbook (will need primary ability of source of learned spell (which class/race) to calculate save DC), sort spellbook by school, ability to favourite spells
 
     // Creature.cast() players can ping spells and attacks (Flint casts Icebolt and it does 3d6+5 frost damage) (Flint uses melee attack and it does 3d6+5 bludgeoning damage)
 
     // sort race and class TurnResource counters to different objects/classes
 
-    // go through actual dnd (not bg3) subraces, subclasses, spells and add/modify the ones you have
+    // go through actual dnd (not bg3) subraces, subclasses, spells, conditions and add/modify the ones you have
 
-    // levelups are done manually !!!
-
-    // Postman website and vsc extension for POST requests
+    // Postman website or vsc extension for POST requests
 
     // --- WEBAPP RESEARCH & CONVERSION TIME ---
 
@@ -251,6 +248,8 @@ class Creature {
     // add trading: buying and selling items (trader has buy and sell modifiers that can be changed by spells )
 
     // Go through each class, subclass, race and subrace and imagine trying to level them up
+
+    // add hierarchy list of Ability Checks, Saving Throws and Attack Roll to see all possible bonuses
 
     // do i even need a Creature class or a PlayableCharacter class ?
 
