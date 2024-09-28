@@ -86,19 +86,22 @@ enum Subrace {
     Subrace(Ability spellcastingAbility, CreatureSize creatureSize) {
         this.SPELLCASTING_ABILITY = spellcastingAbility;
         this.CREATURE_SIZE = creatureSize;
-        this.RACE = this.RACE();
+        this.RACE = null; //RACE(this);
     }
 
-    private Race RACE(){
+    //TODO 
+    /*
+    private static Race RACE(Subrace customSubrace){
         for (Race race : Race.values()) {
             for (Subrace subrace : race.SUBRACES) {
-                if (this == subrace) {
-                    return race;
+                if (customSubrace == subrace) {
+                    return race; // add temporary Race variable and change the final prop to it at the end
                 }
             }
         }
         return null;
     }
+    */
 
 }
 

@@ -4,20 +4,16 @@ class StatusEffectInstance {
     int turnsDuration; // maybe change to turnsDuration
     String customNote; // DM inputed reminder
 
-    public StatusEffectInstance(StatusEffect statusEffect, Duration duration, String customNote) { // probably change to 1 constructor with default Duration.TURN 
+    public StatusEffectInstance(StatusEffect statusEffect, int turnsDuration, Duration duration, String customNote) {
         this.statusEffect = statusEffect;
         this.duration = duration;
-        this.customNote = customNote;
-    }
-
-    public StatusEffectInstance(StatusEffect statusEffect, int turnsDuration, String customNote) {
-        this.statusEffect = statusEffect;
         this.turnsDuration = turnsDuration;
         this.customNote = customNote;
     }
 }
 
 enum Duration {
+    TURNS,
     SHORT_REST,
     LONG_REST,
     UNLIMITED
@@ -72,8 +68,8 @@ enum StatusEffect {
     BARKSKIN("Armour Class increased to 16."),
     BEACON_OF_HOPE("Has Advantage on Wisdom and Death Saving throws. Use the highest possible dice roll when healed."),
     BEARS_ENDURANCE("Has Advantage on Constitution Checks. Gain 7 Temporary Hit Points."),
-    BEND_LUCK_BONUS("Wild magic has twisted the affected entity's fate. It gained a +1d4 bonus to Ability Checks."),
-    BEND_LUCK_PENALTY("Wild magic has twisted the affected entity's fate. It gained a -1d4 bonus to Ability Checks."),
+    BEND_LUCK_BONUS("Wild magic has twisted the affected entity's fate. Gain a +1d4 bonus to Ability Checks."),
+    BEND_LUCK_PENALTY("Wild magic has twisted the affected entity's fate. Gain a -1d4 bonus to Ability Checks."),
     BLACK_TENTACLES("Restrained by dark tendrils. Affected entity can't move and takes 3d6 Bludgeoning damage per turn. Attack Rolls against the affected entity have Advantage, while the entity's Attack Rolls and Dexterity Saving Throws have Disadvantage"),
     BLADE_WARD("Has Resistance against Bludgeoning, Piercing, and Slashing damage."),
     BLEEDING("Creature takes 2 Slashing damage at the start of each turn and has Disadvantage on Constitution Saving throws."),
@@ -85,7 +81,9 @@ enum StatusEffect {
     BLINKED_TO_THE_ETHEREAL_PLANE("Affected entity is in the Ethereal Plane, where it can't be harmed, seen, or affected. Can't move or interact with anything in the world, but can choose to teleport up to 20ft."),
     BLUDGEON_THE_WEAK("Affected entity is Vulnerable to Bludgeoning damage for 3 turns, or until it takes damage."),
     BLURRED("Attackers have Disadvantage on Attack rolls against this creature, unless they do not rely on sight or can see through illusions."),
-    
+    BOLSTERING_MAGIC_BOON("Bolstered by wild magic. Has a +1d4 bonus to Attack Rolls and Ability Checks"),
+    BONE_CHILLED("Can not regain HP. If Undead, has Disadvantage on Attack rolls."),
+    BOUND_WEAPON("The weapon is ritually bound to its wielder. It can't be knocked out of the wielder's hand, and automatically returns to its wielder when Thrown."),
 
 
 
@@ -98,7 +96,9 @@ enum StatusEffect {
 
 
 
+    // add potion heal here
 
+    // add Undead (vulnerable to radiant) and other similiar traits
 
     ;
     // Features (proficiencies, traits)

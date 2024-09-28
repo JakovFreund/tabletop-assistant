@@ -4,12 +4,15 @@ class Main {
 
     public static void main(String[] args) {
         System.out.println(DiceNotation.addDice("4d12+1d2+7", "1d6+2d2+5"));
+        System.out.println(Spell.get("Eldritch Blast").getDescription(0, 5));
+        Damage damage = new Damage.Builder().add(Damage.DamageType.ACID, "2d6").add(Damage.DamageType.BLUDGEONING, "4d4+5").build();
+        System.out.println(damage);
+
         Creature a = new Creature();
-        a.statusEffects.add(new StatusEffectInstance(StatusEffect.PETRIFIED, 3, ""));
+        a.statusEffects.add(new StatusEffectInstance(StatusEffect.PETRIFIED, 3, Duration.TURNS, ""));
         a.inventory.add(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
         System.out.println(a.inventory.get(0));
-        System.out.println(StatusEffect.BLINDED.DESCRIPTION);
-        System.out.println(Spell.get("Eldritch Blast").getDescription(0, 5));
+
         //testSpells();
     }
 

@@ -81,4 +81,24 @@ enum Subclass { // TODO add TurnResource list to subclass constructor?
     ILLUSION_SCHOOL,
     NECROMANCY_SCHOOL,
     TRANSMUTATION_SCHOOL;
+
+    final GameClass GAMECLASS;
+
+    Subclass() {
+        this.GAMECLASS = null; //GAMECLASS();
+    }
+    //TODO 
+    /*
+    private GameClass GAMECLASS() {
+        for (GameClass gameClass : GameClass.values()) {
+            for (Subclass subClass : gameClass.SUBCLASSES) {
+                if (this == subClass) {
+                    return gameClass;
+                }
+            }
+        }
+        return null;
+    }
+    */
+
 }

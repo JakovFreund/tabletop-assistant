@@ -139,6 +139,10 @@ class Creature {
         statusEffects.removeAll(toRemove);
     }
 
+    void addStatusEffectInstance(StatusEffectInstance statusEffectInstance){
+        // TODO also if tree, apply initial effect
+    }
+
     void endCombat() {
         // loop proc all turnDuration effects to the end
         // TODO prompt auto go into turn based mode on death saving throws
@@ -203,7 +207,15 @@ class Creature {
 
     // add statusEffects from page (flying, darkvision... bool passives)
 
+    // ItemEffect conversion
+
+    // Change Spell structure, add Target class & enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
+
+    // keep seperate track of maxHP from character and bonus HP from effects, probably need bonus HP counter (render it in a different color - orange)
+
     // finish races & subraces enums, classes and sublclasses enums
+
+    // I can program in the resistances if I manually damage by type
 
     // https://bg3.wiki/wiki/Weapon_actions
 
@@ -244,6 +256,8 @@ class Creature {
     // print shit out and save it to a log file simultaneously
 
     // player inventory actions come as requests to me with checkmark or x to approve or dissmiss (ability to lock each inventory)
+
+    // stack splitting when transfering item
 
     // add trading: buying and selling items (trader has buy and sell modifiers that can be changed by spells )
 

@@ -112,18 +112,29 @@ class ItemEffect {
     EffectType effectType;
     String statModifier; //maybe change String to Object
 
+    // TODO maybe do if EffectType == ... -> assign different properties (have ItemEffect obj have Damage, StatusEffect)
+    // can we do it all from String? (for example Damage obj from String("4d6,0,0,0,0,1d4,0")), String(StatusEffect), String(spellName)
+
     ItemEffect(EffectType effectType, String statModifier) {
         this.effectType = effectType;
         this.statModifier = statModifier;
     }
+
+    Damage getDamage(){
+        // TODO
+        return null;
+    }
+
+    // StatusEffectInstance(StatusEffect, int turnsDuration, Duration, String customNote) // SPLIT BY ";"
+    
 }
 
 enum EffectType {
     DAMAGE,
-    HEAL,
+    HEAL, // for consumables, probably change to GIVE_STATUS_EFFECT(String(StatusEffect))
     AC,
     LEARN_SPELL, // (EffectType.LEARN_SPELL,"Haste 2") add function to Spell class to convert string to enum
-    LIGHT
+    LIGHTED // item is illuminated
     // TODO add more
 }
 
