@@ -131,10 +131,12 @@ class ItemEffect {
 
 enum EffectType {
     DAMAGE,
-    HEAL, // for consumables, probably change to GIVE_STATUS_EFFECT(String(StatusEffect))
+    HEAL, // for consumables, probably change to GRANT_STATUS_EFFECT(String(StatusEffect)) to wielder
     AC,
     LEARN_SPELL, // (EffectType.LEARN_SPELL,"Haste 2") add function to Spell class to convert string to enum
+    APPLY_EFFECT_ON_HIT, // TODO change name - applies StatusEffect on target/victim
     LIGHTED // item is illuminated
+
     // TODO add more
 }
 

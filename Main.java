@@ -9,9 +9,9 @@ class Main {
         System.out.println(damage);
 
         Creature a = new Creature();
-        a.statusEffects.add(new StatusEffectInstance(StatusEffect.PETRIFIED, 3, Duration.TURNS, ""));
-        a.inventory.add(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
-        System.out.println(a.inventory.get(0));
+        a.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.PETRIFIED, 3, Duration.TURNS, ""));
+        a.giveItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
+        System.out.println(a.getItemStackByIndex(0));
 
         //testSpells();
     }

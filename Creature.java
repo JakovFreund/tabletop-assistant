@@ -2,24 +2,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class Creature {
-    int STR;
-    int DEX;
-    int CON;
-    int INT;
-    int WIS;
-    int CHA;
-    Race race;
-    Subrace subrace;
-    HashMap<GameClass, Integer> classes;
-    ArrayList<Subclass> subclasses;
-    ArrayList<StatusEffectInstance> statusEffects;
-    ArrayList<TurnResource> turnResources;
-    ArrayList<ItemStack> inventory;
+    private int STR;
+    private int DEX;
+    private int CON;
+    private int INT;
+    private int WIS;
+    private int CHA;
+    private Race race;
+    private Subrace subrace;
+    private HashMap<GameClass, Integer> classes;
+    private ArrayList<Subclass> subclasses;
+    private ArrayList<StatusEffectInstance> statusEffectInstances;
+    private ArrayList<TurnResource> turnResources;
+    private ArrayList<ItemStack> inventory;
     int equiped[]; // stores inventory indexes of equiped items
+
+    // TODO ^^need getters for all because of StatusEffects (getter returns modified current value (for example temporary double DEX) while these contain base values)
 
     public Creature() {
         this.classes = new HashMap<GameClass, Integer>();
-        this.statusEffects = new ArrayList<StatusEffectInstance>();
+        this.statusEffectInstances = new ArrayList<StatusEffectInstance>();
         this.turnResources = new ArrayList<TurnResource>();
         this.inventory = new ArrayList<ItemStack>();
         this.equiped = new int[EquipSlot.values().length];
@@ -36,6 +38,7 @@ class Creature {
         turnResources.add(new TurnResource("Movement", 5, 5, RefillRate.TURN));
 
         turnResources.add(new TurnResource("HP", 5, 5, RefillRate.LONG_REST));
+        turnResources.add(new TurnResource("Temporary HP", 0, 0, RefillRate.NEVER));
         turnResources.add(new TurnResource("Hit Dice", 3, 3, RefillRate.LONG_REST));
 
         turnResources.add(new TurnResource("Level 1 Spellslot", 0, 0, RefillRate.LONG_REST));
@@ -128,7 +131,7 @@ class Creature {
 
         // remove 1 duration from effects
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+        for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
             if (statusEffectInstance.duration == null) {
                 statusEffectInstance.turnsDuration -= 1;
                 if (statusEffectInstance.turnsDuration == 0) {
@@ -136,11 +139,22 @@ class Creature {
                 }
             }
         }
-        statusEffects.removeAll(toRemove);
+        statusEffectInstances.removeAll(toRemove);
     }
 
     void addStatusEffectInstance(StatusEffectInstance statusEffectInstance){
         // TODO also if tree, apply initial effect
+        // actually probably a switch case tree
+        // for example: addStatusEffectInstance(Invisibility) -> if this.hasStatusEffect(Branding Smite) -> can't turn invisible
+    }
+
+    boolean hasStatusEffect(StatusEffect statusEffect){
+        for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
+            if (statusEffectInstance.statusEffect == statusEffect){
+                return true;
+            }
+        }
+        return false;
     }
 
     void endCombat() {
@@ -151,23 +165,23 @@ class Creature {
     void shortRest() {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+        for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
             if (statusEffectInstance.duration == Duration.SHORT_REST) {
                 toRemove.add(statusEffectInstance);
             }
         }
-        statusEffects.removeAll(toRemove);
+        statusEffectInstances.removeAll(toRemove);
     }
 
     void longRest() {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : statusEffects) {
+        for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
             if (statusEffectInstance.duration == Duration.LONG_REST) { //probably need to refresh all, not just LONG_REST
                 toRemove.add(statusEffectInstance);
             }
         }
-        statusEffects.removeAll(toRemove);
+        statusEffectInstances.removeAll(toRemove);
     }
 
     void giveItems(ArrayList<ItemStack> items) {
@@ -191,8 +205,28 @@ class Creature {
         // if type.CONSUMABLE
     }
 
-    void damage(int amount) {
-        getTurnResource("HP").amount -= amount;
+    ArrayList<ItemStack> getInventory(){
+        return this.inventory;
+    }
+
+    ItemStack getItemStackByIndex(int index){
+        return this.getInventory().get(index);
+    }
+
+    void damage(int damageAmount) {
+        if (getTurnResource("Temporary HP").amount>0){
+            if (getTurnResource("Temporary HP").amount > damageAmount){
+                getTurnResource("Temporary HP").amount -= damageAmount;
+                if(this.hasStatusEffect(StatusEffect.ARMOUR_OF_AGATHYS)){
+                    // TODO armour of agahtys proc
+                }
+                // TODO other cases
+
+            }
+            
+        }
+        
+        getTurnResource("HP").amount -= damageAmount;
     }
 
     void setHP(int amount) {
@@ -202,78 +236,7 @@ class Creature {
     void setMaxHP(int amount) {
         getTurnResource("HP").maxAmount = amount;
     }
-
-    // https://bg3.wiki/w/index.php?title=Special:CargoQuery&limit=1500&offset=0&tables=conditions&fields=_pageName+%3D+page%2C+name%2C+icon%2C+effects&order_by=name&format=template&default=%3Ctr%3E%3Ctd+colspan%3D%222%22+style%3D%22text-align%3A+center%3B%22%3E%27%27None%27%27%3C%2Ftd%3E%3C%2Ftr%3E&template=ConditionsTableRow&named+args=yes
-
-    // add statusEffects from page (flying, darkvision... bool passives)
-
-    // ItemEffect conversion
-
-    // Change Spell structure, add Target class & enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
-
-    // keep seperate track of maxHP from character and bonus HP from effects, probably need bonus HP counter (render it in a different color - orange)
-
-    // finish races & subraces enums, classes and sublclasses enums
-
-    // I can program in the resistances if I manually damage by type
-
-    // https://bg3.wiki/wiki/Weapon_actions
-
-    // add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
-
-    // finish all statuseffects enum
-
-    // make a static playable races list in Race enum
-
-    // add like 10 ClassActions to list
-
-    // promjeni spell upcastove u true na lv1 spellovima gdje treba
-
-    // Creature.spellbook (will need primary ability of source of learned spell (which class/race) to calculate save DC), sort spellbook by school, ability to favourite spells
-
-    // Creature.cast() players can ping spells and attacks (Flint casts Icebolt and it does 3d6+5 frost damage) (Flint uses melee attack and it does 3d6+5 bludgeoning damage)
-
-    // sort race and class TurnResource counters to different objects/classes
-
-    // go through actual dnd (not bg3) subraces, subclasses, spells, conditions and add/modify the ones you have
-
-    // Postman website or vsc extension for POST requests
-
-    // --- WEBAPP RESEARCH & CONVERSION TIME ---
-
-    // Item image
-
-    // change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)
-
-    // highlight item in inventory on move/modify
-
-    // finish all spells list
-
-    // Item can be lootable, add ability to save inventories (probably to database) outside player's inventories (if they intentionally drop some bag), print out its location coordinates and inventories recursively 
-
-    // add sorting options for inventory
-
-    // print shit out and save it to a log file simultaneously
-
-    // player inventory actions come as requests to me with checkmark or x to approve or dissmiss (ability to lock each inventory)
-
-    // stack splitting when transfering item
-
-    // add trading: buying and selling items (trader has buy and sell modifiers that can be changed by spells )
-
-    // Go through each class, subclass, race and subrace and imagine trying to level them up
-
-    // add hierarchy list of Ability Checks, Saving Throws and Attack Roll to see all possible bonuses
-
-    // do i even need a Creature class or a PlayableCharacter class ?
-
-    // display resistances & relevant passives in combat (like minecraft)
-
-    // add "pop" sound (similiar to minecraft item pickup) to equip and inventory actions
-
-    // COMBAT TAB with quick resource counter control for all
-
-    // SCENE TAB with Items
+    
 
 }
 

@@ -10,6 +10,9 @@ public final class GameData {
         //Create Spell Slot
         //Bardic Inspiration
         //Cutting Words
+
+        // unique actions of summons and druid wild shape also go here (don't need monsters since players aren't gonna be controlling them) - technically racial actions
+        // Water elemental: Slam, Winter's Breath, Multiattack
         );
 
         static final List<Spell> SPELLS = List.of(
@@ -265,6 +268,8 @@ enum ItemType {
                         List.of(new ItemEffect(EffectType.DAMAGE, "4d8"))),
 
         //https://5e.tools/lootgen.html
+
+        // add staff that gives an action to get arcane acuity for 3 turns
 
         GOLD("Gold", ItemCategory.MISC, Rarity.COMMON, "Currency of Alarién", 0, 1);
         // TODO change inlore name of gold

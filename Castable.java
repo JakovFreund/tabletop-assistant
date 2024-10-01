@@ -25,8 +25,6 @@ abstract class Castable {
         }
 }
 
-// TODO move ClassAction and Spell to seperate files
-
 class ClassAction extends Castable {
         //final Class CLASS;
         ClassAction(String name, List<String> cost, Boolean concentration, Boolean ritual, List<String> formulas,
@@ -70,8 +68,6 @@ class Spell extends Castable {
                 this.SCHOOL = school;
                 this.UPCAST = upcast;
         }
-
-        // Spell save DC is class determined so i don't need to calculate it here
 
         static Spell get(String name) {
                 for (Spell SPELL : SPELLS) {
