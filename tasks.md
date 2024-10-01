@@ -133,9 +133,9 @@ mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\t
 
 RULES:
 
-DnD 5e Players Handbook (BnW OCR)
-D&D 5e Dungeon Master's Guide ( PDFDrive)
-5th Edition - Essentials Kit Rulebook
+- DnD 5e Players Handbook
+- D&D 5e Dungeon Master's Guide
+- 5th Edition - Essentials Kit Rulebook
 
 
 
