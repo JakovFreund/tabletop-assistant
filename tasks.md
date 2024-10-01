@@ -1,8 +1,6 @@
 
 ### TASKS
 
-test1
-
 - python script that displays all possible json pros of spell
 
 - create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
@@ -121,25 +119,34 @@ mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\t
 
 ### ILIA TASKS
 
-1 square ~2.5cm 
-popunit spellove u kodu na githubu (GameData.java), popunit subclasses u kodu na githubu (GameClass.java), koliki ce bit: gridmap PC movement range, gridmap spell range, gridmap aoe spells, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage), kako funkcioniraju hit dice (short rest, long rest, levelup), koji ability za attack roll a koji za damage roll, weapon types and scaling (finesse, versatile, martial...)
+- koliki ce bit: gridmap PC movement range, gridmap spell range, gridmap aoe spells, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
+- gridmap -> 1 square ~2.5cm
+- kako funkcioniraju hit dice (short rest, long rest, levelup)
+- koji ability za attack roll a koji za damage roll (napisi tablicu po klasama i tipovima oruzja ak treba nemam pojma)
+- weapon types and scaling (finesse, versatile, martial...) https://bg3.wiki/wiki/Weapons#Properties
+- nauci kak funkcionira git i github (add, commit, pull, push, branch, merge, pull request) zato da mi mozes contributat u kod bez mog inputa i samo pull requestat
+- popunit subclasses u kodu na githubu (GameClass.java)
+- dodavat spellove koji fale u json-u i pregledat ove bg3 spellove koji su tu jel su isti efekti i ako nisu odabrat koji se cini bolji
+- povezat spellove i status effecte u kodu
+- dodavanje slika spellovima
+- convertat feet u squares svugdje u kodu
+
+RULES:
+
 DnD 5e Players Handbook (BnW OCR)
 D&D 5e Dungeon Master's Guide ( PDFDrive)
 5th Edition - Essentials Kit Rulebook
 
----
 
-nauci kak funkcionira git i github (add, commit, pull, push, branch, merge, pull request) zato da mi mozes contributat u kod bez mog inputa i samo pull requestat
 
-dodavat spellove koji fale u json-u i pregledat ove bg3 spellove koji su tu jel su isti efekti i ako nisu odabrat koji se cini bolji
 
-povezat spellove i status effecte u kodu
 
-https://bg3.wiki/wiki/Weapons#Properties
 
-dodavanje slika spellovima
 
-convertat feet u squares svugdje u kodu
+
+
+
+
 
 
 
