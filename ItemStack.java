@@ -53,7 +53,7 @@ class Item {
         recalculate();
     }
 
-    String getEffectModifier(EffectType effectType){
+    String getEffectModifier(ItemEffectType effectType){
         ArrayList<String> modifiers = new ArrayList<String>();
         for (ItemEffect effect : this.effects){
             if (effect.effectType == effectType){
@@ -109,13 +109,13 @@ enum ItemCategory {
 }
 
 class ItemEffect {
-    EffectType effectType;
+    ItemEffectType effectType;
     String statModifier; //maybe change String to Object
 
     // TODO maybe do if EffectType == ... -> assign different properties (have ItemEffect obj have Damage, StatusEffect)
     // can we do it all from String? (for example Damage obj from String("4d6,0,0,0,0,1d4,0")), String(StatusEffect), String(spellName)
 
-    ItemEffect(EffectType effectType, String statModifier) {
+    ItemEffect(ItemEffectType effectType, String statModifier) {
         this.effectType = effectType;
         this.statModifier = statModifier;
     }
@@ -129,15 +129,17 @@ class ItemEffect {
     
 }
 
-enum EffectType {
+enum ItemEffectType { // only for perma stats/effects no temporary like "Light" or "Magic Weapon"
     DAMAGE,
-    HEAL, // for consumables, probably change to GRANT_STATUS_EFFECT(String(StatusEffect)) to wielder
+    HEAL, // for consumables, probably change to GRANT_STATUS_EFFECT(StatusEffect.HASTE.name() and then convert it back with StatusEffect.valueOf("HASTE")) to wielder
     AC,
-    LEARN_SPELL, // (EffectType.LEARN_SPELL,"Haste 2") add function to Spell class to convert string to enum
-    APPLY_EFFECT_ON_HIT, // TODO change name - applies StatusEffect on target/victim
-    LIGHTED // item is illuminated
+    LEARN_SPELL, // (EffectType.LEARN_SPELL,"Haste") maybe needs a primary DC Ability ("Haste;DEX")
+    ON_HIT_EFFECT, // applies StatusEffect on target/victim
+    PACT_WEAPON,
+    
 
     // TODO add more
+    // go through statuseffects and maybe move some here to weapon effect
 }
 
 enum Rarity {

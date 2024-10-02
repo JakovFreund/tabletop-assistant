@@ -121,6 +121,10 @@ class Creature {
 
     // addTurnResource custom for endpoint ?
 
+    void logManualInput(String string){ // for StatusEffects that don't proc on their own
+        System.out.println("MANUAL INPUT: " + string);
+    }
+
     void myTurn() {
         // refresh action, bonus action, reaction
         for (TurnResource turnResource : getTurnResources(RefillRate.TURN)) {
@@ -128,8 +132,8 @@ class Creature {
         }
 
         // TODO proc poisons, saving throws or whatever, this needs to be an if tree with calculations
-
         // remove 1 duration from effects
+
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
             if (statusEffectInstance.duration == null) {
@@ -140,6 +144,10 @@ class Creature {
             }
         }
         statusEffectInstances.removeAll(toRemove);
+    }
+
+    void endTurn(){
+        // proc the rare end of turn effects
     }
 
     void addStatusEffectInstance(StatusEffectInstance statusEffectInstance){
@@ -197,6 +205,8 @@ class Creature {
     void equipItem(int inventoryIndex, EquipSlot equipSlot) {
         // remove buffs from previous in that slot
         equiped[equipSlot.ordinal()] = inventoryIndex;
+
+        // if creature is holding Produce Flame gain Lighted StatusEffect
 
     }
 

@@ -36,10 +36,12 @@ public enum Race {
     // TODO add more animals (and group them to Beast)
     // Bear, Cat, Dog, Frog, Rat, Boar, Spider, Wolf, Bird, Bat, Other
 
-    // group to Beast: Minotaurs, Aarakocra, Satyr, Leonin, Tabaxi, Pegasus, Owlbear, Griffin, Displacer Beast
+    // group to Beast: Harpy, Minotaur, Aarakocra, Satyr, Leonin, Tabaxi, Pegasus, Owlbear, Griffin, Displacer Beast
     //  also to Chimera or Air Elemental
     
-
+    
+    //https://bg3.wiki/wiki/Template:Creatures
+    //https://bg3.wiki/wiki/List_of_creature_types
     //https://5e.tools/races.html
     //http://dndroll.wikidot.com/races
     //https://www.dndbeyond.com/races

@@ -13,6 +13,7 @@
 - https://bg3.wiki/wiki/Weapon_actions
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 - finish all statuseffects enum
+- update the spell descriptions by making them more descriptive and dnd-like (as a contrast to crpg-like) https://roll20.net/compendium/dnd5e/Index%3ASpells
 - make a static playable races list in Race enum
 - change "Elemental Weapon" spell so it doesn't give +1 to both Attack roll and damgae roll, but only to attack roll
 - add a clickable damage object in log that auto copies the damage into calculator (or just queues text pointer on appropriate damage types)
@@ -79,13 +80,16 @@ mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\t
 
 - trenutno su sve mjerne jedinice postavljene u metrima i feet, a treba ih pretvorit u gridmap squares
 - gridmap -> 1 square ≈ 2.5cm irl
+- odredi koliko ce 1 square bit u feet. prodi kroz spellove u Player's Handbook-u, statuseffecte u StatusEffect.java i guglaj sta su drugi napravili
 - koliki ce bit (u squares): PC movement range, spell range, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
 - gridmap aoe spells (nacrtat aoe grid za svaki radius, pregledat sve spellove za cudne oblike npr. cone i nacrtat kak ce to izgledat za razlicite rangeve)
 - gridmap Wall of Fire ?
 - kako funkcioniraju hit dice (short rest, long rest, levelup)
-- koji ability za attack roll a koji za damage roll (napisi tablicu po klasama i tipovima oruzja ak treba nemam pojma)
+- koji ability za attack roll a koji za damage roll (napisi listu po klasama i tipovima oruzja ak treba nemam pojma)
 - weapon types and scaling (finesse, versatile, martial...) https://bg3.wiki/wiki/Weapons#Properties
-- nauci kak funkcionira git i github (add, commit, pull, push, branch, merge, pull request) zato da mi mozes contributat u kod bez mog inputa i samo pull requestat
+- nauci kak funkcionira git i github (zato da mi mozes contributat u kod bez mog inputa):
+    - commands (add, commit, pull, push, branch, merge, pull request)
+    - Feature branching Git workflow
 - popunit subclasses u kodu na githubu (GameClass.java)
 - promjeni spell upcastove u true na lv1 spellovima gdje treba
 - if any spell mentions distance in meters (ex. 9 m): find description and convert to ft
@@ -96,9 +100,12 @@ mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\t
 
 RULES:
 
+[google drive download link for all 3:](https://drive.google.com/drive/folders/1fJvKEWDJ7MjdcF3NVsntdT7wIlEm06JC?usp=sharing)
 - DnD 5e Players Handbook
 - D&D 5e Dungeon Master's Guide
 - 5th Edition - Essentials Kit Rulebook
+
+
 
 
 

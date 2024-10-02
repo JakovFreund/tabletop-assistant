@@ -259,17 +259,19 @@ public final class GameData {
 
 enum ItemType {
         WOODEN_SWORD("Wooden sword", ItemCategory.WEAPON, Rarity.UNCOMMON, "Just a wooden sword", 30, 10,
-                        List.of(new ItemEffect(EffectType.DAMAGE, "d6"))),
+                        List.of(new ItemEffect(ItemEffectType.DAMAGE, "d6"))),
         RANDOM_CHESTPLATE("Random Chestplate", ItemCategory.WEARABLE, Rarity.RARE, "abc", 50, 15,
-                        List.of(new ItemEffect(EffectType.AC, "10"))),
+                        List.of(new ItemEffect(ItemEffectType.AC, "10"))),
         SILVERFANG("Silverfang", ItemCategory.WEAPON, Rarity.EPIC,
                         "An ancient sword forged from Mithril in the legendary Great Hearth of the First Dwarven Kingdom. Being made of Mithril makes it a good choice against the undead.",
                         25, 500,
-                        List.of(new ItemEffect(EffectType.DAMAGE, "4d8"))),
+                        List.of(new ItemEffect(ItemEffectType.DAMAGE, "4d8"))),
 
         //https://5e.tools/lootgen.html
 
         // add staff that gives an action to get arcane acuity for 3 turns
+
+        // Produce Flame is an item that always has "Light" (statuseffect part solved in Creature.java)
 
         GOLD("Gold", ItemCategory.MISC, Rarity.COMMON, "Currency of Alarién", 0, 1);
         // TODO change inlore name of gold
