@@ -321,6 +321,8 @@ enum StatusEffect {
 
     // add Undead (vulnerable to radiant) and other similiar traits
 
+    // Blindsight, Truesight ?
+
     ;
     // Features (proficiencies, racial traits, class traits, passives)
     // Feats // Character.addFeat(FEAT.blabla); Character.addBuff(Buff.STR_IMPROVEMENT, Duration.UNLIMITED) - increases STR by 1
@@ -333,6 +335,8 @@ enum StatusEffect {
 
 
     // https://bg3.wiki/wiki/Feats
+
+    // check if each class action is possible (do necessary turnresources and statuseffects exist):
 
     // https://bg3.wiki/wiki/Template:BarbarianNavbox
     // https://bg3.wiki/wiki/Template:BardNavbox

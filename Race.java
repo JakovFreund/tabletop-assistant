@@ -26,8 +26,12 @@ public enum Race {
     AASIMAR(List.of()),
     CELESTIAL(List.of(Subrace.SOLAR, Subrace.AASIMON, Subrace.ELADRIN)),
     FIEND(List.of(Subrace.DEVIL, Subrace.DEMON, Subrace.DAEMON)),
-    ELEMENTAL(List.of()), //phoenix, instead of elementals try to find an appropriate being, Fire Genasi,
-    OBJECT(List.of(Subrace.SPELL));
+    ELEMENTAL(List.of()), //phoenix, along with basic elementals try to find an appropriate being for each (ex. Fire Genasi, Phoenix..)
+    // PLANT(List.of(Subrace.TREANT, Subrace.MYCONID)),
+    OBJECT(List.of(Subrace.SPELL)),
+    OTHER(List.of());
+
+    // construct ?
     //fairy
     //siren
     //myconid
@@ -38,11 +42,11 @@ public enum Race {
 
     // group to Beast: Harpy, Minotaur, Aarakocra, Satyr, Leonin, Tabaxi, Pegasus, Owlbear, Griffin, Displacer Beast
     //  also to Chimera or Air Elemental
-    
-    
+
     //https://bg3.wiki/wiki/Template:Creatures
     //https://bg3.wiki/wiki/List_of_creature_types
     //https://5e.tools/races.html
+    //https://shieldmaiden.app/compendium/monsters
     //http://dndroll.wikidot.com/races
     //https://www.dndbeyond.com/races
 
@@ -79,7 +83,8 @@ enum Subrace {
     DEMON(Ability.STR, CreatureSize.MEDIUM),
     DAEMON(Ability.WIS, CreatureSize.MEDIUM),
 
-    SPELL(Ability.NONE, CreatureSize.SMALL);
+    SPELL(Ability.NONE, CreatureSize.SMALL),
+    OTHER(Ability.NONE, CreatureSize.MEDIUM);
 
     final Ability SPELLCASTING_ABILITY; //for racial spells
     final CreatureSize CREATURE_SIZE;

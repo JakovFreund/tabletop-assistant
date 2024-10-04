@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class Creature {
-    private int STR;
-    private int DEX;
-    private int CON;
-    private int INT;
-    private int WIS;
-    private int CHA;
+    private int base_STR;
+    private int base_DEX;
+    private int base_CON;
+    private int base_INT;
+    private int base_WIS;
+    private int base_CHA;
     private Race race;
     private Subrace subrace;
     private HashMap<GameClass, Integer> classes;
@@ -30,54 +30,14 @@ class Creature {
 
         //prepared spells (class?)
 
-        // move this to CharacterDefault dataclass or something and loop through it, add and sort race and class counters to different object/class and levels
+        turnResources.add(new TurnResource(TurnResourceType.ACTION));
+        turnResources.add(new TurnResource(TurnResourceType.BONUS_ACTION));
+        //turnResources.add(new TurnResource(TurnResourceType.REACTION));
+        //turnResources.add(new TurnResource(TurnResourceType.MOVEMENT));
 
-        turnResources.add(new TurnResource("Action", 1, 1, RefillRate.TURN));
-        turnResources.add(new TurnResource("Bonus Action", 1, 1, RefillRate.TURN));
-        turnResources.add(new TurnResource("Reaction", 1, 1, RefillRate.TURN));
-        turnResources.add(new TurnResource("Movement", 5, 5, RefillRate.TURN));
-
-        turnResources.add(new TurnResource("HP", 5, 5, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Temporary HP", 0, 0, RefillRate.NEVER));
-        turnResources.add(new TurnResource("Hit Dice", 3, 3, RefillRate.LONG_REST));
-
-        turnResources.add(new TurnResource("Level 1 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 2 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 3 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 4 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 5 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 6 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 7 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 8 Spellslot", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Level 9 Spellslot", 0, 0, RefillRate.LONG_REST));
-
-        turnResources.add(new TurnResource("Warlock Spellslot", 0, 0, RefillRate.SHORT_REST)); //wl spell level is independat of slots
-
-        turnResources.add(new TurnResource("Arcane Recovery Charge", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Bardic Inspiration Charge", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Fungal Infestation Charge", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Lay on Hands Charge", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Natural Recovery Charge", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Rage Charge", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("Sorcery Point", 0, 0, RefillRate.LONG_REST));
-        turnResources.add(new TurnResource("War Priest Charge", 0, 0, RefillRate.LONG_REST));
-
-        turnResources.add(new TurnResource("Action Surge Charge", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Channel Divinity Charge", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Channel Oath Charge", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Superiority Dice", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Ki Points", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Tides of Chaos Charge", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Wild Shape Charge", 0, 0, RefillRate.SHORT_REST));
-
-        turnResources.add(new TurnResource("Luck Point", 0, 0, RefillRate.LONG_REST)); // lucky feat
-
-        turnResources.add(new TurnResource("Faerie Fire", 0, 0, RefillRate.SHORT_REST)); // drow race trait
-        turnResources.add(new TurnResource("Mage Hand", 0, 0, RefillRate.SHORT_REST));
-        turnResources.add(new TurnResource("Benign Transposition: Teleport", 0, 0, RefillRate.LONG_REST));
-
-
-        
+        //turnResources.add(new TurnResource(TurnResourceType.HP));
+        //turnResources.add(new TurnResource(TurnResourceType.Temporary HP));
+        //turnResources.add(new TurnResource(TurnResourceType.Hit Dice));
 
     }
 
@@ -166,7 +126,7 @@ class Creature {
     }
 
     void endCombat() {
-        // loop proc all turnDuration effects to the end
+        // don't proc all turnDuration effects since some may last days, proc them as they travel (10 turns = 1 minute)
         // TODO prompt auto go into turn based mode on death saving throws
     }
 
@@ -211,8 +171,7 @@ class Creature {
     }
 
     void consumeItem(int inventoryIndex) {
-        // TODO
-        // if type.CONSUMABLE
+        // TODO if type.CONSUMABLE
     }
 
     ArrayList<ItemStack> getInventory(){

@@ -267,7 +267,9 @@ enum ItemType {
                         25, 500,
                         List.of(new ItemEffect(ItemEffectType.DAMAGE, "4d8"))),
 
-        //https://5e.tools/lootgen.html
+
+        // https://shieldmaiden.app/compendium/items
+        // https://5e.tools/lootgen.html
 
         // add staff that gives an action to get arcane acuity for 3 turns
 

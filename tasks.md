@@ -1,7 +1,13 @@
 
 ### TASKS
 
-- python script that displays all possible json pros of spell
+- set up basic public website (react frontend) hosted locally
+- i might need a source object/class (this.Creature, this.Castable, this.StatusEffect) which means Creature needs a unique id (probably from database)
+- CastableDamage gets turned into Damage between ping and input
+- make eldritch blast have 3 different damage components that have the same damageType
+- add a CastableHeal object aswell - because of source and drag n dropping
+- add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
+- create a python script that generates this ˇˇ
 - create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
 - add statusEffects from page (flying, darkvision... bool passives)
 - ItemEffect conversion
@@ -31,6 +37,9 @@
 - go through each statuseffect and program it in.
 - go through actual dnd (not bg3) subraces, subclasses, spells, conditions and add/modify the ones you have
 - Postman website or vsc extension for POST requests
+- a the bottom of the screen is a log (player pings, DM pings, DM actions/changes all go there), has ability to filter only DM actions
+- when a player pings a spell, the log prints out all the info and buttons for the DM which i can use to autosubtract turnresources, autofocus damage textboxes (by drag n droping damage on the target creature and just entering appropriate amounts for each type, also autofill in if not dice notation) autoapply statuseffect by drag n drop (with info about the target type [self, enemy...] for clearer gameflow)
+- the players see the buttons but can't use them
 
 - --- WEBAPP RESEARCH & CONVERSION TIME ---
 
@@ -50,6 +59,7 @@
 - add hierarchy list of Ability Checks, Saving Throws and Attack Roll to see all possible bonuses
 - do i even need a Creature class or a PlayableCharacter class ?
 - display resistances & relevant passives in combat (like minecraft)
+- add a cancel drag n drop area on combat screen
 - add "pop" sound (similiar to minecraft item pickup) to equip and inventory actions
 - COMBAT TAB with quick resource counter control for all
 - SCENE TAB with Items
@@ -66,12 +76,18 @@
 
 
 
-### Windows Hard link command:
+### Windows Hard link command
 
 ```batch
 mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabletop-assistant\tasks.md"
 ```
 
+
+### Obsidian render
+
+```md
+<center><iframe width="800" height="500" src="https://github.com/JakovFreund/tabletop-assistant/blob/main/tasks.md#ilia-tasks"></iframe></center>
+```
 
 
 
@@ -90,7 +106,8 @@ mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\t
 - nauci kak funkcionira git i github (zato da mi mozes contributat u kod bez mog inputa):
     - commands (add, commit, pull, push, branch, merge, pull request)
     - Feature branching Git workflow
-- popunit subclasses u kodu na githubu (GameClass.java)
+- popuni TurnResourceType
+- popuni subclasses u kodu na githubu (GameClass.java)
 - promjeni spell upcastove u true na lv1 spellovima gdje treba
 - if any spell mentions distance in meters (ex. 9 m): find description and convert to ft
 - dodavat spellove koji fale u json-u i pregledat ove bg3 spellove koji su tu jel su isti efekti i ako nisu odabrat koji se cini bolji
