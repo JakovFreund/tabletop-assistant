@@ -1,8 +1,6 @@
 
 ### TASKS
 
-- def
-- abc
 - set up basic public website (react frontend) hosted locally
 - i might need a source object/class (this.Creature, this.Castable, this.StatusEffect) which means Creature needs a unique id (probably from database)
 - CastableDamage gets turned into Damage between ping and input
