@@ -5,6 +5,8 @@
 - try websockets and live updating between desktop and phone (button that prints on both screens)
 - maybe do statuseffect procs with Spring @EventListener
 - i might need a source object/class (this.Creature, this.Castable, this.StatusEffect) which means Creature needs a unique id (probably from database)
+- add GameState bean
+- convert Items from enum to class
 - CastableDamage gets turned into Damage between ping and input
 - make eldritch blast have 3 different damage components that have the same damageType
 - add a CastableHeal object aswell - because of source and drag n dropping
