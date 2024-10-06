@@ -2,6 +2,8 @@
 ### TASKS
 
 - set up basic public website (react frontend) hosted locally
+- try websockets and live updating between desktop and phone (button that prints on both screens)
+- maybe do statuseffect procs with Spring @EventListener
 - i might need a source object/class (this.Creature, this.Castable, this.StatusEffect) which means Creature needs a unique id (probably from database)
 - CastableDamage gets turned into Damage between ping and input
 - make eldritch blast have 3 different damage components that have the same damageType
@@ -14,6 +16,7 @@
 - change equiped (to ItemStack ?) since indexes can get fucked by moving items
 - Change Spell structure, add Target class & enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
 - keep seperate track of maxHP from character and bonus HP from effects, probably need bonus HP counter (render it in a different color - orange)
+- players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
 - finish races & subraces enums, classes and sublclasses enums
 - weight and encumbered
 - https://bg3.wiki/wiki/Weapon_actions
@@ -79,7 +82,7 @@
 ### Windows Hard link command
 
 ```batch
-mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabletop-assistant\tasks.md"
+mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabletop-assistant\tasks.md"
 ```
 
 
@@ -94,9 +97,7 @@ mklink /H "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\t
 
 ### ILIA TASKS
 
-- trenutno su sve mjerne jedinice postavljene u metrima i feet, a treba ih pretvorit u gridmap squares
-- gridmap -> 1 square ≈ 2.5cm irl
-- odredi koliko ce 1 square bit u feet. prodi kroz spellove u Player's Handbook-u, statuseffecte u StatusEffect.java i guglaj sta su drugi napravili
+- DMG pg250 procitaj cijeli section pa mi daj tldr slj tjedan
 - koliki ce bit (u squares): PC movement range, spell range, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
 - gridmap aoe spells (nacrtat aoe grid za svaki radius, pregledat sve spellove za cudne oblike npr. cone i nacrtat kak ce to izgledat za razlicite rangeve)
 - gridmap Wall of Fire ?
@@ -122,6 +123,65 @@ RULES:
 - D&D 5e Dungeon Master's Guide
 - 5th Edition - Essentials Kit Rulebook
 
+### BG3 spells missing from 5eSpells.json
+
+#### CANTRIPS
+Blade Ward
+Bone Chill = Chill Touch
+Friends
+Thorn Whip
+
+#### LEVEL 1
+Armour of Agathys
+Arms of Hadar
+Chromatic Orb
+Compelled Duel
+Dissonant Whispers
+Enhance Leap = Jump
+Ensnaring Strike
+Hail of Thorns
+Hex
+Ice Knife
+Ray of Sickness
+Searing Smite
+Shield of Faith
+Tasha's Hideous Laughter = Hideous Laughter
+Thunderous Smite
+Witch Bolt
+Wrathful Smite
+
+#### LEVEL 2
+Cloud of Daggers
+Crown of Madness
+Melf's Acid Arrow = Acid Arrow
+Phantasmal Force
+
+#### LEVEL 3
+Blinding Smite
+Conjure Barrage
+Crusader's Mantle
+Elemental Weapon
+Feign Death
+Grant Flight = Fly
+Hunger of Hadar
+Lightning Arrow
+Warden of Vitality
+
+#### LEVEL 4
+Evard's Black Tentacles = Black Tentacles
+Grasping Vine
+Otiluke's Resilient Sphere = Resilient Sphere
+
+#### LEVEL 5
+Curriculum of Strategy: Artistry of War
+Banishing Smite
+Destructive Wave
+Dethrone
+Arcane Gate
+
+#### LEVEL 6
+Otiluke's Freezing Sphere = Freezing Sphere
+Otto's Irresistible Dance = Irresistible Dance
 
 
 
