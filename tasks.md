@@ -126,62 +126,62 @@ RULES:
 ### BG3 spells missing from 5eSpells.json
 
 #### CANTRIPS
-Blade Ward
-Bone Chill = Chill Touch
-Friends
-Thorn Whip
+- Blade Ward
+- Bone Chill = Chill Touch
+- Friends
+- Thorn Whip
 
 #### LEVEL 1
-Armour of Agathys
-Arms of Hadar
-Chromatic Orb
-Compelled Duel
-Dissonant Whispers
-Enhance Leap = Jump
-Ensnaring Strike
-Hail of Thorns
-Hex
-Ice Knife
-Ray of Sickness
-Searing Smite
-Shield of Faith
-Tasha's Hideous Laughter = Hideous Laughter
-Thunderous Smite
-Witch Bolt
-Wrathful Smite
+- Armour of Agathys
+- Arms of Hadar
+- Chromatic Orb
+- Compelled Duel
+- Dissonant Whispers
+- Enhance Leap = Jump
+- Ensnaring Strike
+- Hail of Thorns
+- Hex
+- Ice Knife
+- Ray of Sickness
+- Searing Smite
+- Shield of Faith
+- Tasha's Hideous Laughter = Hideous Laughter
+- Thunderous Smite
+- Witch Bolt
+- Wrathful Smite
 
 #### LEVEL 2
-Cloud of Daggers
-Crown of Madness
-Melf's Acid Arrow = Acid Arrow
-Phantasmal Force
+- Cloud of Daggers
+- Crown of Madness
+- Melf's Acid Arrow = Acid Arrow
+- Phantasmal Force
 
 #### LEVEL 3
-Blinding Smite
-Conjure Barrage
-Crusader's Mantle
-Elemental Weapon
-Feign Death
-Grant Flight = Fly
-Hunger of Hadar
-Lightning Arrow
-Warden of Vitality
+- Blinding Smite
+- Conjure Barrage
+- Crusader's Mantle
+- Elemental Weapon
+- Feign Death
+- Grant Flight = Fly
+- Hunger of Hadar
+- Lightning Arrow
+- Warden of Vitality
 
 #### LEVEL 4
-Evard's Black Tentacles = Black Tentacles
-Grasping Vine
-Otiluke's Resilient Sphere = Resilient Sphere
+- Evard's Black Tentacles = Black Tentacles
+- Grasping Vine
+- Otiluke's Resilient Sphere = Resilient Sphere
 
 #### LEVEL 5
-Curriculum of Strategy: Artistry of War
-Banishing Smite
-Destructive Wave
-Dethrone
-Arcane Gate
+- Curriculum of Strategy: Artistry of War
+- Banishing Smite
+- Destructive Wave
+- Dethrone
+- Arcane Gate
 
 #### LEVEL 6
-Otiluke's Freezing Sphere = Freezing Sphere
-Otto's Irresistible Dance = Irresistible Dance
+- Otiluke's Freezing Sphere = Freezing Sphere
+- Otto's Irresistible Dance = Irresistible Dance
 
 
 
