@@ -1,3 +1,5 @@
+package com.freund.tabletop_assistant.model;
+
 import java.util.List;
 
 public enum Race {

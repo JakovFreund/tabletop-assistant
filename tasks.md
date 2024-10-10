@@ -68,8 +68,9 @@
 - add "pop" sound (similiar to minecraft item pickup) to equip and inventory actions
 - COMBAT TAB with quick resource counter control for all
 - SCENE TAB with Items
-
-
+- players roll investigation checks on combat start for each new creature type to see their stats and abilities in combat (like homm4 few, band, scores...), on failed roll -> statuseffects and stats greyed out
+- AC style vantage points for map discovery
+- add a device managment UI that assigns nicknames to MAC adresses or whatever
 
 
 

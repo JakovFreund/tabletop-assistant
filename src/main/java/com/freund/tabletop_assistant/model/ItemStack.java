@@ -1,6 +1,8 @@
+package com.freund.tabletop_assistant.model;
+
 import java.util.ArrayList;
 
-import util.DiceNotation;
+import com.freund.tabletop_assistant.util.DiceNotation;
 
 
 // novi komentar

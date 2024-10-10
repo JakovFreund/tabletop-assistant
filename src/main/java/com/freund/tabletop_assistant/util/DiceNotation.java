@@ -1,8 +1,9 @@
-package util;
+package com.freund.tabletop_assistant.util;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiceNotation {
+public final class DiceNotation {
 
     // Function to add two dice notation strings
     public static String addDice(String dice1, String dice2) {

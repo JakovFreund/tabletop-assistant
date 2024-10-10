@@ -1,7 +1,9 @@
+package com.freund.tabletop_assistant.model;
+
 import java.util.HashMap;
 import java.util.List;
 
-import util.StringUtil;
+import com.freund.tabletop_assistant.util.StringUtil;
 
 public class Damage {
     private HashMap<DamageType, String> components;

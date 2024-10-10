@@ -1,3 +1,5 @@
+package com.freund.tabletop_assistant.model;
+
 class StatusEffectInstance {
     StatusEffect statusEffect;
     Duration duration;

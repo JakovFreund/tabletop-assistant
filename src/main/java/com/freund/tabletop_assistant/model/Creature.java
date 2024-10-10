@@ -1,3 +1,5 @@
+package com.freund.tabletop_assistant.model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

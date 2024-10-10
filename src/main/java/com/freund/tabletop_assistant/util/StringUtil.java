@@ -1,6 +1,6 @@
-package util;
+package com.freund.tabletop_assistant.util;
 
-public class StringUtil {
+public final class StringUtil {
     public static String removeLastChar(String str){
         if (str.length() > 0){
             return str.substring(0, str.length() - 1);

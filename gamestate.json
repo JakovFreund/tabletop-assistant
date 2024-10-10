@@ -1,0 +1,1 @@
+{"players":[{"id":1,"name":"Gamestate player","hp":100,"gameClass":"BARBARIAN","inventory":[]},{"id":5,"name":"First","hp":12,"gameClass":"BARBARIAN","inventory":["Knife"]},{"id":5,"name":"Second","hp":20,"gameClass":"DRUID","inventory":["item1","item2"]},{"id":4,"name":"Player Niggani","hp":69,"gameClass":"DRUID","inventory":["Sword","Sandal"]}]}

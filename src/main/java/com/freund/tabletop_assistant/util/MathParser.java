@@ -1,7 +1,8 @@
-package util;
+package com.freund.tabletop_assistant.util;
+
 import java.util.Stack;
 
-public class MathParser {
+public final class MathParser {
 
     public static void main(String[] args) {
         /*

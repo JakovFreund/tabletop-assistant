@@ -1,3 +1,5 @@
+package com.freund.tabletop_assistant.model;
+
 public class TurnResource {
     TurnResourceType type;
     String name;

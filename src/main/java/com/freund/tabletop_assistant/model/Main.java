@@ -1,4 +1,6 @@
-import util.DiceNotation;
+package com.freund.tabletop_assistant.model;
+
+import com.freund.tabletop_assistant.util.DiceNotation;
 
 class Main {
 

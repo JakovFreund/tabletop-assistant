@@ -1,7 +1,9 @@
+package com.freund.tabletop_assistant.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import util.MathParser;
+import com.freund.tabletop_assistant.util.MathParser;
 
 abstract class Castable {
         final String NAME;
