@@ -1,27 +1,6 @@
 package com.freund.tabletop_assistant.model;
 
-class StatusEffectInstance {
-    StatusEffect statusEffect;
-    Duration duration;
-    int turnsDuration; // maybe change to turnsDuration
-    String customNote; // DM inputed reminder
-
-    public StatusEffectInstance(StatusEffect statusEffect, int turnsDuration, Duration duration, String customNote) {
-        this.statusEffect = statusEffect;
-        this.duration = duration;
-        this.turnsDuration = turnsDuration; // ignore if duration != TURNS
-        this.customNote = customNote;
-    }
-}
-
-enum Duration {
-    TURNS,
-    SHORT_REST,
-    LONG_REST,
-    UNLIMITED
-}
-
-enum StatusEffect {
+public enum StatusEffect {
     // @formatter:off
     ACID("Armour Class reduced by 2."),
     ACID_RESISTANCE("Resistant to Acid damage."),

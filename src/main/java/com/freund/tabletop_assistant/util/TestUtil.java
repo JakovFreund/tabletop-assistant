@@ -1,10 +1,17 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.util;
 
-import com.freund.tabletop_assistant.util.DiceNotation;
+import com.freund.tabletop_assistant.model.Creature;
+import com.freund.tabletop_assistant.model.Damage;
+import com.freund.tabletop_assistant.model.Duration;
+import com.freund.tabletop_assistant.model.Spell;
+import com.freund.tabletop_assistant.model.StatusEffect;
+import com.freund.tabletop_assistant.model.StatusEffectInstance;
+import com.freund.tabletop_assistant.model.item.Item;
+import com.freund.tabletop_assistant.model.item.ItemStack;
+import com.freund.tabletop_assistant.model.item.ItemType;
 
-class Main {
-
-    public static void main(String[] args) {
+public class TestUtil {
+    public static void previousMain() {
         // System.out.println(Spell.get("Eldritch Blast").getDescription(0, 5));
         testSpell("Colour Spray");
         // testSpells();
@@ -15,7 +22,7 @@ class Main {
 
         Creature a = new Creature();
         a.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.PETRIFIED, 3, Duration.TURNS, ""));
-        a.giveItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
+        a.getItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
         System.out.println(a.getItemStackByIndex(0));
 
         //testSpells();

@@ -2,39 +2,50 @@ package com.freund.tabletop_assistant.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
+import jakarta.annotation.PostConstruct;
 
 import com.freund.tabletop_assistant.util.JsonHandler;
 
-import jakarta.annotation.PostConstruct;
 
 @Component
 public class GameState {
-    private ArrayList<Player> players;
+    private ArrayList<Creature> creatures;
 
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public ArrayList<Creature> getCreatures() {
+        return creatures;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public Creature getCreature (UUID id){
+        for (Creature creature : this.getCreatures()){
+            if (creature.getCreatureId().equals(id)){
+                System.out.println("returned!");
+                return creature;
+            }
+        }
+        return null;
+    }
+
+    public void setCreatures(ArrayList<Creature> creatures) {
+        this.creatures = creatures;
     }
 
     public GameState(){
         // TODO add import
-        this.players = new ArrayList<Player>();
+        this.creatures = new ArrayList<Creature>();
     }
 
-    public void addPlayer(Player player){
-        players.add(player);
+    public void addCreature(Creature creature){
+        creatures.add(creature);
     }
 
     @PostConstruct
     public void loadGameState(){
         try {
-            for (Player player : JsonHandler.loadGameStateFromFile("gamestate.json").getPlayers()){
-                this.addPlayer(player);
+            for (Creature creature : JsonHandler.loadGameStateFromFile("gamestate.json").getCreatures()){
+                this.addCreature(creature);
             }
         } catch (IOException e) {
             e.printStackTrace();

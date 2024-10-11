@@ -1,15 +1,24 @@
 
 ### TASKS
 
-- set up basic public website (react frontend) hosted locally
-- try websockets and live updating between desktop and phone (button that prints on both screens)
-- maybe do statuseffect procs with Spring @EventListener
+- learn how to use a debugger instead of printing at every step
+- make a simple interactive frontend
+- Typescript (.tsx vs .ts ?)
+- Redux
+- lombok package for @Data @AllArgs @NoArgs ?
+- probably need default setters for every class
+- object from GameState live displayed on both PC and phone and live updated when changed by one device (websockets)
+- move gamestate to folder (rename to save-DD-MM-YY or something)
+- periodic saving to json (multiple json "saves", autoloads latest one)
+- try websockets and live updating between desktop and phone (button that effects both screens)
+- try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - i might need a source object/class (this.Creature, this.Castable, this.StatusEffect) which means Creature needs a unique id (probably from database)
 - add GameState bean
 - convert Items from enum to class
 - CastableDamage gets turned into Damage between ping and input
 - make eldritch blast have 3 different damage components that have the same damageType
 - add a CastableHeal object aswell - because of source and drag n dropping
+- add unique slot icons (full and empty) to each TurnResource
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - create a python script that generates this ˇˇ
 - create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
@@ -19,6 +28,7 @@
 - Change Spell structure, add Target class & enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
 - keep seperate track of maxHP from character and bonus HP from effects, probably need bonus HP counter (render it in a different color - orange)
 - players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
+- need a scene Object class (Creature, Item and Object (tree, rock...) inherit from it) - has size, id
 - finish races & subraces enums, classes and sublclasses enums
 - weight and encumbered
 - https://bg3.wiki/wiki/Weapon_actions
@@ -49,7 +59,7 @@
 - --- WEBAPP RESEARCH & CONVERSION TIME ---
 
 - 2 frontends: DM interface (Desktop) and player interface (Phone)
-- Item image
+- Item image (32x32px)
 - kad ce trebat dodavat slike spellova to moze ilia 
 - change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)
 - highlight item in inventory on move/modify
@@ -72,6 +82,10 @@
 - AC style vantage points for map discovery
 - add a device managment UI that assigns nicknames to MAC adresses or whatever
 
+### LOW PRIORITY IDEAS FOR LATER
+- add icons to statuseffects, spells, abilities
+- add Artificer class
+- 
 
 
 

@@ -7,7 +7,7 @@ import com.freund.tabletop_assistant.util.StringUtil;
 
 public class Damage {
     private HashMap<DamageType, String> components;
-    String source;
+    String source; // maybe even UUID
 
     public Damage(List<String> componentValues) {
         this.components = new HashMap<DamageType, String>();
