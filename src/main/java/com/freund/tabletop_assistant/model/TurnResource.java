@@ -49,19 +49,19 @@ public class TurnResource {
         return refillRate;
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    void setAmount(int amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    void setMaxAmount(int maxAmount) {
+    public void setMaxAmount(int maxAmount) {
         this.maxAmount = maxAmount;
     }
 
-    void setRefillRate(RefillRate refillRate) {
+    public void setRefillRate(RefillRate refillRate) {
         this.refillRate = refillRate;
     }
 

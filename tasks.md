@@ -1,10 +1,7 @@
 
 ### TASKS
 
-- make a simple interactive frontend
-- add a frontend toggle button for some stat
-- object from GameState live displayed on both PC and phone and live updated when changed by one device (websockets)
-- try websockets and live updating between desktop and phone (button that effects both screens)
+- build a typescript react project and push to github new repo
 - Typescript (.tsx vs .ts ?)
 - Redux
 - lombok package for @Data @AllArgs @NoArgs ?

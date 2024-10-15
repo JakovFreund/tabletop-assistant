@@ -157,7 +157,7 @@ public class Creature {
     }
 
 
-    TurnResource getTurnResource(TurnResourceType turnResourceType) {
+    public TurnResource getTurnResource(TurnResourceType turnResourceType) {
         for (TurnResource turnResource : turnResources) {
             if (turnResource.getType() == turnResourceType) {
                 return turnResource;
