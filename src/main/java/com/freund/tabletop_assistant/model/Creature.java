@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.springframework.core.annotation.AliasFor;
-
 import com.freund.tabletop_assistant.model.item.ItemStack;
 
 public class Creature {
@@ -24,7 +22,7 @@ public class Creature {
     private ArrayList<StatusEffectInstance> statusEffectInstances;
     private ArrayList<TurnResource> turnResources;
     private ArrayList<ItemStack> inventory;
-    UUID equiped[]; // stores inventory indexes of equiped items
+    private UUID equiped[]; // stores inventory indexes of equiped items
 
     public Creature() {
         this.classes = new HashMap<GameClass, Integer>();
@@ -140,7 +138,7 @@ public class Creature {
         // update item.lastModified
     }
 
-    public void giveItemToCreature(Creature creature, int index){
+    public void giveItemTo(Creature creature, int index){
         // TODO
     }
 
@@ -310,31 +308,6 @@ public class Creature {
 
 }
 
-enum EquipSlot {
-    HEAD,
-    CAPE,
-    TORSO,
-    GLOVES,
-    FEET,
-    AMULET,
-    RING_1,
-    RING_2,
-    RIGHT_HAND,
-    LEFT_HAND,
-    RANGED
-}
 
-enum Ability {
-    NONE,
-    STR,
-    DEX,
-    CON,
-    INT,
-    WIS,
-    CHA;
 
-    static int toModifier(int AbilityPoint) {
-        int result = AbilityPoint / 2;
-        return result - 5;
-    }
-}
+

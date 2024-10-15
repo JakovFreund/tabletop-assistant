@@ -266,6 +266,12 @@ public enum StatusEffect {
     RAGE_TIGER_HEART("In Rage. Can use Tiger's Bloodlust. Jump distance increased by 15 ft."),
     RAGE_WOLF_HEART("In Rage. Can use Inciting Howl. Allies have melee Advantage against enemies within 7ft of affected entity."),
     RAY_OF_FROST("Movement speed reduced by 10ft."),
+    REAPPLY_HEX("Can recast Hex without expending a new spell slot."),
+    RECAST_SPEAK_WITH_DEAD("Can recast Speak with Dead without expending a spell slot."),
+    RECKLESS_ATTACK("Advantage on Attack Rolls. Attacks against the affected creature also have Advantage."),
+    REDUCED("Size is reduced. Weapon attacks deal 1d4 less damage. Disadvantage on Strength Checks and Saving throws. Carrying Capacity reduced by 25%."),
+    RELENTLESS_AVENGER("Gain 15ft bonus Movement Speed"),
+
 
 
 
@@ -296,7 +302,7 @@ public enum StatusEffect {
 
     
 
-    // add potion heal here
+    
 
     // Inquisitor's Might spell doesn't exist
 
@@ -316,6 +322,7 @@ public enum StatusEffect {
 
 
     // https://bg3.wiki/wiki/Feats
+    // https://baldursgate3.wiki.fextralife.com/Traits+and+Features
 
     // check if each class action is possible (do necessary turnresources and statuseffects exist):
 

@@ -1,16 +1,16 @@
 
 ### TASKS
 
-- learn how to use a debugger instead of printing at every step
 - make a simple interactive frontend
+- add a frontend toggle button for some stat
+- object from GameState live displayed on both PC and phone and live updated when changed by one device (websockets)
+- try websockets and live updating between desktop and phone (button that effects both screens)
 - Typescript (.tsx vs .ts ?)
 - Redux
 - lombok package for @Data @AllArgs @NoArgs ?
 - probably need default setters for every class
-- object from GameState live displayed on both PC and phone and live updated when changed by one device (websockets)
 - move gamestate to folder (rename to save-DD-MM-YY or something)
 - periodic saving to json (multiple json "saves", autoloads latest one)
-- try websockets and live updating between desktop and phone (button that effects both screens)
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - i might need a source object/class (this.Creature, this.Castable, this.StatusEffect) which means Creature needs a unique id (probably from database)
 - add GameState bean
