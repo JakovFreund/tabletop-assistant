@@ -13,12 +13,14 @@ import com.freund.tabletop_assistant.util.JsonHandler;
 @Component
 public class GameState {
     private ArrayList<Creature> creatures;
+    private ArrayList<DeviceMapping> deviceMappings;
 
     @PostConstruct
     public void loadGameState(){
         try {
             GameState loadedGameState = JsonHandler.loadGameStateFromFile("gamestate.json");
             this.creatures = loadedGameState.getCreatures();
+            this.deviceMappings = loadedGameState.getDeviceMappings();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,5 +59,13 @@ public class GameState {
 
     public void addCreature(Creature creature){
         creatures.add(creature);
+    }
+
+    public ArrayList<DeviceMapping> getDeviceMappings() {
+        return deviceMappings;
+    }
+
+    public void setDeviceMappings(ArrayList<DeviceMapping> deviceMappings) {
+        this.deviceMappings = deviceMappings;
     }
 }

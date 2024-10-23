@@ -89,9 +89,18 @@ public class GameStateController {
         gameState.addCreature(c);
 
         Creature d = new Creature("Fourth", Subrace.HILL_DWARF);
-        d.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CHILLED, 3, Duration.TURNS, "he kinda chill with it tho"));
+        d.addStatusEffectInstance(
+                new StatusEffectInstance(StatusEffect.CHILLED, 3, Duration.TURNS, "he kinda chill with it tho"));
         gameState.addCreature(d);
 
         return new ResponseEntity<>("Creatures added.", HttpStatus.CREATED);
     }
+
+    @GetMapping("/UUID")
+    public String generateUUID() {
+        String id = UUID.randomUUID().toString();
+        System.out.println("Generated UUID: " + id);
+        return id;
+    }
+
 }
