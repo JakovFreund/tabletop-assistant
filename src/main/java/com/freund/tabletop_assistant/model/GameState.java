@@ -6,11 +6,13 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
+import lombok.Data;
 
 import com.freund.tabletop_assistant.util.JsonHandler;
 
 
 @Component
+@Data
 public class GameState {
     private ArrayList<Creature> creatures;
     private ArrayList<DeviceMapping> deviceMappings;
@@ -40,10 +42,6 @@ public class GameState {
         this.creatures = new ArrayList<Creature>();
     }
 
-    public ArrayList<Creature> getCreatures() {
-        return creatures;
-    }
-
     public Creature getCreature (UUID id){
         for (Creature creature : this.getCreatures()){
             if (creature.getCreatureId().equals(id)){
@@ -53,19 +51,7 @@ public class GameState {
         return null;
     }
 
-    public void setCreatures(ArrayList<Creature> creatures) {
-        this.creatures = creatures;
-    }
-
     public void addCreature(Creature creature){
         creatures.add(creature);
-    }
-
-    public ArrayList<DeviceMapping> getDeviceMappings() {
-        return deviceMappings;
-    }
-
-    public void setDeviceMappings(ArrayList<DeviceMapping> deviceMappings) {
-        this.deviceMappings = deviceMappings;
     }
 }

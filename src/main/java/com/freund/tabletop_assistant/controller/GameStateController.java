@@ -65,7 +65,7 @@ public class GameStateController {
 
     @GetMapping("/addItem")
     public ResponseEntity<String> addItem() {
-        gameState.getCreatures().get(0).getItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
+        gameState.getCreatures().get(0).addItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
         return new ResponseEntity<>("Item added.", HttpStatus.CREATED);
     }
 
@@ -75,7 +75,7 @@ public class GameStateController {
         gameState.setCreatures(empty);
 
         Creature a = new Creature("Creature Ninjani", Subrace.DROW);
-        a.getItem(new ItemStack(new Item(ItemType.GOLD), 35));
+        a.addItem(new ItemStack(new Item(ItemType.GOLD), 35));
         gameState.addCreature(a);
 
         Creature b = new Creature("Second", Subrace.DEMON);
@@ -85,7 +85,7 @@ public class GameStateController {
         Creature c = new Creature("Player", Subrace.HALF_ELF);
         c.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.BLESS, 0, Duration.LONG_REST, "long note"));
         c.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.BARKSKIN, 0, Duration.SHORT_REST, ""));
-        c.getItem(new ItemStack(new Item(ItemType.SILVERFANG), 1));
+        c.addItem(new ItemStack(new Item(ItemType.SILVERFANG), 1));
         gameState.addCreature(c);
 
         Creature d = new Creature("Fourth", Subrace.HILL_DWARF);

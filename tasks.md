@@ -6,8 +6,7 @@
 - DM Device Managment UI to assign nicknames or creatures to devices
 - on new deviceID prompt DM for reidentifiaction and association with a creature
 - fill in some StatusEffects :D
-- lombok package for @Data @AllArgs @NoArgs ?
-- probably need default setters for every class
+- add a frontend menu (both Player and DM) with all UIs. **DONT WORRY ABOUT AESTHETICS NOW**
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
@@ -41,6 +40,13 @@
 - seperate remaining tasks into DM UI and PlayerUI
 
 
+
+### LOMBOK TAGS
+@Data @AllArgs @NoArgs, @Builder, @Getter @Setter, @NoArgsConstructor, @RequiredArgsConstructor, @NonNull
+
+- for model/ classes: @Data, @NoArgsConstructor, (#todo test @AllArgsContrcutor with lists), (optional @Builder)
+- for controllers: nothing
+- for dto: #todo (probably @Data)
 
 
 

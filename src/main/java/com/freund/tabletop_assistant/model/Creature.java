@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import com.freund.tabletop_assistant.model.item.ItemStack;
 
+import lombok.Data;
+
+@Data
 public class Creature {
     private UUID creatureId;
     private String name;
@@ -30,7 +33,6 @@ public class Creature {
         this.turnResources = new ArrayList<TurnResource>();
         this.inventory = new ArrayList<ItemStack>();
         this.equiped = new UUID[EquipSlot.values().length];
-
     }
 
     public Creature (String name, Subrace subrace){
@@ -54,86 +56,23 @@ public class Creature {
         turnResources.add(new TurnResource(TurnResourceType.HIT_DICE)); 
     }
 
-    // default getters
+    
+    
 
-    public UUID getCreatureId(){
-        return this.creatureId;
-    }
+    // TODO modified ability getters (getSTR() => base_STR * StatusEffect.ENCOUMBERED ...) (getter returns modified current value (for example temporary double DEX) while these contain base values)
 
-    public String getName(){
-        return this.name;
-    }
-
-    public int getBase_STR(){
-        return this.base_STR;
-    }
-
-    public int getBase_DEX(){
-        return this.base_DEX;
-    }
-
-    public int getBase_CON(){
-        return this.base_CON;
-    }
-
-    public int getBase_INT(){
-        return this.base_INT;
-    }
-
-    public int getBase_WIS(){
-        return this.base_WIS;
-    }
-
-    public int getBase_CHA(){
-        return this.base_CHA;
-    }
-
-    public Race getRace(){
-        return this.race;
-    }
-
-    public Subrace getSubrace(){
-        return this.subrace;
-    }
-
-    public HashMap<GameClass, Integer> getClasses(){
-        return this.classes;
-    }
-
-    public ArrayList<Subclass> getSubclasses(){
-        return this.subclasses;
-    }
-
-    public ArrayList<StatusEffectInstance> getStatusEffectInstances(){
-        return this.statusEffectInstances;
-    }
-
-    public ArrayList<TurnResource> getTurnResources(){
-        return this.turnResources;
-    }
-
-    public ArrayList<ItemStack> getInventory(){
-        return this.inventory;
-    }
-
-    public UUID[] getEquiped(){
-        return this.equiped;
-    }
-
-    // ---
-
-    // TODO modified ability getters
-    // need getters for all because of StatusEffects (getter returns modified current value (for example temporary double DEX) while these contain base values)
+    // addClass(), addSubclass, addTurnResource
 
 
-    void getItems(ArrayList<ItemStack> items) {
+
+    void addItems(ArrayList<ItemStack> items) {
         for (ItemStack item : items) {
-            this.getItem(item);
+            this.addItem(item);
         }
     }
 
-    public void getItem(ItemStack item) {
-        System.out.println("give item");
+    public void addItem(ItemStack item) {
+        System.out.println("add item");
         this.inventory.add(item);
         // update item.lastModified
     }
@@ -143,7 +82,7 @@ public class Creature {
     }
 
     void equipItem(UUID itemId, EquipSlot equipSlot) {
-        // remove buffs from previous in that slot
+        // remove buffs from previous in that slot (add function to recalculate all status effects)
         // equiped[equipSlot.ordinal()] = this.getItem(itemId);
         // if creature is holding Produce Flame gain Lighted StatusEffect
     }
@@ -229,9 +168,6 @@ public class Creature {
 
 
 
-
-
-
     void logManualInput(String string){ // for StatusEffects that don't proc on their own
         System.out.println("MANUAL INPUT: " + string);
     }
@@ -304,6 +240,76 @@ public class Creature {
         
         getTurnResource(TurnResourceType.HP).setAmount(getTurnResource(TurnResourceType.HP).getAmount() - damageAmount);
     }
+
+    // ---
+    /*
+    // default getters
+
+    public UUID getCreatureId(){
+        return this.creatureId;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public int getBase_STR(){
+        return this.base_STR;
+    }
+
+    public int getBase_DEX(){
+        return this.base_DEX;
+    }
+
+    public int getBase_CON(){
+        return this.base_CON;
+    }
+
+    public int getBase_INT(){
+        return this.base_INT;
+    }
+
+    public int getBase_WIS(){
+        return this.base_WIS;
+    }
+
+    public int getBase_CHA(){
+        return this.base_CHA;
+    }
+
+    public Race getRace(){
+        return this.race;
+    }
+
+    public Subrace getSubrace(){
+        return this.subrace;
+    }
+
+    public HashMap<GameClass, Integer> getClasses(){
+        return this.classes;
+    }
+
+    public ArrayList<Subclass> getSubclasses(){
+        return this.subclasses;
+    }
+
+    public ArrayList<StatusEffectInstance> getStatusEffectInstances(){
+        return this.statusEffectInstances;
+    }
+
+    public ArrayList<TurnResource> getTurnResources(){
+        return this.turnResources;
+    }
+
+    public ArrayList<ItemStack> getInventory(){
+        return this.inventory;
+    }
+
+    public UUID[] getEquiped(){
+        return this.equiped;
+    }
+    */
+
 
 
 }

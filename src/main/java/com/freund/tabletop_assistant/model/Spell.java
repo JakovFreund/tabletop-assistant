@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import com.freund.tabletop_assistant.util.MathParser;
 
+import lombok.Data;
+
+@Data //<- check underlined warning ?
 public class Spell extends Castable {
-    // TODO change all to private and add getters and setters
+    // TODO change all to private
     public final int LEVEL;
     public final SchoolOfMagic SCHOOL;
     public final Boolean UPCAST;
@@ -20,7 +23,7 @@ public class Spell extends Castable {
             this.UPCAST = upcast;
     }
 
-    public static Spell get(String name) {
+    public static Spell get(String name) { // do i need this?
             for (Spell SPELL : SPELLS) {
                     if (SPELL.NAME == name) {
                             return SPELL;

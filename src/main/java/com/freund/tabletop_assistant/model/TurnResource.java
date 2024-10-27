@@ -1,14 +1,16 @@
 package com.freund.tabletop_assistant.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class TurnResource {
-    private TurnResourceType type;
+    private TurnResourceType type; // the turnresources get updated per id_string, but enumerators make it easier for me when adding
     private String name;
     private int amount;
     private int maxAmount;
     private RefillRate refillRate;
-
-    public TurnResource() {
-    }
 
     public TurnResource(TurnResourceType type) {
         this.type = type;
@@ -28,43 +30,4 @@ public class TurnResource {
         this(TurnResourceType.CUSTOM, maxAmount);
         this.name = customName;
     }
-
-    public TurnResourceType getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public int getMaxAmount() {
-        return maxAmount;
-    }
-
-    public RefillRate getRefillRate() {
-        return refillRate;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setMaxAmount(int maxAmount) {
-        this.maxAmount = maxAmount;
-    }
-
-    public void setRefillRate(RefillRate refillRate) {
-        this.refillRate = refillRate;
-    }
-
 }
-
-// the turnresources get updated per id_string, but enumerators make it easier for me when adding

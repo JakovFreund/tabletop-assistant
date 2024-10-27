@@ -1,14 +1,9 @@
 package com.freund.tabletop_assistant.dto;
 
+import lombok.Data;
+
 // Helper class for handling the request payload
+@Data
 public class HPUpdateRequest {
     private int hp;
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
 }

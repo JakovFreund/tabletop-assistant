@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.freund.tabletop_assistant.util.StringUtil;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Damage {
     private HashMap<DamageType, String> components;
     String source; // maybe even UUID

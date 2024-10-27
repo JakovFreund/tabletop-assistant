@@ -5,15 +5,17 @@ import java.util.List;
 
 import com.freund.tabletop_assistant.util.DiceNotation;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Item {
     private ItemType itemType;
     private Rarity rarity;
     private ArrayList<ItemEffect> effects;
     private ArrayList<ItemEffect> newEffects;
     private int value;
-
-    public Item(){
-    }
 
     public Item(ItemType itemType) {
         System.out.println("Item constructor");
@@ -77,26 +79,5 @@ public class Item {
         return str;
     }
 
-    // TODO need equals() comparison for item stacking
-
-    public ItemType getItemType() {
-        return itemType;
-    }
-
-    public Rarity getRarity() {
-        return rarity;
-    }
-
-    public ArrayList<ItemEffect> getEffects() {
-        return effects;
-    }
-
-    public ArrayList<ItemEffect> getNewEffects() {
-        return newEffects;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
+    // TODO probably override @Data equals() (or maybe implement) to not compare UUID - for item stacking
 }

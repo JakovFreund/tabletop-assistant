@@ -22,7 +22,7 @@ public class TestUtil {
 
         Creature a = new Creature();
         a.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.PETRIFIED, 3, Duration.TURNS, ""));
-        a.getItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
+        a.addItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
         System.out.println(a.getItemStackByIndex(0));
 
         //testSpells();

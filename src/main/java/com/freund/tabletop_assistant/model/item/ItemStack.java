@@ -2,14 +2,16 @@ package com.freund.tabletop_assistant.model.item;
 
 import java.util.ArrayList;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class ItemStack {
-    private Item item;
-    private int amount;
+    private Item item; // TODO change to ArrayList<Item> because of UUID
+    private int amount; // get this from items.length ^^
     private long lastModified; // TODO add currentDate function
     private ArrayList<ItemStack> inventory;
-
-    public ItemStack() {
-    }
 
     public ItemStack(Item item, int amount) {
         System.out.println("ItemStack constructor");
@@ -27,21 +29,4 @@ public class ItemStack {
     public String toString() {
         return this.amount + "x " + this.item;
     }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public long getLastModified() {
-        return lastModified;
-    }
-
-    public ArrayList<ItemStack> getInventory() {
-        return inventory;
-    }
-
 }
