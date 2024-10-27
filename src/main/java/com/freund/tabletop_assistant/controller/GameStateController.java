@@ -1,6 +1,5 @@
 package com.freund.tabletop_assistant.controller;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,38 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.freund.tabletop_assistant.dto.HPUpdateRequest;
 import com.freund.tabletop_assistant.model.Creature;
-import com.freund.tabletop_assistant.model.Duration;
 import com.freund.tabletop_assistant.model.GameState;
-import com.freund.tabletop_assistant.model.StatusEffect;
-import com.freund.tabletop_assistant.model.StatusEffectInstance;
-import com.freund.tabletop_assistant.model.Subrace;
-import com.freund.tabletop_assistant.model.TurnResourceType;
-import com.freund.tabletop_assistant.model.item.Item;
-import com.freund.tabletop_assistant.model.item.ItemStack;
-import com.freund.tabletop_assistant.model.item.ItemType;
+import com.freund.tabletop_assistant.service.CreatureService;
 
 @RestController
 @RequestMapping("/api")
 public class GameStateController {
     @Autowired
     private GameState gameState;
+    @Autowired
+    private CreatureService creatureService;
 
     @GetMapping("/gamestate")
     public GameState getGameState() {
         return gameState;
     }
 
-    // New endpoint to update HP
     @PutMapping("/creature/{id}/hp")
     public ResponseEntity<String> updateCreatureHP(@PathVariable UUID id, @RequestBody HPUpdateRequest request) {
-        Creature creature = gameState.getCreature(id);
-        if (creature == null) {
-            return new ResponseEntity<>("Creature not found", HttpStatus.NOT_FOUND);
+        if(creatureService.updateCreatureHP(id, request.getHp())){
+            return new ResponseEntity<>("HP updated successfully", HttpStatus.OK);
         }
-        // Assuming the HP is stored in turnResources, we update the HP resource
-        creature.setTurnResourceAmount(TurnResourceType.HP, request.getHp());
-
-        return new ResponseEntity<>("HP updated successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Creature not found", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/save")
@@ -62,6 +51,8 @@ public class GameStateController {
     public Creature getCreatureById(@PathVariable UUID id) {
         return gameState.getCreature(id);
     }
+
+    /*
 
     @GetMapping("/addItem")
     public ResponseEntity<String> addItem() {
@@ -95,6 +86,7 @@ public class GameStateController {
 
         return new ResponseEntity<>("Creatures added.", HttpStatus.CREATED);
     }
+    */
 
     @GetMapping("/UUID")
     public String generateUUID() {

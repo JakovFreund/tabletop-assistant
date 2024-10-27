@@ -1,10 +1,15 @@
 
 ### TASKS
 
-- add deviceId to deviceNickname mapping on backend
-- frontend finish the deviceId-creatureId mapping
+- add @Component ConnectedDevices class, controller, endpoint
+- if deviceID not in gamestate display a deviceId on screen on PlayerInterface
 - DM Device Managment UI to assign nicknames or creatures to devices
-- on new deviceID prompt DM for reidentifiaction and association with a creature
+- on new deviceID prompt DM (probably log to console and have the DM do it manually) for reidentifiaction and association with a creature
+- remove DM login and just have the DM deviceID stored in gamestate 
+- frontend finish the deviceId-creatureId mapping
+- maybe move interfaces from redux gameStateSlice to a new folder and import them (ask chatgpt)
+- check Spell.java warning
+- add connection error UI on fetch gamestate fail
 - fill in some StatusEffects :D
 - add a frontend menu (both Player and DM) with all UIs. **DONT WORRY ABOUT AESTHETICS NOW**
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
@@ -12,6 +17,7 @@
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
+- maybe move api.ts requests to seperate files ?
 - create a python script that generates this ˇˇ
 - create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
 - Change Spell structure, add Target class & enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones

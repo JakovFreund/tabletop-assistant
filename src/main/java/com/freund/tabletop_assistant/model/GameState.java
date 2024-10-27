@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 
+import com.freund.tabletop_assistant.model.device.Device;
+import com.freund.tabletop_assistant.model.device.DeviceMapping;
 import com.freund.tabletop_assistant.util.JsonHandler;
 
 
@@ -16,6 +18,7 @@ import com.freund.tabletop_assistant.util.JsonHandler;
 public class GameState {
     private ArrayList<Creature> creatures;
     private ArrayList<DeviceMapping> deviceMappings;
+    private ArrayList<Device> devices;
 
     @PostConstruct
     public void loadGameState(){
@@ -23,6 +26,7 @@ public class GameState {
             GameState loadedGameState = JsonHandler.loadGameStateFromFile("gamestate.json");
             this.creatures = loadedGameState.getCreatures();
             this.deviceMappings = loadedGameState.getDeviceMappings();
+            this.devices = loadedGameState.getDevices();
         } catch (IOException e) {
             e.printStackTrace();
         }
