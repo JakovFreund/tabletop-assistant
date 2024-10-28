@@ -1,11 +1,9 @@
 
 ### TASKS
 
-- add @Component ConnectedDevices class, controller, endpoint
 - if deviceID not in gamestate display a deviceId on screen on PlayerInterface
 - DM Device Managment UI to assign nicknames or creatures to devices
 - on new deviceID prompt DM (probably log to console and have the DM do it manually) for reidentifiaction and association with a creature
-- remove DM login and just have the DM deviceID stored in gamestate 
 - frontend finish the deviceId-creatureId mapping
 - maybe move interfaces from redux gameStateSlice to a new folder and import them (ask chatgpt)
 - check Spell.java warning
