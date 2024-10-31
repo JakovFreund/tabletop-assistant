@@ -58,4 +58,22 @@ public class GameState {
     public void addCreature(Creature creature){
         creatures.add(creature);
     }
+
+    public DeviceMapping getDeviceMapping(UUID deviceId){
+        for (DeviceMapping deviceMapping : deviceMappings){
+            if (deviceMapping.getDeviceId().equals(deviceId)){
+                return deviceMapping;
+            }
+        }
+        return null;
+    }
+
+    public Device getDevice(UUID deviceId){
+        for (Device device : devices){
+            if (device.getDeviceId().equals(deviceId)){
+                return device;
+            }
+        }
+        return null;
+    }
 }

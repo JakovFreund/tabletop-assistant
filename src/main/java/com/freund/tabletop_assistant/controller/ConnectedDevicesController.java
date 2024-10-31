@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.freund.tabletop_assistant.dto.ConnectDeviceRequest;
+import com.freund.tabletop_assistant.model.GameState;
 import com.freund.tabletop_assistant.model.device.ConnectedDevices;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ConnectedDevicesController {
     @Autowired
     private ConnectedDevices connectedDevices;
+    @Autowired
+    private GameState gameState;
 
     @GetMapping("/connected")
     public ArrayList<UUID> getConnectedDevices() {
@@ -30,9 +33,13 @@ public class ConnectedDevicesController {
     @PostMapping("/connect")
     public ResponseEntity<String> connectDevice(@RequestBody ConnectDeviceRequest request) {
         connectedDevices.addDevice(request.getDeviceId());
-        System.out.println("Connected device: " + request.getDeviceId());
-        return new ResponseEntity<>("Device connected.", HttpStatus.OK);
-        
+        String deviceNickname = "";
+        if(gameState.getDevice(request.getDeviceId())!=null){
+            deviceNickname = gameState.getDevice(request.getDeviceId()).getDeviceNickname()+" ";
+        }
+        System.out.println("Connected device: " + deviceNickname + request.getDeviceId());
+
+        return new ResponseEntity<>("Device connected.", HttpStatus.OK);  
     }
     
 }

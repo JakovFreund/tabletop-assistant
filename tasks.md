@@ -1,15 +1,11 @@
 
 ### TASKS
 
-- if deviceID not in gamestate display a deviceId on screen on PlayerInterface
 - DM Device Managment UI to assign nicknames or creatures to devices
-- on new deviceID prompt DM (probably log to console and have the DM do it manually) for reidentifiaction and association with a creature
-- frontend finish the deviceId-creatureId mapping
-- maybe move interfaces from redux gameStateSlice to a new folder and import them (ask chatgpt)
+- how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip)
 - check Spell.java warning
 - add connection error UI on fetch gamestate fail
 - fill in some StatusEffects :D
-- add a frontend menu (both Player and DM) with all UIs. **DONT WORRY ABOUT AESTHETICS NOW**
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
