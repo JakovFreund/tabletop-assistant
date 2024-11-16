@@ -1,9 +1,12 @@
 
 ### TASKS
 
+- create a python script that generates this ˇˇ
+- create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
+- add SpellTarget class/enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
 - DM Device Managment UI to assign nicknames or creatures to devices
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip)
-- check Spell.java warning
+- add GameStateService and remove the Autowired gameState from GameStateController
 - add connection error UI on fetch gamestate fail
 - fill in some StatusEffects :D
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
@@ -12,10 +15,7 @@
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- create a python script that generates this ˇˇ
-- create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
-- Change Spell structure, add Target class & enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
-- i might need a Source (for damage source, effect source...) object/class (this.Creature, this.Castable, this.StatusEffect)
+- i might need a SourceObject (for damage source, effect source...) object/class (this.Creature, this.Castable, this.StatusEffect)
 - ItemEffect conversion
 - finish races & subraces enums, classes and sublclasses enums
 - weight and encumbered
@@ -30,11 +30,9 @@
 - periodic saving to json (multiple json "saves", autoloads latest one) ~ every 2 minutes
 - add ClassActions
 - go look through monsters statblocks for missing statuseffects
-- finish all spells list
 - Creature.spellbook (will need primary ability of source of learned spell to calculate save DC), sort spellbook by school, ability to favourite spells
 - prepared spells (how different classes do it)
 - maybe sort race and class TurnResource counters to different objects/classes ?
-- go through actual dnd (not bg3) subraces, subclasses, spells, conditions and add/modify the ones you have
 - print shit out and save it to a log file simultaneously (NOT GAMESTATE)
 - Go through each class, subclass, race and subrace and imagine trying to level them up
 - seperate remaining tasks into DM UI and PlayerUI
@@ -43,15 +41,9 @@
 
 ### LOMBOK TAGS
 @Data @AllArgs @NoArgs, @Builder, @Getter @Setter, @NoArgsConstructor, @RequiredArgsConstructor, @NonNull
-
 - for model/ classes: @Data, @NoArgsConstructor, (#todo test @AllArgsContrcutor with lists), (optional @Builder)
 - for controllers: nothing
 - for dto: #todo (probably @Data)
-
-
-
-
-
 
 #### STATS/PROFILE TAB
 - add Skills

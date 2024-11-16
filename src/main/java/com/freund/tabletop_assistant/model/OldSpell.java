@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import com.freund.tabletop_assistant.util.MathParser;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Data //<- check underlined warning ?
-public class Spell extends Castable {
-    // TODO change all to private
-    public final int LEVEL;
-    public final SchoolOfMagic SCHOOL;
-    public final Boolean UPCAST;
-    public static final List<Spell> SPELLS = GameData.SPELLS;
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class OldSpell extends OldCastable {
+    private final int LEVEL;
+    private final SchoolOfMagic SCHOOL;
+    private final Boolean UPCAST;
+    public static final List<OldSpell> SPELLS = GameData.SPELLS;
 
-    Spell(String name, int level, SchoolOfMagic school, List<String> cost, Boolean concentration, Boolean upcast,
+    public OldSpell(String name, int level, SchoolOfMagic school, List<String> cost, Boolean concentration, Boolean upcast,
                     Boolean ritual, List<String> formulas, String description) {
             super(name, cost, concentration, ritual, formulas, description);
             this.LEVEL = level;
@@ -23,9 +24,9 @@ public class Spell extends Castable {
             this.UPCAST = upcast;
     }
 
-    public static Spell get(String name) { // do i need this?
-            for (Spell SPELL : SPELLS) {
-                    if (SPELL.NAME == name) {
+    public static OldSpell get(String name) {
+            for (OldSpell SPELL : SPELLS) {
+                    if (SPELL.getNAME() == name) {
                             return SPELL;
                     }
             }
@@ -85,7 +86,7 @@ public class Spell extends Castable {
                             calculatedFormulas);
 
             String finalDescription = new String();
-            finalDescription += this.NAME + "\n";
+            finalDescription += this.getNAME() + "\n";
             finalDescription += "Costs:\n";
             if (calculatedCosts.isEmpty()) {
                     finalDescription += "None\n";

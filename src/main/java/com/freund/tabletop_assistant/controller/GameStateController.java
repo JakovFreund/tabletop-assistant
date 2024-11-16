@@ -21,12 +21,12 @@ import com.freund.tabletop_assistant.service.CreatureService;
 @RequestMapping("/api")
 public class GameStateController {
     @Autowired
-    private GameState gameState;
+    private GameState gameState; // TODO move to gameStateService 
     @Autowired
     private CreatureService creatureService;
 
     @GetMapping("/gamestate")
-    public GameState getGameState() {
+    public GameState getGameState() { // TODO move to gameStateService 
         return gameState;
     }
 
