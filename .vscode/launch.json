@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "TabletopAssistantApplication",
+            "request": "launch",
+            "mainClass": "com.freund.tabletop_assistant.TabletopAssistantApplication",
+            "projectName": "tabletop-assistant"
+        }
+    ]
+}
