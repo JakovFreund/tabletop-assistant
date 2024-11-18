@@ -16,18 +16,19 @@ import com.freund.tabletop_assistant.dto.HPUpdateRequest;
 import com.freund.tabletop_assistant.model.Creature;
 import com.freund.tabletop_assistant.model.GameState;
 import com.freund.tabletop_assistant.service.CreatureService;
+import com.freund.tabletop_assistant.service.GameStateService;
 
 @RestController
 @RequestMapping("/api")
 public class GameStateController {
     @Autowired
-    private GameState gameState; // TODO move to gameStateService 
+    private GameStateService gameStateService;
     @Autowired
     private CreatureService creatureService;
 
     @GetMapping("/gamestate")
-    public GameState getGameState() { // TODO move to gameStateService 
-        return gameState;
+    public GameState getGameState() {
+        return gameStateService.getGameState();
     }
 
     @PutMapping("/creature/{id}/hp")
@@ -40,7 +41,7 @@ public class GameStateController {
 
     @GetMapping("/save")
     public ResponseEntity<String> saveGameState() {
-        if (gameState.saveGameState()) {
+        if (gameStateService.saveGameState()) {
             return new ResponseEntity<>("GameState has been successfully saved.", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("IOException while saving GameState!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,16 +50,10 @@ public class GameStateController {
 
     @GetMapping("/creature/{id}")
     public Creature getCreatureById(@PathVariable UUID id) {
-        return gameState.getCreature(id);
+        return creatureService.getCreature(id);
     }
 
     /*
-
-    @GetMapping("/addItem")
-    public ResponseEntity<String> addItem() {
-        gameState.getCreatures().get(0).addItem(new ItemStack(new Item(ItemType.WOODEN_SWORD), 2));
-        return new ResponseEntity<>("Item added.", HttpStatus.CREATED);
-    }
 
     @GetMapping("/addcreatures")
     public ResponseEntity<String> temporaryCreature() {
@@ -87,12 +82,5 @@ public class GameStateController {
         return new ResponseEntity<>("Creatures added.", HttpStatus.CREATED);
     }
     */
-
-    @GetMapping("/UUID")
-    public String generateUUID() {
-        String id = UUID.randomUUID().toString();
-        System.out.println("Generated UUID: " + id);
-        return id;
-    }
 
 }

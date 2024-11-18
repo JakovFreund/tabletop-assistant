@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.freund.tabletop_assistant.dto.ConnectDeviceRequest;
-import com.freund.tabletop_assistant.model.GameState;
-import com.freund.tabletop_assistant.model.device.ConnectedDevices;
+import com.freund.tabletop_assistant.service.ConnectedDevicesService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,25 +21,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api")
 public class ConnectedDevicesController {
     @Autowired
-    private ConnectedDevices connectedDevices;
-    @Autowired
-    private GameState gameState;
+    private ConnectedDevicesService connectedDevicesService;
 
     @GetMapping("/connected")
     public ArrayList<UUID> getConnectedDevices() {
-        return new ArrayList<UUID>(connectedDevices.getCurrentlyConnectedDeviceIds());
+        return connectedDevicesService.getCurrentlyConnectedDeviceIds();
     }
 
     @PostMapping("/connect")
     public ResponseEntity<String> connectDevice(@RequestBody ConnectDeviceRequest request) {
-        connectedDevices.addDevice(request.getDeviceId());
-        String deviceNickname = "";
-        if(gameState.getDevice(request.getDeviceId())!=null){
-            deviceNickname = gameState.getDevice(request.getDeviceId()).getDeviceNickname()+" ";
+        if(connectedDevicesService.connectDevice(request.getDeviceId())){
+            return new ResponseEntity<>("Device connected.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Connect device failed.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        System.out.println("Connected device: " + deviceNickname + request.getDeviceId());
+    
+    }
 
-        return new ResponseEntity<>("Device connected.", HttpStatus.OK);  
+    @GetMapping("/UUID")
+    public String generateUUID() {
+        String id = UUID.randomUUID().toString();
+        System.out.println("Generated UUID: " + id);
+        return id;
     }
     
 }

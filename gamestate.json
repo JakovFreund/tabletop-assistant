@@ -1,1 +1,168 @@
-{"creatures":[{"creatureId":"e8b21821-0eae-4a33-811b-216710880937","name":"Creature Ninjani","base_STR":0,"base_DEX":0,"base_CON":0,"base_INT":0,"base_WIS":0,"base_CHA":0,"race":null,"subrace":"DROW","classes":{},"subclasses":null,"statusEffectInstances":[],"turnResources":[{"type":"ACTION","name":"Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"BONUS_ACTION","name":"Bonus Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"REACTION","name":"Reaction","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"MOVEMENT","name":"Movement","amount":5,"maxAmount":5,"refillRate":"TURN"},{"type":"HP","name":"HP","amount":20,"maxAmount":20,"refillRate":"LONG_REST"},{"type":"TEMPORARY_HP","name":"Temporary HP","amount":0,"maxAmount":0,"refillRate":"NEVER"},{"type":"HIT_DICE","name":"Hit Dice","amount":3,"maxAmount":3,"refillRate":"LONG_REST"}],"inventory":[{"item":{"itemType":"GOLD","rarity":"COMMON","effects":[],"newEffects":null,"value":1},"amount":35,"lastModified":1728682905552,"inventory":null}],"equiped":[null,null,null,null,null,null,null,null,null,null,null]},{"creatureId":"1efa437c-8309-4c48-be51-93566b7b78c6","name":"Second","base_STR":0,"base_DEX":0,"base_CON":0,"base_INT":0,"base_WIS":0,"base_CHA":0,"race":null,"subrace":"DEMON","classes":{},"subclasses":null,"statusEffectInstances":[{"statusEffect":"BLINDED","turnsDuration":0,"duration":"FOREVER","customNote":"lmao"}],"turnResources":[{"type":"ACTION","name":"Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"BONUS_ACTION","name":"Bonus Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"REACTION","name":"Reaction","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"MOVEMENT","name":"Movement","amount":5,"maxAmount":5,"refillRate":"TURN"},{"type":"HP","name":"HP","amount":20,"maxAmount":20,"refillRate":"LONG_REST"},{"type":"TEMPORARY_HP","name":"Temporary HP","amount":0,"maxAmount":0,"refillRate":"NEVER"},{"type":"HIT_DICE","name":"Hit Dice","amount":3,"maxAmount":3,"refillRate":"LONG_REST"}],"inventory":[],"equiped":[null,null,null,null,null,null,null,null,null,null,null]},{"creatureId":"a82a4edd-2dc8-4d6b-9e9e-35ed2f48999e","name":"Player","base_STR":0,"base_DEX":0,"base_CON":0,"base_INT":0,"base_WIS":0,"base_CHA":0,"race":null,"subrace":"HALF_ELF","classes":{},"subclasses":null,"statusEffectInstances":[{"statusEffect":"BLESS","turnsDuration":0,"duration":"LONG_REST","customNote":"long note"},{"statusEffect":"BARKSKIN","turnsDuration":0,"duration":"SHORT_REST","customNote":""}],"turnResources":[{"type":"ACTION","name":"Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"BONUS_ACTION","name":"Bonus Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"REACTION","name":"Reaction","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"MOVEMENT","name":"Movement","amount":5,"maxAmount":5,"refillRate":"TURN"},{"type":"HP","name":"HP","amount":20,"maxAmount":20,"refillRate":"LONG_REST"},{"type":"TEMPORARY_HP","name":"Temporary HP","amount":0,"maxAmount":0,"refillRate":"NEVER"},{"type":"HIT_DICE","name":"Hit Dice","amount":3,"maxAmount":3,"refillRate":"LONG_REST"}],"inventory":[{"item":{"itemType":"SILVERFANG","rarity":"EPIC","effects":[{"effectType":"DAMAGE","statModifier":"4d8"}],"newEffects":null,"value":500},"amount":1,"lastModified":1728682905553,"inventory":null}],"equiped":[null,null,null,null,null,null,null,null,null,null,null]},{"creatureId":"e356eae0-a774-4664-925b-58d00142215f","name":"Fourth","base_STR":0,"base_DEX":0,"base_CON":0,"base_INT":0,"base_WIS":0,"base_CHA":0,"race":null,"subrace":"HILL_DWARF","classes":{},"subclasses":null,"statusEffectInstances":[{"statusEffect":"CHILLED","turnsDuration":3,"duration":"TURNS","customNote":"he kinda chill with it tho"}],"turnResources":[{"type":"ACTION","name":"Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"BONUS_ACTION","name":"Bonus Action","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"REACTION","name":"Reaction","amount":1,"maxAmount":1,"refillRate":"TURN"},{"type":"MOVEMENT","name":"Movement","amount":5,"maxAmount":5,"refillRate":"TURN"},{"type":"HP","name":"HP","amount":20,"maxAmount":20,"refillRate":"LONG_REST"},{"type":"TEMPORARY_HP","name":"Temporary HP","amount":0,"maxAmount":0,"refillRate":"NEVER"},{"type":"HIT_DICE","name":"Hit Dice","amount":3,"maxAmount":3,"refillRate":"LONG_REST"}],"inventory":[],"equiped":[null,null,null,null,null,null,null,null,null,null,null]}],"deviceMappings":[{"deviceId":"553c08eb-08c3-4148-845c-cf8e1fb42a38","creatureId":"e8b21821-0eae-4a33-811b-216710880937","dungeonMaster":true}],"devices":[{"deviceId":"553c08eb-08c3-4148-845c-cf8e1fb42a38","deviceNickname":"JakovPC"}]}
+{
+    "creatures": [
+        {
+            "creatureId": "e8b21821-0eae-4a33-811b-216710880937",
+            "name": "Creature Ninjani",
+            "base_STR": 0,
+            "base_DEX": 0,
+            "base_CON": 0,
+            "base_INT": 0,
+            "base_WIS": 0,
+            "base_CHA": 0,
+            "race": null,
+            "subrace": "DROW",
+            "classes": {},
+            "subclasses": null,
+            "statusEffectInstances": [],
+            "turnResources": [],
+            "inventory": [
+                {
+                    "item": {
+                        "itemType": "GOLD",
+                        "rarity": "COMMON",
+                        "effects": [],
+                        "newEffects": null,
+                        "value": 1
+                    },
+                    "amount": 35,
+                    "lastModified": 1728682905552,
+                    "inventory": null
+                }
+            ],
+            "equiped": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "creatureId": "1efa437c-8309-4c48-be51-93566b7b78c6",
+            "name": "Second",
+            "base_STR": 0,
+            "base_DEX": 0,
+            "base_CON": 0,
+            "base_INT": 0,
+            "base_WIS": 0,
+            "base_CHA": 0,
+            "race": null,
+            "subrace": "DEMON",
+            "classes": {},
+            "subclasses": null,
+            "statusEffectInstances": [],
+            "turnResources": [],
+            "inventory": [],
+            "equiped": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "creatureId": "a82a4edd-2dc8-4d6b-9e9e-35ed2f48999e",
+            "name": "Player",
+            "base_STR": 0,
+            "base_DEX": 0,
+            "base_CON": 0,
+            "base_INT": 0,
+            "base_WIS": 0,
+            "base_CHA": 0,
+            "race": null,
+            "subrace": "HALF_ELF",
+            "classes": {},
+            "subclasses": null,
+            "statusEffectInstances": [],
+            "turnResources": [],
+            "inventory": [
+                {
+                    "item": {
+                        "itemType": "SILVERFANG",
+                        "rarity": "EPIC",
+                        "effects": [
+                            {
+                                "effectType": "DAMAGE",
+                                "statModifier": "4d8"
+                            }
+                        ],
+                        "newEffects": null,
+                        "value": 500
+                    },
+                    "amount": 1,
+                    "lastModified": 1728682905553,
+                    "inventory": null
+                }
+            ],
+            "equiped": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        },
+        {
+            "creatureId": "e356eae0-a774-4664-925b-58d00142215f",
+            "name": "Fourth",
+            "base_STR": 0,
+            "base_DEX": 0,
+            "base_CON": 0,
+            "base_INT": 0,
+            "base_WIS": 0,
+            "base_CHA": 0,
+            "race": null,
+            "subrace": "HILL_DWARF",
+            "classes": {},
+            "subclasses": null,
+            "statusEffectInstances": [],
+            "turnResources": [],
+            "inventory": [],
+            "equiped": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ]
+        }
+    ],
+    "deviceMappings": [
+        {
+            "deviceId": "553c08eb-08c3-4148-845c-cf8e1fb42a38",
+            "creatureId": "e8b21821-0eae-4a33-811b-216710880937",
+            "dungeonMaster": true
+        }
+    ],
+    "devices": [
+        {
+            "deviceId": "553c08eb-08c3-4148-845c-cf8e1fb42a38",
+            "deviceNickname": "JakovPC"
+        }
+    ]
+}

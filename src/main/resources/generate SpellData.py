@@ -83,7 +83,7 @@ with open(output_file, 'w') as f:
         elif spell["duration"]=="7 days":
             f.write("TURNS, 100800")
         elif spell["duration"]=="Until dispelled":
-            f.write("FOREVER, 0")
+            f.write("INDEFINITE, 0")
         elif spell["duration"]=="1 hour" or spell["duration"]=="Up to 1 hour":
             f.write("TURNS, 600")
         elif spell["duration"]=="8 hours" or spell["duration"]=="Up to 8 hours":
@@ -99,7 +99,7 @@ with open(output_file, 'w') as f:
         elif spell["duration"]=="30 days":
             f.write("TURNS, 432000")
         else:
-            f.write("SPECIAL, 0")
+            f.write("INDEFINITE, 0")
         f.write("), ")
 
         #HashMap<TurnResourceType, Integer> costs; // casting_time

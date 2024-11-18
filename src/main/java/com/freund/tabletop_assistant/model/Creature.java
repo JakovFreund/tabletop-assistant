@@ -120,7 +120,7 @@ public class Creature {
         if (turnResource != null) {
             turnResource.setAmount(amount);
         } else {
-            System.out.println("turnResource doesn't exist");
+            System.err.println("turnResource "+turnResourceType.toString()+" doesn't exist");
         }
     }
 
@@ -129,7 +129,7 @@ public class Creature {
         if (turnResource != null) {
             turnResource.setMaxAmount(maxAmount);
         } else {
-            System.out.println("turnResource doesn't exist");
+            System.err.println("turnResource "+turnResourceType.toString()+" doesn't exist");
         }
     }
 

@@ -5,6 +5,6 @@ public enum DurationType {
     SHORT_REST,
     LONG_REST,
     INSTANT,
-    FOREVER,
+    INDEFINITE,
     SPECIAL
 }

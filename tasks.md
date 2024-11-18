@@ -1,15 +1,11 @@
 
 ### TASKS
 
+- fix the decoupling stuff around service and model (gamestate, creature, connecteddevices)
 - fill in some StatusEffects :D
-- need to update gamestate.json to changed structure (check application run warnings)
 - change saving of deviceId on frontend localstorage to "tabletopAssistantDeviceId" to not conflict with other ids
-- do i need DurationType.SPECIAL (or can i change all cases to FOREVER) - go through spells that have that
-- ^^ don't forget to modify python script also
 - DM Device Managment UI to assign nicknames or creatures to devices
-- set custom static final DM UUID for damage source (ex. 0000-0000 ... means DM)
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip)
-- add GameStateService and remove the Autowired gameState from GameStateController
 - add connection error UI on fetch gamestate fail
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
