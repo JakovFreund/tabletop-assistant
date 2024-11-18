@@ -1,41 +1,50 @@
 
 ### TASKS
 
-- create a python script that generates this ˇˇ
-- create a inheritable class tree for all json props of spells (with interfaces/abstract classes for different types - cones, spheres...)
-- add SpellTarget class/enum (self, ally, enemy, aura, point, aoe, cone) that contains ranges, cones
+- fill in some StatusEffects :D
+- need to update gamestate.json to changed structure (check application run warnings)
+- change saving of deviceId on frontend localstorage to "tabletopAssistantDeviceId" to not conflict with other ids
+- do i need DurationType.SPECIAL (or can i change all cases to FOREVER) - go through spells that have that
+- ^^ don't forget to modify python script also
 - DM Device Managment UI to assign nicknames or creatures to devices
+- set custom static final DM UUID for damage source (ex. 0000-0000 ... means DM)
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip)
 - add GameStateService and remove the Autowired gameState from GameStateController
 - add connection error UI on fetch gamestate fail
-- fill in some StatusEffects :D
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- i might need a SourceObject (for damage source, effect source...) object/class (this.Creature, this.Castable, this.StatusEffect)
+- UUID Source (for damage source, effect source...)
 - ItemEffect conversion
 - finish races & subraces enums, classes and sublclasses enums
 - weight and encumbered
 - https://bg3.wiki/wiki/Weapon_actions
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 - finish all statuseffects enum
-- update the spell descriptions by making them more descriptive and dnd-like (as a contrast to crpg-like) https://roll20.net/compendium/dnd5e/Index%3ASpells
 - make a static playable races list in Race enum
 - change "Elemental Weapon" spell so it doesn't give +1 to both Attack roll and damgae roll, but only to attack roll
 - also need a appliesStatusEffect property of spell (clickable in log and can be dragged to a creature)
 - move gamestate to folder (rename to save-DD-MM-YY or something)
 - periodic saving to json (multiple json "saves", autoloads latest one) ~ every 2 minutes
 - add ClassActions
+- render different damage types and heals differently (create react objects for them?)
 - go look through monsters statblocks for missing statuseffects
 - Creature.spellbook (will need primary ability of source of learned spell to calculate save DC), sort spellbook by school, ability to favourite spells
 - prepared spells (how different classes do it)
 - maybe sort race and class TurnResource counters to different objects/classes ?
-- print shit out and save it to a log file simultaneously (NOT GAMESTATE)
+- print shit out and save it to a log file simultaneously (not gamestate)
+- need to program warlock spellslot spending seperately (can spend wl spellslot instead of nromal if spell level is the same or less...)
 - Go through each class, subclass, race and subrace and imagine trying to level them up
-- seperate remaining tasks into DM UI and PlayerUI
+- seperate remaining tasks into general, DM UI and PlayerUI
+- test True Strike spell duration
+- time controls (play, pause, speed, increment a specific amount in either direction, undo(gamestate rollback))
+- manually check SpellData if spell upcast booleans are accurate
+- spells that have multiple damage types were wrong in the json, fix manually in SpellData
+- on combat end convert currently active castable costs (channeling) to a custom StatusEffect "CASTING_SPELL" with the same Duration
+- ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
 
 
 
@@ -123,7 +132,8 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 ### ILIA TASKS
 
 - DMG pg250 procitaj cijeli section pa mi daj tldr slj tjedan
-- koliki ce bit (u squares): PC movement range, spell range, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
+- procitaj Players Handbook "Resting" section za Hit Dice info
+- koliki ce bit: PC movement range, spell range, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
 - gridmap aoe spells (nacrtat aoe grid za svaki radius, pregledat sve spellove za cudne oblike npr. cone i nacrtat kak ce to izgledat za razlicite rangeve)
 - gridmap Wall of Fire ?
 - kako funkcioniraju hit dice (short rest, long rest, levelup)
@@ -136,9 +146,11 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 - popuni subclasses u kodu na githubu (GameClass.java)
 - promjeni spell upcastove u true na lv1 spellovima gdje treba
 - if any spell mentions distance in meters (ex. 9 m): find description and convert to ft
-- dodavat spellove koji fale u json-u i pregledat ove bg3 spellove koji su tu jel su isti efekti i ako nisu odabrat koji se cini bolji
-- povezat spellove i status effecte u kodu
-- convertat feet u squares svugdje u kodu
+- https://bg3.wiki/wiki/List_of_all_spells
+- dodaj spellove koji fale (izlistano dolje u ### BG3 spells missing from 5eSpells.json) u SpellData.java na dno postojece liste (ne abecedno)
+- pregledaj te bg3 spellove jesu li isti efekti u bg3 i 5e, i ako nisu odabrat koji se cini bolji
+- povezi spellove i status effecte u kodu
+- zaokruzi feet koji nisu djeljivi sa 5
 
 RULES:
 

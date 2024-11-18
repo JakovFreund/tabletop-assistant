@@ -182,14 +182,16 @@ public class Creature {
         // remove 1 duration from effects
 
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
+
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
-            if (statusEffectInstance.getDuration() == null) {
-                statusEffectInstance.setTurnsDuration(statusEffectInstance.getTurnsDuration() - 1);
-                if (statusEffectInstance.getTurnsDuration() == 0) {
+            if (statusEffectInstance.getDuration().getDurationType() == DurationType.TURNS) {
+                statusEffectInstance.getDuration().setTurnsDuration(statusEffectInstance.getDuration().getTurnsDuration() - 1);
+                if (statusEffectInstance.getDuration().getTurnsDuration() == 0) {
                     toRemove.add(statusEffectInstance);
                 }
             }
         }
+
         statusEffectInstances.removeAll(toRemove);
     }
 
@@ -206,7 +208,7 @@ public class Creature {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
-            if (statusEffectInstance.getDuration() == Duration.SHORT_REST) {
+            if (statusEffectInstance.getDuration().getDurationType() == DurationType.SHORT_REST) {
                 toRemove.add(statusEffectInstance);
             }
         }
@@ -217,7 +219,7 @@ public class Creature {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
-            if (statusEffectInstance.getDuration() == Duration.LONG_REST) { //probably need to refresh all, not just LONG_REST
+            if (statusEffectInstance.getDuration().getDurationType() == DurationType.LONG_REST) { //probably need to refresh all, not just LONG_REST
                 toRemove.add(statusEffectInstance);
             }
         }
@@ -241,76 +243,7 @@ public class Creature {
         getTurnResource(TurnResourceType.HP).setAmount(getTurnResource(TurnResourceType.HP).getAmount() - damageAmount);
     }
 
-    // ---
-    /*
-    // default getters
-
-    public UUID getCreatureId(){
-        return this.creatureId;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public int getBase_STR(){
-        return this.base_STR;
-    }
-
-    public int getBase_DEX(){
-        return this.base_DEX;
-    }
-
-    public int getBase_CON(){
-        return this.base_CON;
-    }
-
-    public int getBase_INT(){
-        return this.base_INT;
-    }
-
-    public int getBase_WIS(){
-        return this.base_WIS;
-    }
-
-    public int getBase_CHA(){
-        return this.base_CHA;
-    }
-
-    public Race getRace(){
-        return this.race;
-    }
-
-    public Subrace getSubrace(){
-        return this.subrace;
-    }
-
-    public HashMap<GameClass, Integer> getClasses(){
-        return this.classes;
-    }
-
-    public ArrayList<Subclass> getSubclasses(){
-        return this.subclasses;
-    }
-
-    public ArrayList<StatusEffectInstance> getStatusEffectInstances(){
-        return this.statusEffectInstances;
-    }
-
-    public ArrayList<TurnResource> getTurnResources(){
-        return this.turnResources;
-    }
-
-    public ArrayList<ItemStack> getInventory(){
-        return this.inventory;
-    }
-
-    public UUID[] getEquiped(){
-        return this.equiped;
-    }
-    */
-
-
+    // TODO check rules on creature death/knocked out: do statuseffects get removed? (by source UUID?)
 
 }
 

@@ -1,5 +1,7 @@
 package com.freund.tabletop_assistant.model;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StatusEffectInstance {
     private StatusEffect statusEffect;
-    private int turnsDuration; // ignore if duration != TURNS
     private Duration duration;
+    private UUID source;
     private String customNote; // DM inputed reminder
 }

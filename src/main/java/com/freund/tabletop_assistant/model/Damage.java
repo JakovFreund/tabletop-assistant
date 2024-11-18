@@ -2,58 +2,30 @@ package com.freund.tabletop_assistant.model;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import com.freund.tabletop_assistant.util.StringUtil;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Damage {
     private HashMap<DamageType, String> components;
-    String source; // maybe even UUID
+    UUID source;
 
+    // probably remove
     public Damage(List<String> componentValues) {
         this.components = new HashMap<DamageType, String>();
-        this.source = "";
+        this.source = null;
         if (componentValues.size() != DamageType.values().length) {
             throw new IllegalArgumentException("Damage values list size must be equal to the amount of DamageTypes");
         }  
         for (int i = 0; i < DamageType.values().length; i++) {
             this.components.put(DamageType.values()[i], componentValues.get(i));
-        }
-    }
-
-    public Damage(Builder builder) {
-        this.components = new HashMap<DamageType, String>();
-        this.source = "";
-        for (DamageType damageType : builder.components.keySet()) {
-            this.components.put(damageType, builder.components.get(damageType));
-        }
-        this.source = builder.source;
-    }
-
-    public static class Builder {
-        private HashMap<DamageType, String> components;
-        private String source;
-
-        public Builder() {
-            this.components = new HashMap<DamageType, String>();
-        }
-
-        public Builder add(DamageType damageType, String amount) {
-            this.components.put(damageType, amount);
-            return this;
-        }
-
-        public Builder source(String source){
-            this.source = source;
-            return this;
-        }
-
-        public Damage build() {
-            return new Damage(this);
         }
     }
 
@@ -77,21 +49,5 @@ public class Damage {
         }
         returnString += "}";
         return returnString;
-    }
-
-    public enum DamageType {
-        BLUDGEONING,
-        PIERCING,
-        SLASHING,
-        COLD,
-        FIRE,
-        LIGHTNING,
-        THUNDER,
-        ACID,
-        POISON,
-        RADIANT,
-        NECROTIC,
-        FORCE,
-        PSYCHIC,
     }
 }
