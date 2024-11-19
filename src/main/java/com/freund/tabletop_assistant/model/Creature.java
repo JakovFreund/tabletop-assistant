@@ -18,17 +18,18 @@ public class Creature {
     private int base_INT;
     private int base_WIS;
     private int base_CHA;
-    private Race race;
     private Subrace subrace;
     private HashMap<GameClass, Integer> classes;
     private ArrayList<Subclass> subclasses;
     private ArrayList<StatusEffectInstance> statusEffectInstances;
     private ArrayList<TurnResource> turnResources;
     private ArrayList<ItemStack> inventory;
-    private UUID equiped[]; // stores inventory indexes of equiped items
+    private UUID equiped[]; // stores ids of equiped items from inventory
 
+    // i probably don't need thisˇˇ (it's just gonna get filled from the gamestate anyway, TODO test array creation with @NoArgsConstructor, what about EquipSlot.values().length ?)
     public Creature() {
         this.classes = new HashMap<GameClass, Integer>();
+        this.subclasses = new ArrayList<Subclass>();
         this.statusEffectInstances = new ArrayList<StatusEffectInstance>();
         this.turnResources = new ArrayList<TurnResource>();
         this.inventory = new ArrayList<ItemStack>();
@@ -40,7 +41,6 @@ public class Creature {
         this.creatureId = UUID.randomUUID();
         this.name = name;
         this.subrace = subrace;
-        this.race = this.subrace.RACE;
 
         //prepared spells (class?)
 
@@ -63,9 +63,12 @@ public class Creature {
 
     // addClass(), addSubclass, addTurnResource
 
+    public Race getRace(){
+        return this.subrace.RACE;
+    }
 
 
-    void addItems(ArrayList<ItemStack> items) {
+    public void addItems(ArrayList<ItemStack> items) {
         for (ItemStack item : items) {
             this.addItem(item);
         }
@@ -77,17 +80,13 @@ public class Creature {
         // update item.lastModified
     }
 
-    public void giveItemTo(Creature creature, int index){
-        // TODO
-    }
-
-    void equipItem(UUID itemId, EquipSlot equipSlot) {
+    public void equipItem(UUID itemId, EquipSlot equipSlot) {
         // remove buffs from previous in that slot (add function to recalculate all status effects)
         // equiped[equipSlot.ordinal()] = this.getItem(itemId);
         // if creature is holding Produce Flame gain Lighted StatusEffect
     }
 
-    void consumeItem(int inventoryIndex) {
+    public void consumeItem(int inventoryIndex) {
         // TODO if type.CONSUMABLE
     }
 
@@ -105,7 +104,7 @@ public class Creature {
         return null;
     }
 
-    ArrayList<TurnResource> getTurnResources(RefillRate refillRate) {
+    public ArrayList<TurnResource> getTurnResources(RefillRate refillRate) {
         ArrayList<TurnResource> refillRateTurnResources = new ArrayList<TurnResource>();
         for (TurnResource turnResource : turnResources) {
             if (turnResource.getRefillRate() == refillRate) {
@@ -115,32 +114,34 @@ public class Creature {
         return refillRateTurnResources;
     }
 
-    public void setTurnResourceAmount(TurnResourceType turnResourceType, int amount) {
+    public boolean setTurnResourceAmount(TurnResourceType turnResourceType, int amount) {
         TurnResource turnResource = getTurnResource(turnResourceType);
         if (turnResource != null) {
             turnResource.setAmount(amount);
         } else {
             System.err.println("turnResource "+turnResourceType.toString()+" doesn't exist");
+            return false;
         }
+        return true;
     }
 
-    public void setTurnResourceMaxAmount(TurnResourceType turnResourceType, int maxAmount) {
+    public boolean setTurnResourceMaxAmount(TurnResourceType turnResourceType, int maxAmount) {
         TurnResource turnResource = getTurnResource(turnResourceType);
         if (turnResource != null) {
             turnResource.setMaxAmount(maxAmount);
         } else {
             System.err.println("turnResource "+turnResourceType.toString()+" doesn't exist");
+            return false;
         }
+        return true;
     }
 
     public void addStatusEffectInstance(StatusEffectInstance statusEffectInstance){
         statusEffectInstances.add(statusEffectInstance);
-        // TODO also if tree, apply initial effect
-        // actually probably a switch case tree
-        // for example: addStatusEffectInstance(Invisibility) -> if this.hasStatusEffect(Branding Smite) -> can't turn invisible
+        // TODO don't need if tree, just go through StatusEffect.dependancies list and apply them with the same duration and dependsUpon.
     }
 
-    boolean hasStatusEffect(StatusEffect statusEffect){
+    public boolean hasStatusEffect(StatusEffect statusEffect){
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
             if (statusEffectInstance.getStatusEffect() == statusEffect){
                 return true;
@@ -156,7 +157,7 @@ public class Creature {
     // ---
 
 
-    void levelUp(GameClass gameClass) { // TODO optional add subclasses
+    public void levelUp(GameClass gameClass) { // TODO optional add subclasses
         if (this.classes.containsKey(gameClass)) {
             this.classes.put(gameClass, this.classes.get(gameClass) + 1);
         } else{
@@ -168,11 +169,11 @@ public class Creature {
 
 
 
-    void logManualInput(String string){ // for StatusEffects that don't proc on their own
+    public void logManualInput(String string){ // for StatusEffects that don't proc on their own
         System.out.println("MANUAL INPUT: " + string);
     }
 
-    void myTurn() {
+    public void myTurn() {
         // refresh action, bonus action, reaction
         for (TurnResource turnResource : getTurnResources(RefillRate.TURN)) {
             turnResource.setAmount(turnResource.getMaxAmount());
@@ -195,16 +196,16 @@ public class Creature {
         statusEffectInstances.removeAll(toRemove);
     }
 
-    void endTurn(){
+    public void endTurn(){
         // proc the rare end of turn effects
     }
 
-    void endCombat() {
+    public void endCombat() {
         // don't proc all turnDuration effects since some may last days, proc them as they travel (10 turns = 1 minute)
         // TODO prompt auto go into turn based mode on death saving throws
     }
 
-    void shortRest() {
+    public void shortRest() {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
@@ -215,7 +216,7 @@ public class Creature {
         statusEffectInstances.removeAll(toRemove);
     }
 
-    void longRest() {
+    public void longRest() {
         // TODO HP, SPELLSLOTS...
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : statusEffectInstances) {
@@ -227,7 +228,7 @@ public class Creature {
     }
 
 
-    void damage(int damageAmount) {
+    public void damage(int damageAmount) {
         if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount()>0){
             if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > damageAmount){
                 getTurnResource(TurnResourceType.TEMPORARY_HP).setAmount(getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() - damageAmount);

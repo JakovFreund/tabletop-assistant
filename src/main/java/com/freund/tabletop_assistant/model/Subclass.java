@@ -1,9 +1,8 @@
 package com.freund.tabletop_assistant.model;
 
-enum Subclass { // TODO add TurnResource list to subclass constructor? 
+enum Subclass {
     BERSERKER,
     WILDHEART,
-    WILD_MAGIC_BARBARIAN,
     COLLEGE_OF_LORE,
     COLLEGE_OF_VALOUR,
     COLLEGE_OF_SWORDS,

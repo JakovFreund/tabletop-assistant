@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/settings.json
+
+### CUSTOM
+**/src/main/resources/5e-SRD-Spells.json

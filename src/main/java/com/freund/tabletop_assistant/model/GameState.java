@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
@@ -15,6 +16,7 @@ import com.freund.tabletop_assistant.util.JsonHandler;
 
 @Component
 @Data
+@NoArgsConstructor
 public class GameState {
     private ArrayList<Creature> creatures;
     private ArrayList<DeviceMapping> deviceMappings;
@@ -42,10 +44,6 @@ public class GameState {
         }
     }
 
-    public GameState(){
-        this.creatures = new ArrayList<Creature>();
-    }
-
     public Creature getCreature (UUID id){
         for (Creature creature : this.getCreatures()){
             if (creature.getCreatureId().equals(id)){
@@ -53,10 +51,6 @@ public class GameState {
             }
         }
         return null;
-    }
-
-    public void addCreature(Creature creature){
-        creatures.add(creature);
     }
 
     public DeviceMapping getDeviceMapping(UUID deviceId){

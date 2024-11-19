@@ -1,6 +1,6 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.castable;
 
-enum SchoolOfMagic {
+public enum SchoolOfMagic {
     ABJURATION,
     CONJURATION,
     DIVINATION,

@@ -1,8 +1,8 @@
 
 ### TASKS
 
-- fix the decoupling stuff around service and model (gamestate, creature, connecteddevices)
-- fill in some StatusEffects :D
+- shorten StatusEffects by finding common denominators (ex. can't take Actions)
+- add StatusEffect attribute List<StatusEffect> dependancies
 - change saving of deviceId on frontend localstorage to "tabletopAssistantDeviceId" to not conflict with other ids
 - DM Device Managment UI to assign nicknames or creatures to devices
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip)
@@ -13,19 +13,22 @@
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- UUID Source (for damage source, effect source...)
+- UUID Source (for damage source, effect source...) -> source is gonna be Creature UUID always.
 - ItemEffect conversion
 - finish races & subraces enums, classes and sublclasses enums
 - weight and encumbered
+- cleanup creature class
+- add ClassActions
+- add default actions (Grab, Shove, Throw, Help, Dash...)
 - https://bg3.wiki/wiki/Weapon_actions
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 - finish all statuseffects enum
 - make a static playable races list in Race enum
 - change "Elemental Weapon" spell so it doesn't give +1 to both Attack roll and damgae roll, but only to attack roll
+- check out weapon StatusEffect implementation (MAGIC_WEAPON, PACT_WEAPON...). Can items have StatusEffects?
 - also need a appliesStatusEffect property of spell (clickable in log and can be dragged to a creature)
 - move gamestate to folder (rename to save-DD-MM-YY or something)
 - periodic saving to json (multiple json "saves", autoloads latest one) ~ every 2 minutes
-- add ClassActions
 - render different damage types and heals differently (create react objects for them?)
 - go look through monsters statblocks for missing statuseffects
 - Creature.spellbook (will need primary ability of source of learned spell to calculate save DC), sort spellbook by school, ability to favourite spells
@@ -41,6 +44,8 @@
 - spells that have multiple damage types were wrong in the json, fix manually in SpellData
 - on combat end convert currently active castable costs (channeling) to a custom StatusEffect "CASTING_SPELL" with the same Duration
 - ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
+- spirit guardians spell aoe wrong in json
+- add all wild magic statuseffects from 5e
 
 
 

@@ -29,4 +29,8 @@ public class GameStateService {
     public Device getDevice(UUID id){
         return gameState.getDevice(id);
     }
+
+    public void addCreature(Creature creature){
+        gameState.getCreatures().add(creature);
+    }
 }

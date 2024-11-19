@@ -6,13 +6,16 @@ output_file = java_class_name+".java"
 #output_file = java_class_name+".txt"
 
 
+imports = ["java.util.List","java.util.Map","com.freund.tabletop_assistant.model.Ability","com.freund.tabletop_assistant.model.DamageType","com.freund.tabletop_assistant.model.Duration","com.freund.tabletop_assistant.model.DurationType","com.freund.tabletop_assistant.model.TurnResourceType","static java.util.Map.entry"]
+
 with open(file_path, 'r') as f:
     data = json.load(f)
 
 with open(output_file, 'w') as f:
-    f.write("package com.freund.tabletop_assistant.model;\n\n")
-    f.write("import java.util.List;\nimport java.util.Map;\nimport static java.util.Map.entry;")
-    f.write("\n\n// @formatter:off\npublic final class "+java_class_name)
+    f.write("package com.freund.tabletop_assistant.model.castable;\n\n")
+    for imp in imports:
+        f.write("import "+imp+";\n")
+    f.write("\n// @formatter:off\npublic final class "+java_class_name)
     f.write(" {\n\tpublic static final List<Spell> SPELLS = List.of(\n")
 
     for spell_index, spell in enumerate(data):

@@ -18,12 +18,23 @@ public class CreatureService {
         if (creature == null) {
             return false;
         }
-        creature.setTurnResourceAmount(TurnResourceType.HP, hp);
-        return true;
+        return creature.setTurnResourceAmount(TurnResourceType.HP, hp);
     }
 
     public Creature getCreature(UUID id){
         return gameStateService.getCreature(id);
+    }
+
+    public void giveItemTo(Creature creature, int index){
+        // TODO
+    }
+
+    public void damageCreature(UUID id, int damageAmount) {
+        Creature creature = getCreature(id);
+        if (creature == null) {
+            throw new IllegalArgumentException("Creature not found");
+        }
+        creature.damage(damageAmount);
     }
     
 }

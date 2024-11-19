@@ -1,7 +1,12 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.castable;
 
 import java.util.List;
 import java.util.Map;
+import com.freund.tabletop_assistant.model.Ability;
+import com.freund.tabletop_assistant.model.DamageType;
+import com.freund.tabletop_assistant.model.Duration;
+import com.freund.tabletop_assistant.model.DurationType;
+import com.freund.tabletop_assistant.model.TurnResourceType;
 import static java.util.Map.entry;
 
 // @formatter:off
