@@ -9,7 +9,7 @@ public enum Ability {
     WIS,
     CHA;
 
-    public static int toModifier(int AbilityPoint) {
+    public static int getModifier(int AbilityPoint) {
         int result = AbilityPoint / 2;
         return result - 5;
     }

@@ -1,20 +1,32 @@
 
 ### TASKS
 
+- need both a creature dto and a gamestate dto (frontend has a different gamestate)
+- create a Creature DTO that has all the calculated stats, and setup sync to frontend (not just gamestate i guess ...)
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
-- add StatusEffect attribute List<StatusEffect> dependancies
+- go through all StatusEffects and check common denominators
 - change saving of deviceId on frontend localstorage to "tabletopAssistantDeviceId" to not conflict with other ids
 - DM Device Managment UI to assign nicknames or creatures to devices
-- how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip)
+- how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts)
 - add connection error UI on fetch gamestate fail
+- implement the StatusEffectInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
+- add statuseffects from items
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- UUID Source (for damage source, effect source...) -> source is gonna be Creature UUID always.
+- change UUID Source (for damage source, effect source...) to source object (sourceId is always gonna be Creature UUID though)
 - ItemEffect conversion
+- Creature.setConcentration(Castable) - set on both creature attribute and add statuseffect.
+- CreatureService.removeConcentration(Creature) - check other creatures for matching statuseffects that need to be removed
+- when you drag a statuseffect on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
+- ^^ If saving throw needed, pop-up that inputs roll amount and adds proficiency, skill modifier or whatever is needed. (log "Saving throw failed..." with all info)
+- implement remove status effect on lost concentration
+- add rogue expertise statuseffect for all skills
+- add fantasy datetime to gamestate (check dnd lore, should i use 12 months and 365 days of something else?)
+- fill in race movement speeds
 - finish races & subraces enums, classes and sublclasses enums
 - weight and encumbered
 - cleanup creature class
@@ -46,6 +58,8 @@
 - ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
 - spirit guardians spell aoe wrong in json
 - add all wild magic statuseffects from 5e
+- subracial default images
+- players with aura effect have to remember to apply them since app doesn't keep track of position
 
 
 

@@ -2,7 +2,6 @@ package com.freund.tabletop_assistant.model;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import com.freund.tabletop_assistant.util.StringUtil;
 
@@ -15,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Damage {
     private HashMap<DamageType, String> components;
-    UUID source;
+    EffectSource source;
 
     // probably remove
     public Damage(List<String> componentValues) {

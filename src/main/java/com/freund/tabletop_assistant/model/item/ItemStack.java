@@ -1,6 +1,7 @@
 package com.freund.tabletop_assistant.model.item;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ItemStack {
+    private UUID itemId;
     private Item item; // TODO change to ArrayList<Item> because of UUID
     private int amount; // get this from items.length ^^
     private long lastModified; // TODO add currentDate function

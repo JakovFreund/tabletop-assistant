@@ -18,6 +18,7 @@ import com.freund.tabletop_assistant.util.JsonHandler;
 @Data
 @NoArgsConstructor
 public class GameState {
+    // fantasy datetime
     private ArrayList<Creature> creatures;
     private ArrayList<DeviceMapping> deviceMappings;
     private ArrayList<Device> devices;
