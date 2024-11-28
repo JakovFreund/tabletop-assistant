@@ -14,6 +14,6 @@ public class StatusEffectInstance {
     private Duration duration;
     private EffectSource source;
     //private boolean removedOnSourceLostConcentration; // i probably don't need this (just check all effects when concentration is lost)
-    private List<StatusEffect> dependsUpon; // for chain removing status effects
+    private List<StatusEffect> dependsUpon; // for chain removing status effects with multiple "parent" statuseffects
     private String customNote; // DM inputed reminder
 }

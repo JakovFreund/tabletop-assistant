@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import com.freund.tabletop_assistant.model.castable.Castable;
 import com.freund.tabletop_assistant.model.item.ItemStack;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -20,7 +21,7 @@ public class Creature {
     private Alignment alignment;
     // Tool/Armour/Weapon Proficiencies ?
     private HashMap<Ability, Integer> abilityScores;
-    private HashMap<Skill, Boolean> skillProficiencies;
+    private HashMap<Skill, Boolean> skillProficiencies; //ˇˇ these two could be Lists with only true elements inside but whatever
     private HashMap<Ability, Boolean> savingThrowProficiencies;
     private HashMap<GameClass, Integer> classes;
     private ArrayList<Subclass> subclasses;
@@ -29,21 +30,21 @@ public class Creature {
     private ArrayList<ItemStack> inventory;
     private UUID equiped[]; // stores ids of equiped items from inventory
 
-
     // ### SPECIAL
 
     public void damage(int damageAmount) {
-        if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount()>0){
-            if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > damageAmount){
-                getTurnResource(TurnResourceType.TEMPORARY_HP).setAmount(getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() - damageAmount);
-                if(this.hasStatusEffect(StatusEffect.ARMOUR_OF_AGATHYS)){
+        if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > 0) {
+            if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > damageAmount) {
+                getTurnResource(TurnResourceType.TEMPORARY_HP)
+                        .setAmount(getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() - damageAmount);
+                if (this.hasStatusEffect(StatusEffect.ARMOUR_OF_AGATHYS)) {
                     // TODO armour of agahtys proc
                 }
                 // TODO other cases
 
             }
         }
-        
+
         getTurnResource(TurnResourceType.HP).setAmount(getTurnResource(TurnResourceType.HP).getAmount() - damageAmount);
     }
 
@@ -54,13 +55,12 @@ public class Creature {
     public void levelUp(GameClass gameClass) { // TODO optional add subclasses
         if (this.classes.containsKey(gameClass)) {
             this.classes.put(gameClass, this.classes.get(gameClass) + 1);
-        } else{
+        } else {
             this.classes.put(gameClass, 1);
         }
     }
 
     // TODO void resetLevel() also reset classes and subclasses
-
 
     // ### TURN
 
@@ -76,7 +76,8 @@ public class Creature {
         ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
         for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
             if (statusEffectInstance.getDuration().getDurationType() == DurationType.TURNS) {
-                statusEffectInstance.getDuration().setTurnsDuration(statusEffectInstance.getDuration().getTurnsDuration() - 1);
+                statusEffectInstance.getDuration()
+                        .setTurnsDuration(statusEffectInstance.getDuration().getTurnsDuration() - 1);
                 if (statusEffectInstance.getDuration().getTurnsDuration() == 0) {
                     toRemove.add(statusEffectInstance);
                 }
@@ -85,7 +86,7 @@ public class Creature {
         statusEffectInstances.removeAll(toRemove);
     }
 
-    public void endTurn(){
+    public void endTurn() {
         // proc the rare end of turn effects
     }
 
@@ -118,103 +119,118 @@ public class Creature {
         statusEffectInstances.removeAll(toRemove);
     }
 
-    
-
     // ### GETTERS, SETTERS, ADDERS 
 
-    public void addSubclass(Subclass subclass){
+    public void addSubclass(Subclass subclass) {
         this.subclasses.add(subclass);
     }
 
-    public Race getRace(){
+    @JsonIgnore
+    public Race getRace() {
         return this.getSubrace().RACE;
     }
 
-    public CreatureSize getCreatureSize(){
+    @JsonIgnore
+    public CreatureSize getCreatureSize() {
         return this.getSubrace().CREATURE_SIZE;
     }
 
-    public int getLevel(){
+    @JsonIgnore
+    public int getLevel() {
         // TODO count class levels
         return 0;
     }
 
-    public int getProficiencyBonus(){
+    @JsonIgnore
+    public int getProficiencyBonus() {
         // TODO getLevel()
         return 0;
     }
 
-    public boolean isProficient(Skill skill){
-        return this.getSkillProficiencies().get(skill);
+    public boolean isProficient(Skill skill) {
+        return this.getSkillProficiencies().getOrDefault(skill, false);
     }
 
-    public boolean isProficientSavingThrow(Ability ability){
-        return this.getSavingThrowProficiencies().get(ability);
+    public boolean isProficientSavingThrow(Ability ability) {
+        return this.getSavingThrowProficiencies().getOrDefault(ability, false);
     }
-    
-    public int getAbilityScore(Ability ability){
+
+    public int getAbilityScore(Ability ability) {
         return this.getAbilityScores().get(ability);
     }
 
-    public int getAbilityModifier(Ability ability){
+    public int getAbilityModifier(Ability ability) {
         return Ability.getModifier(getAbilityScore(ability));
     }
 
-    public int getSkillModifier(Skill skill){
-        if (this.isProficient(skill)){
+    public int getSkillModifier(Skill skill) {
+        if (this.isProficient(skill)) {
             return this.getProficiencyBonus() + getAbilityModifier(skill.ABILITY);
-        } else{
+        } else {
             return this.getAbilityModifier(skill.ABILITY);
         }
     }
 
-    public int getSavingThrowModifier(Ability ability){
-        if (this.isProficientSavingThrow(ability)){
+    public int getSavingThrowModifier(Ability ability) {
+        if (this.isProficientSavingThrow(ability)) {
             return this.getProficiencyBonus() + getAbilityModifier(ability);
-        } else{
+        } else {
             return this.getAbilityModifier(ability);
         }
     }
 
-    public int getPassivePerception(){
+    @JsonIgnore
+    public int getPassivePerception() {
         return 10 + this.getSkillModifier(Skill.PERCEPTION);
     }
 
-    public int getInitiativeModifier(){
+    @JsonIgnore
+    public int getInitiativeModifier() {
         return getAbilityModifier(Ability.DEX); // Initiative is a Dexterity Check -> d20 + DEX modifier
     }
-    
-    public int getCarryingCapacity(){ // in pounds
+
+    @JsonIgnore
+    public int getCarryingCapacity() { // in pounds
         return this.getAbilityScore(Ability.STR) * 15;
     }
 
-    public int getPushDragLiftCapacity(){
+    @JsonIgnore
+    public int getPushDragLiftCapacity() {
         // While pushing or dragging weight in excess of your carrying capacity, your speed drops to 5 feet.
         return this.getCarryingCapacity() * 2;
     }
 
-    public int getArmourClass(){
+    @JsonIgnore
+    public int getArmourClass() {
         // TODO return 10 + getAbilityModifier(Ability.DEX) + getEquipedItemStack(EquipSlot.TORSO).getItem() + shield item stat // which equipslots count towards AC?
         return 10 + getAbilityModifier(Ability.DEX);
     }
 
-    public int getJumpLength(){
+    @JsonIgnore
+    public int getJumpLength() {
         return getAbilityScore(Ability.STR);
     }
 
-    public int getJumpHeight(){
+    @JsonIgnore
+    public int getJumpHeight() {
         return 3 + getAbilityModifier(Ability.STR);
     }
 
-    public int getSavingThrowDC(Ability spellcastingAbility){ // TODO change to getDC(SavedSpell savedSpell) - get ability from map spell class origin
-        // GameClass.SP
+    @JsonIgnore
+    public int getSavingThrowDC(Ability spellcastingAbility) { // TODO change to getDC(SavedSpell savedSpell) - get ability from map spell class origin
         return 8 + this.getAbilityModifier(spellcastingAbility) + this.getProficiencyBonus();
     }
 
-    // @Override lombok ?
-    public void setConcentratingOn(Castable castable){
+    public void setConcentratingOn(Castable castable) { // sets both the creature's attribute and the concentrating statuseffect  
         this.concentratingOn = castable;
-        this.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CONCENTRATING, castable.getDuration(), new EffectSource(EffectSourceType.SPELL, creatureId), List.of(), ""));
+        if (castable == null) {
+        // TODO call CreatureService.remove previous from other creatures
+            this.removeStatusEffectInstance(StatusEffect.CONCENTRATING);
+        } else {
+            this.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CONCENTRATING, castable.getDuration(),
+                    new EffectSource(EffectSourceType.SPELL, creatureId), List.of(), ""));
+
+        }
     }
 
     // ### LIST/MAP
@@ -231,24 +247,24 @@ public class Creature {
         // update item.lastModified
     }
 
-    public ItemStack getItemStackByIndex(int index){
+    public ItemStack getItemStackByIndex(int index) {
         return this.getInventory().get(index);
     }
 
-    public ItemStack getItemStack(UUID uuid){
-        for (ItemStack itemStack : getInventory()){
-            if (itemStack.getItemId().equals(uuid)){
+    public ItemStack getItemStack(UUID uuid) {
+        for (ItemStack itemStack : getInventory()) {
+            if (itemStack.getItemId().equals(uuid)) {
                 return itemStack;
             }
         }
         return null;
     }
 
-    public UUID getEquipedInSlot(EquipSlot equipSlot){
+    public UUID getEquipedInSlot(EquipSlot equipSlot) {
         return getEquiped()[equipSlot.ordinal()];
     }
 
-    public ItemStack getEquipedItemStack(EquipSlot equipSlot){
+    public ItemStack getEquipedItemStack(EquipSlot equipSlot) {
         return getItemStack(getEquipedInSlot(equipSlot));
     }
 
@@ -282,7 +298,7 @@ public class Creature {
         if (turnResource != null) {
             turnResource.setAmount(amount);
         } else {
-            System.err.println("turnResource "+turnResourceType.toString()+" doesn't exist");
+            System.err.println("turnResource " + turnResourceType.toString() + " doesn't exist");
             return false;
         }
         return true;
@@ -293,37 +309,45 @@ public class Creature {
         if (turnResource != null) {
             turnResource.setMaxAmount(maxAmount);
         } else {
-            System.err.println("turnResource "+turnResourceType.toString()+" doesn't exist");
+            System.err.println("turnResource " + turnResourceType.toString() + " doesn't exist");
             return false;
         }
         return true;
     }
 
-    public void addTurnResource(TurnResource turnResource){
+    public void addTurnResource(TurnResource turnResource) {
         this.turnResources.add(turnResource);
     }
 
-    public void addStatusEffectInstance(StatusEffectInstance statusEffectInstance){
+    public void addStatusEffectInstance(StatusEffectInstance statusEffectInstance) {
         statusEffectInstances.add(statusEffectInstance);
         // print/log if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
         // then have a popup for what he rolled
         // TODO don't need if tree, just go through StatusEffect.dependancies list and apply them with the same duration and dependsUpon.
     }
 
-    public boolean hasStatusEffect(StatusEffect statusEffect){
+    public void removeStatusEffectInstance(StatusEffect statusEffect) {
         for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
-            if (statusEffectInstance.getStatusEffect() == statusEffect){
+            if (statusEffectInstance.getStatusEffect().equals(statusEffect)) {
+                getStatusEffectInstances().remove(statusEffectInstance);
+            }
+        }
+    }
+
+    public boolean hasStatusEffect(StatusEffect statusEffect) {
+        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
+            if (statusEffectInstance.getStatusEffect() == statusEffect) {
                 return true;
             }
         }
         return false;
     }
 
-
     // ### CONSTRUCTOR
 
     // i probably don't need thisˇˇ (it's just gonna get filled from the gamestate anyway, TODO test array creation with @NoArgsConstructor, what about EquipSlot.values().length ?)
     public Creature() {
+        this.setCreatureId(UUID.randomUUID());
         this.abilityScores = new HashMap<Ability, Integer>();
         this.skillProficiencies = new HashMap<Skill, Boolean>();
         this.savingThrowProficiencies = new HashMap<Ability, Boolean>();
@@ -333,30 +357,38 @@ public class Creature {
         this.turnResources = new ArrayList<TurnResource>();
         this.inventory = new ArrayList<ItemStack>();
         this.equiped = new UUID[EquipSlot.values().length];
+
+
+        for (Ability ability : Ability.values()) {
+            if (!ability.equals(Ability.NONE)) {
+                abilityScores.put(ability, 0);
+            }
+        }
+
+        for (Skill skill : Skill.values()) {
+            skillProficiencies.put(skill, false);
+        }
+
+        for (Ability ability : Ability.values()) {
+            savingThrowProficiencies.put(ability, false);
+        }
     }
 
-    public Creature (String name, Subrace subrace){
+    public Creature(String name, Subrace subrace) {
         this();
-        this.creatureId = UUID.randomUUID();
-        this.name = name;
-        this.subrace = subrace;
+        this.setName(name);
+        this.setSubrace(subrace);
 
         //prepared spells (class?)
-
 
         addTurnResource(new TurnResource(TurnResourceType.ACTION));
         addTurnResource(new TurnResource(TurnResourceType.BONUS_ACTION));
         addTurnResource(new TurnResource(TurnResourceType.REACTION));
         addTurnResource(new TurnResource(TurnResourceType.MOVEMENT, this.getRace().MOVEMENT_SPEED));
 
-        
         // the values of theseˇˇ might come from their race/class or maybe even base_CON ?
         addTurnResource(new TurnResource(TurnResourceType.HP, 20));
         addTurnResource(new TurnResource(TurnResourceType.TEMPORARY_HP));
         addTurnResource(new TurnResource(TurnResourceType.HIT_DICE)); // need hit dice counter for each class
     }
 }
-
-
-
-

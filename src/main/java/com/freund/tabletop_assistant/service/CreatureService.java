@@ -13,16 +13,16 @@ public class CreatureService {
     @Autowired
     private GameStateService gameStateService;
 
+    public Creature getCreature(UUID id){
+        return gameStateService.getCreature(id);
+    }
+
     public boolean updateCreatureHP(UUID id, int hp){
         Creature creature = gameStateService.getCreature(id);
         if (creature == null) {
             return false;
         }
         return creature.setTurnResourceAmount(TurnResourceType.HP, hp);
-    }
-
-    public Creature getCreature(UUID id){
-        return gameStateService.getCreature(id);
     }
 
     public void giveItemTo(Creature creature, int index){

@@ -1,8 +1,7 @@
 
 ### TASKS
 
-- need both a creature dto and a gamestate dto (frontend has a different gamestate)
-- create a Creature DTO that has all the calculated stats, and setup sync to frontend (not just gamestate i guess ...)
+- remove "savingThrowProficiencies": {"NONE": false, from gamestate.json} (probably add function to Ability.java)
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
 - go through all StatusEffects and check common denominators
 - change saving of deviceId on frontend localstorage to "tabletopAssistantDeviceId" to not conflict with other ids
@@ -12,14 +11,13 @@
 - implement the StatusEffectInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
+- items need UUID
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
 - add statuseffects from items
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- change UUID Source (for damage source, effect source...) to source object (sourceId is always gonna be Creature UUID though)
-- ItemEffect conversion
-- Creature.setConcentration(Castable) - set on both creature attribute and add statuseffect.
+- maybe make an ItemEffect enum (for lighted and similar)
 - CreatureService.removeConcentration(Creature) - check other creatures for matching statuseffects that need to be removed
 - when you drag a statuseffect on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
 - ^^ If saving throw needed, pop-up that inputs roll amount and adds proficiency, skill modifier or whatever is needed. (log "Saving throw failed..." with all info)
@@ -27,11 +25,10 @@
 - add rogue expertise statuseffect for all skills
 - add fantasy datetime to gamestate (check dnd lore, should i use 12 months and 365 days of something else?)
 - fill in race movement speeds
-- finish races & subraces enums, classes and sublclasses enums
+- finish races & subraces enums
 - weight and encumbered
-- cleanup creature class
 - add ClassActions
-- add default actions (Grab, Shove, Throw, Help, Dash...)
+- add default actions (Grab, Shove, Throw, Help, Dash...) - DefaultActions.java ?
 - https://bg3.wiki/wiki/Weapon_actions
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 - finish all statuseffects enum
@@ -40,7 +37,7 @@
 - check out weapon StatusEffect implementation (MAGIC_WEAPON, PACT_WEAPON...). Can items have StatusEffects?
 - also need a appliesStatusEffect property of spell (clickable in log and can be dragged to a creature)
 - move gamestate to folder (rename to save-DD-MM-YY or something)
-- periodic saving to json (multiple json "saves", autoloads latest one) ~ every 2 minutes
+- periodic saving to json (multiple json "saves", autoloads latest one) ~ saves every 2 minutes
 - render different damage types and heals differently (create react objects for them?)
 - go look through monsters statblocks for missing statuseffects
 - Creature.spellbook (will need primary ability of source of learned spell to calculate save DC), sort spellbook by school, ability to favourite spells
@@ -67,7 +64,7 @@
 @Data @AllArgs @NoArgs, @Builder, @Getter @Setter, @NoArgsConstructor, @RequiredArgsConstructor, @NonNull
 - for model/ classes: @Data, @NoArgsConstructor, (#todo test @AllArgsContrcutor with lists), (optional @Builder)
 - for controllers: nothing
-- for dto: #todo (probably @Data)
+- for dto: @Data (generates a @RequiredArgsConstructor if no constructor has been explicitly specified)
 
 #### STATS/PROFILE TAB
 - add Skills
@@ -111,18 +108,11 @@
 
 
 
-
-
 ### LOW PRIORITY IDEAS FOR LATER
 - players roll investigation checks on combat start for each new creature type to see their stats and abilities in combat (like homm4 few, band, scores...), on failed roll -> statuseffects and stats greyed out
 - add icons to statuseffects, spells, abilities
 - add Artificer class
 - convert to 5.5e
-
-
-
-
-
 
 
 
@@ -148,23 +138,21 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 
 - DMG pg250 procitaj cijeli section pa mi daj tldr slj tjedan
 - procitaj Players Handbook "Resting" section za Hit Dice info
-- koliki ce bit: PC movement range, spell range, improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
-- gridmap aoe spells (nacrtat aoe grid za svaki radius, pregledat sve spellove za cudne oblike npr. cone i nacrtat kak ce to izgledat za razlicite rangeve)
-- gridmap Wall of Fire ?
+- koliki su improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
+- gridmap aoe spells (nacrtat aoe grid za svaki AreaType.java, pregledat sve spellove i nacrtat kak ce to izgledat za razlicite rangeve - npr. Wall of Fire)
 - kako funkcioniraju hit dice (short rest, long rest, levelup)
 - koji ability za attack roll a koji za damage roll (napisi listu po klasama i tipovima oruzja ak treba nemam pojma)
 - weapon types and scaling (finesse, versatile, martial...) https://bg3.wiki/wiki/Weapons#Properties
+- prepared spells (how different classes do it), types of spellcasters? (spell refill and spend type)
 - nauci kak funkcionira git i github (zato da mi mozes contributat u kod bez mog inputa):
     - commands (add, commit, pull, push, branch, merge, pull request)
     - Feature branching Git workflow
 - popuni TurnResourceType
-- popuni subclasses u kodu na githubu (GameClass.java)
-- promjeni spell upcastove u true na lv1 spellovima gdje treba
-- if any spell mentions distance in meters (ex. 9 m): find description and convert to ft
+- popuni klase u kodu na githubu (Subclass.java)
 - https://bg3.wiki/wiki/List_of_all_spells
 - dodaj spellove koji fale (izlistano dolje u ### BG3 spells missing from 5eSpells.json) u SpellData.java na dno postojece liste (ne abecedno)
 - pregledaj te bg3 spellove jesu li isti efekti u bg3 i 5e, i ako nisu odabrat koji se cini bolji
-- povezi spellove i status effecte u kodu
+- povezi spellove i status effecte u kodu (SpellData.java -> Spell.statusEffects List<StatusEffect>)
 - zaokruzi feet koji nisu djeljivi sa 5
 
 RULES:

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EffectSource { // used for damageinstance, statuseffect
-    EffectSourceType EffectSourceType;
+    EffectSourceType effectSourceType;
     UUID creatureId;
 }

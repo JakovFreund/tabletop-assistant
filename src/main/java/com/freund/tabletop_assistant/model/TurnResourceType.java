@@ -61,12 +61,12 @@ public enum TurnResourceType {
     CUSTOM("", 1, RefillRate.NEVER);
 
 
-    final String name;
+    final String defaultName;
     final int defaultMaxAmount;
     final RefillRate defaultRefillRate;
 
-    TurnResourceType(String name, int defaultMaxAmount, RefillRate defaultRefillRate) {
-        this.name = name;
+    TurnResourceType(String defaultName, int defaultMaxAmount, RefillRate defaultRefillRate) {
+        this.defaultName = defaultName;
         this.defaultMaxAmount = defaultMaxAmount;
         this.defaultRefillRate = defaultRefillRate;
     }
