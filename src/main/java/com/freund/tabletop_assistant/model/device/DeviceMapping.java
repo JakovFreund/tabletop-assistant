@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @NoArgsConstructor
 public class DeviceMapping {
-    private UUID deviceId;
+    private String deviceNickname;
     private UUID creatureId;
     private boolean dungeonMaster;
 }
