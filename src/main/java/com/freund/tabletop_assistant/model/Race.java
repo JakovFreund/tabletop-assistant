@@ -28,7 +28,7 @@ public enum Race { // TODO fill in movement speeds
     AASIMAR(30),
     CELESTIAL(30), // List.of(Subrace.SOLAR, Subrace.AASIMON, Subrace.ELADRIN)
     FIEND(30), // List.of(Subrace.DEVIL, Subrace.DEMON, Subrace.DAEMON)
-    ELEMENTAL(30), //phoenix, along with basic elementals try to find an appropriate being for each (ex. Fire Genasi, Phoenix..)
+    ELEMENTAL(30), //all elemental genasi, along with basic elementals try to find an appropriate being for each (ex. Phoenix for fire..)
     // PLANT(List.of(Subrace.TREANT, Subrace.MYCONID)),
     OBJECT(30), // List.of(Subrace.SPELL) TODO maybe move to new class SceneObject
     OTHER(30);

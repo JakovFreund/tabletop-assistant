@@ -359,17 +359,15 @@ public class Creature {
         this.equiped = new UUID[EquipSlot.values().length];
 
 
-        for (Ability ability : Ability.values()) {
-            if (!ability.equals(Ability.NONE)) {
-                abilityScores.put(ability, 0);
-            }
+        for (Ability ability : Ability.getAll()) {
+            abilityScores.put(ability, 0);
         }
 
         for (Skill skill : Skill.values()) {
             skillProficiencies.put(skill, false);
         }
 
-        for (Ability ability : Ability.values()) {
+        for (Ability ability : Ability.getAll()) {
             savingThrowProficiencies.put(ability, false);
         }
     }

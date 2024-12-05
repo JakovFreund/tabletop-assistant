@@ -33,4 +33,13 @@ public class GameStateService {
     public void addCreature(Creature creature){
         gameState.getCreatures().add(creature);
     }
+
+    public boolean saveDevice(UUID deviceId, String deviceNickname){
+        if(gameState.getDevice(deviceId)==null){
+            gameState.getDevices().add(new Device(deviceId, deviceNickname));
+        } else {
+            gameState.getDevice(deviceId).setDeviceNickname(deviceNickname);
+        }
+        return true;
+    }
 }

@@ -27,8 +27,13 @@ public class ConnectedDevicesService {
             deviceNickname = gameStateService.getDevice(id).getDeviceNickname()+" ";
         }
         System.out.println("Connected device: " + deviceNickname + id);
-        return true;
-        
+        return true;  
     }
+
+    public boolean saveDevice(UUID deviceId, String deviceNickname){
+        return gameStateService.saveDevice(deviceId, deviceNickname);
+    }
+
+
     
 }

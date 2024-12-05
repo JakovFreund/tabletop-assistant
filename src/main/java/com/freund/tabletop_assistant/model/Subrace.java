@@ -22,10 +22,12 @@ public enum Subrace { // TODO fill in race
     DEVIL(Race.FIEND, Ability.CHA, CreatureSize.LARGE),
     DEMON(Race.FIEND, Ability.STR, CreatureSize.MEDIUM),
     DAEMON(Race.FIEND, Ability.WIS, CreatureSize.MEDIUM),
+    // check HOMM 3 & HOMM 4 for interesting creatures (that probably also exist in dnd)
 
     SPELL(null, Ability.NONE, CreatureSize.SMALL),
     OTHER(null, Ability.NONE, CreatureSize.MEDIUM);
 
+    // final String ICON;
     final Race RACE;
     final Ability SPELLCASTING_ABILITY; //for racial spells
     final CreatureSize CREATURE_SIZE;

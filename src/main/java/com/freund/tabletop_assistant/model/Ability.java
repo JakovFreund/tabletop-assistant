@@ -13,4 +13,16 @@ public enum Ability {
         int result = AbilityPoint / 2;
         return result - 5;
     }
+
+    public static Ability[] getAll() {
+        Ability[] array = new Ability[Ability.values().length - 1];
+        int index = 0;
+        for (Ability ability : Ability.values()) {
+            if (!ability.equals(Ability.NONE)) {
+                array[index++] = ability;
+            }
+        }
+        return array;
+    }
+
 }

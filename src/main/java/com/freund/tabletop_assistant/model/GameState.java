@@ -54,9 +54,9 @@ public class GameState {
         return null;
     }
 
-    public DeviceMapping getDeviceMapping(UUID deviceId){
+    public DeviceMapping getDeviceMapping(String deviceNickname){
         for (DeviceMapping deviceMapping : deviceMappings){
-            if (deviceMapping.getDeviceId().equals(deviceId)){
+            if (deviceMapping.getDeviceNickname().equals(deviceNickname)){
                 return deviceMapping;
             }
         }

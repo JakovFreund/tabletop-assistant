@@ -18,6 +18,7 @@ public enum Background {
     URCHIN(List.of(Skill.SLEIGHT_OF_HAND, Skill.STEALTH));
 
     final List<Skill> SKILL_PROFICIENCIES;
+    // TODO add description 
 
     Background(List<Skill> skillProficiencies){
         this.SKILL_PROFICIENCIES = skillProficiencies;

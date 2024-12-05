@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemStack {
     private UUID itemId;
+    // enum Identified (can players see the description, name, etc... - see spell Identify)
     private Item item; // TODO change to ArrayList<Item> because of UUID
     private int amount; // get this from items.length ^^
     private long lastModified; // TODO add currentDate function

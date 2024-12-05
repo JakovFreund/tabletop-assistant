@@ -22,7 +22,7 @@ public enum GameClass {
     // final List<ArmourType> ARMOUR_PROFICIENCIES // Light/Medium/Heavy armour...
     // final List<WeaponType> WEAPON_PROFICIENCIES // Simple, martial ...
     // final List<ToolType> TOOL_PROFICIENCIES // 
-    // final Boolean SPELLCASTER; // or maybe what type of spellcaster (spell refill and spend type) - enum
+    // final Boolean SPELLCASTER; // or maybe what type of spellcaster (spell refill and spend type, full caster...) - enum
 
     GameClass(Ability spellcastingAbility, String hitDice) {
         this.SPELLCASTING_ABILITY = spellcastingAbility;
