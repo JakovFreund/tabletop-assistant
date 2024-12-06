@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.freund.tabletop_assistant.model.Creature;
 import com.freund.tabletop_assistant.model.GameState;
 import com.freund.tabletop_assistant.model.device.Device;
+import com.freund.tabletop_assistant.model.device.DeviceMapping;
 
 @Service
 public class GameStateService {
@@ -39,6 +40,17 @@ public class GameStateService {
             gameState.getDevices().add(new Device(deviceId, deviceNickname));
         } else {
             gameState.getDevice(deviceId).setDeviceNickname(deviceNickname);
+        }
+        return true;
+    }
+
+    public boolean saveDeviceMapping(String deviceNickname, UUID creatureId, boolean dungeonMaster){
+        if(gameState.getDeviceMapping(deviceNickname)==null){
+            gameState.getDeviceMappings().add(new DeviceMapping(deviceNickname, creatureId, dungeonMaster));
+        } else {
+            DeviceMapping deviceMapping = gameState.getDeviceMapping(deviceNickname);
+            deviceMapping.setCreatureId(creatureId);
+            deviceMapping.setDungeonMaster(dungeonMaster);
         }
         return true;
     }

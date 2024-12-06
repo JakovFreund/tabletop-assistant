@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.freund.tabletop_assistant.dto.ConnectDeviceRequest;
+import com.freund.tabletop_assistant.dto.SaveDeviceMappingRequest;
 import com.freund.tabletop_assistant.dto.SaveDeviceRequest;
-import com.freund.tabletop_assistant.service.ConnectedDevicesService;
+import com.freund.tabletop_assistant.service.DeviceService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,18 +22,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api")
-public class ConnectedDevicesController { // rename to deviceController
+public class DeviceController {
     @Autowired
-    private ConnectedDevicesService connectedDevicesService;
+    private DeviceService deviceService;
 
     @GetMapping("/connected")
     public ArrayList<UUID> getConnectedDevices() {
-        return connectedDevicesService.getCurrentlyConnectedDeviceIds();
+        return deviceService.getCurrentlyConnectedDeviceIds();
     }
 
     @PostMapping("/connect")
     public ResponseEntity<String> connectDevice(@RequestBody ConnectDeviceRequest request) {
-        if(connectedDevicesService.connectDevice(request.getDeviceId())){
+        if(deviceService.connectDevice(request.getDeviceId())){
             return new ResponseEntity<>("Device connected.", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Device connecting failed.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,11 +49,19 @@ public class ConnectedDevicesController { // rename to deviceController
 
     @PutMapping("/device")
     public ResponseEntity<String> saveDevice(@RequestBody SaveDeviceRequest request){
-        if(connectedDevicesService.saveDevice(request.getDeviceId(), request.getDeviceNickname())){
+        if(deviceService.saveDevice(request.getDeviceId(), request.getDeviceNickname())){
             return new ResponseEntity<>("Device saved.", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Device saving failed.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+    @PutMapping("/device-mapping") // TODO is camel case appropriate ?
+    public ResponseEntity<String> saveDeviceMapping(@RequestBody SaveDeviceMappingRequest request){
+        if(deviceService.saveDeviceMapping(request.getDeviceNickname(), request.getCreatureId(), request.isDungeonMaster())){
+            return new ResponseEntity<>("DeviceMapping saved.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("DeviceMapping saving failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

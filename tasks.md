@@ -1,13 +1,22 @@
 
 ### TASKS
 
-- remove "savingThrowProficiencies": {"NONE": false, from gamestate.json} (probably add function to Ability.java)
+- shortened https response syntax from claude
+- rename all endpoints (and controller functions) to match convention ˇˇ
+- RESTful Naming Conventions: The endpoint name should represent the resource being manipulated, not the action.
+- add input component
+- go through all style classNames and change them accordingly
+- define global scss color variables 
+- autofocus/autoselect input in modal
+- do spell attack rolls have the longer range (with disadvantage)?
+- how do mounts work in 5e raw?
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
 - go through all StatusEffects and check common denominators
-- change saving of deviceId on frontend localstorage to "tabletopAssistantDeviceId" to not conflict with other ids
-- DM Device Managment UI to assign nicknames or creatures to devices
+- go through all spells and make status effects if there isn't one
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts)
 - add connection error UI on fetch gamestate fail
+- Mount.java (class for mounts from 5e-Equipment.json with all stats (speed, capacity...))
+- add StatusEffect.notImplemented list for player feedback - if StatusEffect isn't programmed in or requires player action (add special ui/notification for that)
 - implement the StatusEffectInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
 - convert Items from enum to class
@@ -37,40 +46,95 @@
 - check out weapon StatusEffect implementation (MAGIC_WEAPON, PACT_WEAPON...). Can items have StatusEffects?
 - also need a appliesStatusEffect property of spell (clickable in log and can be dragged to a creature)
 - move gamestate to folder (rename to save-DD-MM-YY or something)
-- periodic saving to json (multiple json "saves", autoloads latest one) ~ saves every 2 minutes
+- periodic gamestate saving (saves both to "latest.json" and "backups/21-02-24-12-37-30.json", on start autoloads latest) ~ saves every 2 minutes
 - render different damage types and heals differently (create react objects for them?)
 - go look through monsters statblocks for missing statuseffects
 - Creature.spellbook (will need primary ability of source of learned spell to calculate save DC), sort spellbook by school, ability to favourite spells
 - prepared spells (how different classes do it)
 - maybe sort race and class TurnResource counters to different objects/classes ?
+- which font should i use on frontend?
 - print shit out and save it to a log file simultaneously (not gamestate)
 - need to program warlock spellslot spending seperately (can spend wl spellslot instead of nromal if spell level is the same or less...)
 - Go through each class, subclass, race and subrace and imagine trying to level them up
 - seperate remaining tasks into general, DM UI and PlayerUI
-- test True Strike spell duration
+- test if spell duration is properly implemented - duration needs to be reduced by 1 on end of turn or start of turn? (ex. True Strike needs to end on next turn)
 - time controls (play, pause, speed, increment a specific amount in either direction, undo(gamestate rollback))
 - manually check SpellData if spell upcast booleans are accurate
 - spells that have multiple damage types were wrong in the json, fix manually in SpellData
 - on combat end convert currently active castable costs (channeling) to a custom StatusEffect "CASTING_SPELL" with the same Duration
 - ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
+- different width for different modals?
 - spirit guardians spell aoe wrong in json
 - add all wild magic statuseffects from 5e
-- subracial default images
+- subracial default images (duochrome outlines with different colors - similar to icons from https://www.dndbeyond.com/monsters)
 - players with aura effect have to remember to apply them since app doesn't keep track of position
+- fully obscured, half obscured, partial cover ?
+- make a house rules list (no spellcasting components, potion bonus action... look at other bg3 homebrews)
+- Long range (with disadvantage) for both throwing and shooting is always 3 times the normal range
+- Two-handing a versitile weapon gives a +2 bonus to damage
+- make a rules reminder list
+- add keybinds to MasterInterface actions
+- rename and categorize frontend image resources, cleanup public folder
+- pre-map the finished creatures to deviceNicknames
+
+### MODAL STEP-BY-STEP
+1. ConnectedDeviceCard button.onClick -> dispatch(openModal(modalType, props))
+2. redux state changes (including props because im calling modal from redux), Modal component displays on App (EditDeviceModal variant)
+3. EditDeviceModal calls api.saveDevice(deviceId, nicknameState)
+
+### MAP
+- 3 props: x, y, zoom
+
+### SPELL EXHAUSTION COST
+Spells that would consume material costs instead grant levels of exhaustion to the caster based on this table:
+
+|Spell|Exhaustion level|
+|-|-|
+|Arcane Lock|level|
+|Astral Projection|level|
+|Awaken|level|
+|Clone|level|
+|Continual Flame|0|
+|Divination|level|
+|Find Familiar|level|
+|Forbiddance|level|
+|Glyph of Warding|level|
+|Greater Restoration|level|
+|Hallow|level|
+|Heroes' Feast|level|
+|Illusory Script|0|
+|Legend Lore|0|
+|Magic Circle|level|
+|Magic Mouth|0|
+|Nondetection|0|
+|Planar Binding|level|
+|Protection from Evil and Good|level|
+|Raise Dead|level|
+|Reincarnate|level|
+|Ressurection|level|
+|Revify|level|
+|Sequester|level|
+|Stoneskin|level|
+|Symbol|level|
+|Teleportation Circle|level|
+|True Ressurection|level|
 
 
+#todo ^^
 
-### LOMBOK TAGS
-@Data @AllArgs @NoArgs, @Builder, @Getter @Setter, @NoArgsConstructor, @RequiredArgsConstructor, @NonNull
-- for model/ classes: @Data, @NoArgsConstructor, (#todo test @AllArgsContrcutor with lists), (optional @Builder)
-- for controllers: nothing
-- for dto: @Data (generates a @RequiredArgsConstructor if no constructor has been explicitly specified)
+
 
 #### STATS/PROFILE TAB
 - add Skills
 
 #### INVENTORY TAB
-- item images from https://www.aidedd.org/dnd-filters/magic-items.php (move to ilia tasks)
+- item images sources:
+    - have both the ItemCategory (and WeaponType) default icon and optional unique icon
+    - https://www.dndbeyond.com/magic-items
+    - https://www.dndbeyond.com/equipment
+    - others:
+        - HD images https://www.aidedd.org/dnd-filters/magic-items.php 
+        - drawn but cartoonish https://github.com/Gwillewyn/dnd-item-icons-by-gwill
 - change item.lastModified on move between inventories (add function inventory.moveItem(itemIndex, otherInventory) or something)
 - highlight item in inventory on move/modify
 - add sorting options for inventory
@@ -80,7 +144,8 @@
 - add "pop" sound (similiar to minecraft item pickup) to equip and inventory actions
 
 #### COMBAT/SCENE TAB
-- need a scene Object class (Creature, Item and Object (tree, rock...) inherit from it) - has size, id
+- need a SceneObject class (Creature, Item and Object (tree, rock...) inherit from it) - has size, id
+- DM UI to create a Damage object with all properties
 - player can see all the creatures on scene, actions he can take (with unavailable ones greyed out), full spellbook
 - player can in combat see a list of Default Actions, Spells, Weapon Actions, Class Actions to choose from
 - need to be able to display/preview summon's abilities before summoning them
@@ -103,7 +168,7 @@
 - players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
 
 #### MAP TAB
-- AC style vantage points for map discovery
+- fog of war + AC style vantage points for map discovery (or more like elden ring map location that discovers an entire area but instead its a vantage point) - make it distinct on the map
 
 
 
@@ -113,6 +178,7 @@
 - add icons to statuseffects, spells, abilities
 - add Artificer class
 - convert to 5.5e
+- modify high level spells with a high material cost (or which the spell consumes) to have some sort of penalty/limitation so PCs can't spam them
 
 
 
@@ -138,7 +204,6 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 
 - DMG pg250 procitaj cijeli section pa mi daj tldr slj tjedan
 - procitaj Players Handbook "Resting" section za Hit Dice info
-- koliki su improvised throw weapon range, 2 ranged weapon ranges (shorter one with disadvantage)
 - gridmap aoe spells (nacrtat aoe grid za svaki AreaType.java, pregledat sve spellove i nacrtat kak ce to izgledat za razlicite rangeve - npr. Wall of Fire)
 - kako funkcioniraju hit dice (short rest, long rest, levelup)
 - koji ability za attack roll a koji za damage roll (napisi listu po klasama i tipovima oruzja ak treba nemam pojma)
@@ -149,6 +214,7 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
     - Feature branching Git workflow
 - popuni TurnResourceType
 - popuni klase u kodu na githubu (Subclass.java)
+- Background.java descriptions
 - https://bg3.wiki/wiki/List_of_all_spells
 - dodaj spellove koji fale (izlistano dolje u ### BG3 spells missing from 5eSpells.json) u SpellData.java na dno postojece liste (ne abecedno)
 - pregledaj te bg3 spellove jesu li isti efekti u bg3 i 5e, i ako nisu odabrat koji se cini bolji

@@ -10,7 +10,7 @@ import com.freund.tabletop_assistant.model.device.ConnectedDevices;
 
 
 @Service
-public class ConnectedDevicesService {
+public class DeviceService {
     @Autowired
     ConnectedDevices connectedDevices;
     @Autowired
@@ -22,11 +22,11 @@ public class ConnectedDevicesService {
 
     public boolean connectDevice(UUID id){ //TODO add try-catch
         connectedDevices.addDevice(id);
-        String deviceNickname = "";
+        String deviceNickname = "(device not mapped to nickname)";
         if(gameStateService.getDevice(id)!=null){
-            deviceNickname = gameStateService.getDevice(id).getDeviceNickname()+" ";
+            deviceNickname = gameStateService.getDevice(id).getDeviceNickname();
         }
-        System.out.println("Connected device: " + deviceNickname + id);
+        System.out.println("Connected device: " + deviceNickname + " " + id);
         return true;  
     }
 
@@ -34,6 +34,8 @@ public class ConnectedDevicesService {
         return gameStateService.saveDevice(deviceId, deviceNickname);
     }
 
-
+    public boolean saveDeviceMapping(String deviceNickname, UUID creatureId, boolean dungeonMaster){
+        return gameStateService.saveDeviceMapping(deviceNickname, creatureId, dungeonMaster);
+    }
     
 }
