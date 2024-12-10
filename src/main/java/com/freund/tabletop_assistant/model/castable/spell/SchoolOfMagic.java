@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model.castable;
+package com.freund.tabletop_assistant.model.castable.spell;
 
 public enum SchoolOfMagic {
     ABJURATION,

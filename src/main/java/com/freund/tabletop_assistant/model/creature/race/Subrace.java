@@ -1,4 +1,7 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.creature.race;
+
+import com.freund.tabletop_assistant.model.ability.Ability;
+import com.freund.tabletop_assistant.model.creature.CreatureSize;
 
 public enum Subrace { // TODO fill in race
     PLACEHOLDER1(Race.HUMAN, Ability.INT, CreatureSize.MEDIUM),
@@ -28,9 +31,9 @@ public enum Subrace { // TODO fill in race
     OTHER(null, Ability.NONE, CreatureSize.MEDIUM);
 
     // final String ICON;
-    final Race RACE;
-    final Ability SPELLCASTING_ABILITY; //for racial spells
-    final CreatureSize CREATURE_SIZE;
+    public final Race RACE;
+    public final Ability SPELLCASTING_ABILITY; //for racial spells
+    public final CreatureSize CREATURE_SIZE;
     
 
     Subrace(Race race, Ability spellcastingAbility, CreatureSize creatureSize) {

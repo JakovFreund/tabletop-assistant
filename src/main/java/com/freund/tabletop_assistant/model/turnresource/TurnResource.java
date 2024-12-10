@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.turnresource;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

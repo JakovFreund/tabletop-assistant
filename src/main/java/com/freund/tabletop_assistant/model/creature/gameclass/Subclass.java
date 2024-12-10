@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.creature.gameclass;
 
 public enum Subclass { // TODO fill in GameClasses
     BERSERKER(GameClass.BARBARIAN),

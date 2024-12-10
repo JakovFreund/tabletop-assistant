@@ -1,7 +1,7 @@
 package com.freund.tabletop_assistant.mapper;
 
 import com.freund.tabletop_assistant.dto.CreatureDTO;
-import com.freund.tabletop_assistant.model.Creature;
+import com.freund.tabletop_assistant.model.creature.Creature;
 
 public class CreatureMapper {
 

@@ -1,8 +1,9 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.damage;
 
 import java.util.HashMap;
 import java.util.List;
 
+import com.freund.tabletop_assistant.model.source.EffectSource;
 import com.freund.tabletop_assistant.util.StringUtil;
 
 import lombok.AllArgsConstructor;

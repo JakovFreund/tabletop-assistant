@@ -2,8 +2,8 @@ package com.freund.tabletop_assistant.model.castable;
 
 import java.util.Map;
 
-import com.freund.tabletop_assistant.model.Damage;
-import com.freund.tabletop_assistant.model.DamageType;
+import com.freund.tabletop_assistant.model.damage.Damage;
+import com.freund.tabletop_assistant.model.damage.DamageType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

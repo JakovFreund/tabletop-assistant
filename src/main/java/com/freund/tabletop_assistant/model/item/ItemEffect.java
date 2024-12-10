@@ -1,6 +1,6 @@
 package com.freund.tabletop_assistant.model.item;
 
-import com.freund.tabletop_assistant.model.Damage;
+import com.freund.tabletop_assistant.model.damage.Damage;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

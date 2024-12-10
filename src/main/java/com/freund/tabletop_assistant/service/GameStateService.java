@@ -5,8 +5,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.freund.tabletop_assistant.model.Creature;
 import com.freund.tabletop_assistant.model.GameState;
+import com.freund.tabletop_assistant.model.creature.Creature;
 import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
 

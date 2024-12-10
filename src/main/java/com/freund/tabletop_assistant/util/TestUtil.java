@@ -1,7 +1,7 @@
 package com.freund.tabletop_assistant.util;
 
-import com.freund.tabletop_assistant.model.castable.Spell;
-import com.freund.tabletop_assistant.model.castable.SpellData;
+import com.freund.tabletop_assistant.model.castable.spell.Spell;
+import com.freund.tabletop_assistant.model.castable.spell.SpellData;
 
 public class TestUtil {
     public static void previousMain() {

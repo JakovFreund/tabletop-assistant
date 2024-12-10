@@ -3,10 +3,10 @@ package com.freund.tabletop_assistant.model.castable;
 import java.util.List;
 import java.util.Map;
 
-import com.freund.tabletop_assistant.model.Ability;
-import com.freund.tabletop_assistant.model.Duration;
-import com.freund.tabletop_assistant.model.StatusEffect;
-import com.freund.tabletop_assistant.model.TurnResourceType;
+import com.freund.tabletop_assistant.model.ability.Ability;
+import com.freund.tabletop_assistant.model.duration.Duration;
+import com.freund.tabletop_assistant.model.statuseffect.StatusEffect;
+import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

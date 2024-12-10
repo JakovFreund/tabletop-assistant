@@ -1,12 +1,6 @@
 
 ### TASKS
 
-- shortened https response syntax from claude
-- rename all endpoints (and controller functions) to match convention ˇˇ
-- RESTful Naming Conventions: The endpoint name should represent the resource being manipulated, not the action.
-- add input component
-- go through all style classNames and change them accordingly
-- define global scss color variables 
 - autofocus/autoselect input in modal
 - do spell attack rolls have the longer range (with disadvantage)?
 - how do mounts work in 5e raw?
@@ -63,7 +57,8 @@
 - spells that have multiple damage types were wrong in the json, fix manually in SpellData
 - on combat end convert currently active castable costs (channeling) to a custom StatusEffect "CASTING_SPELL" with the same Duration
 - ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
-- different width for different modals?
+- css google when should i target element by tag/type vs className
+- go through all css classNames and change them accordingly
 - spirit guardians spell aoe wrong in json
 - add all wild magic statuseffects from 5e
 - subracial default images (duochrome outlines with different colors - similar to icons from https://www.dndbeyond.com/monsters)
@@ -77,13 +72,20 @@
 - rename and categorize frontend image resources, cleanup public folder
 - pre-map the finished creatures to deviceNicknames
 
-### MODAL STEP-BY-STEP
-1. ConnectedDeviceCard button.onClick -> dispatch(openModal(modalType, props))
-2. redux state changes (including props because im calling modal from redux), Modal component displays on App (EditDeviceModal variant)
-3. EditDeviceModal calls api.saveDevice(deviceId, nicknameState)
 
-### MAP
-- 3 props: x, y, zoom
+### HTTP
+|Status Code|Description|
+|-|-|
+|**SUCCESS (2xx)**||
+|200 OK|object is found and returned, common response to GET|
+|201 CREATED|object is created, common response to POST, PUT|
+|**CLIENT ERRORS (4xx)**||
+|401 UNAUTHORIZED|authentication failed|
+|403 FORBIDDEN|no permission|
+|404 NOT FOUND|resource not found|
+|**SERVER ERRORS (5xx)**||
+|500 INTERNAL SERVER ERROR|unexpected error|
+|501 NOT IMPLEMENTED|feature in development|
 
 ### SPELL EXHAUSTION COST
 Spells that would consume material costs instead grant levels of exhaustion to the caster based on this table:
@@ -169,7 +171,28 @@ Spells that would consume material costs instead grant levels of exhaustion to t
 
 #### MAP TAB
 - fog of war + AC style vantage points for map discovery (or more like elden ring map location that discovers an entire area but instead its a vantage point) - make it distinct on the map
+- send full map and discovered mask through endpoint, mask image on frontend (don't overlay)
+- 3 props: x, y, zoom
 
+```jsx
+import { useGesture } from 'react-use-gesture';
+
+function MyComponent() {
+  const bind = useGesture({
+    onDrag: ({ delta }) => {
+      // Dragging logic
+    },
+    onPinch: ({ offset }) => {
+      // Pinch zoom
+    },
+    onWheel: ({ delta }) => {
+      // Scroll/wheel interactions
+    }
+  });
+
+  return <div {...bind()}>Touch me</div>;
+}
+```
 
 
 
@@ -220,6 +243,7 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 - pregledaj te bg3 spellove jesu li isti efekti u bg3 i 5e, i ako nisu odabrat koji se cini bolji
 - povezi spellove i status effecte u kodu (SpellData.java -> Spell.statusEffects List<StatusEffect>)
 - zaokruzi feet koji nisu djeljivi sa 5
+- frontend css
 
 RULES:
 

@@ -1,4 +1,6 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.creature.gameclass;
+
+import com.freund.tabletop_assistant.model.ability.Ability;
 
 public enum GameClass {
     BARBARIAN(Ability.NONE, "1d12"), //List.of(Subclass.BERSERKER, Subclass.WILDHEART, Subclass.WILD_MAGIC)
@@ -14,8 +16,8 @@ public enum GameClass {
     WARLOCK(Ability.CHA, "1d8"),
     WIZARD(Ability.INT, "1d6");
 
-    final Ability SPELLCASTING_ABILITY;
-    final String HIT_DICE;
+    public final Ability SPELLCASTING_ABILITY;
+    public final String HIT_DICE;
     
     // ˇˇ probably don't need to implement these since I'll be doing the leveling manually anyway
     // final List<Ability> SAVING_THROW_PROFICIENCIES // gain only on level 1 - doesn't apply to multiclass

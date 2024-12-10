@@ -1,12 +1,18 @@
-package com.freund.tabletop_assistant.model.castable;
+package com.freund.tabletop_assistant.model.castable.spell;
 
 import java.util.List;
 import java.util.Map;
-import com.freund.tabletop_assistant.model.Ability;
-import com.freund.tabletop_assistant.model.DamageType;
-import com.freund.tabletop_assistant.model.Duration;
-import com.freund.tabletop_assistant.model.DurationType;
-import com.freund.tabletop_assistant.model.TurnResourceType;
+
+import com.freund.tabletop_assistant.model.ability.Ability;
+import com.freund.tabletop_assistant.model.castable.AreaType;
+import com.freund.tabletop_assistant.model.castable.CastableDamageComponent;
+import com.freund.tabletop_assistant.model.castable.EffectTarget;
+import com.freund.tabletop_assistant.model.castable.RangeType;
+import com.freund.tabletop_assistant.model.damage.DamageType;
+import com.freund.tabletop_assistant.model.duration.Duration;
+import com.freund.tabletop_assistant.model.duration.DurationType;
+import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
+
 import static java.util.Map.entry;
 
 // @formatter:off

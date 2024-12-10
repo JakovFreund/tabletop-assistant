@@ -1,12 +1,26 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.creature;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import com.freund.tabletop_assistant.model.creature.gameclass.GameClass;
+import com.freund.tabletop_assistant.model.creature.gameclass.Subclass;
+import com.freund.tabletop_assistant.model.ability.Ability;
+import com.freund.tabletop_assistant.model.ability.Skill;
 import com.freund.tabletop_assistant.model.castable.Castable;
+import com.freund.tabletop_assistant.model.creature.race.Race;
+import com.freund.tabletop_assistant.model.creature.race.Subrace;
+import com.freund.tabletop_assistant.model.duration.DurationType;
 import com.freund.tabletop_assistant.model.item.ItemStack;
+import com.freund.tabletop_assistant.model.source.EffectSource;
+import com.freund.tabletop_assistant.model.source.EffectSourceType;
+import com.freund.tabletop_assistant.model.statuseffect.StatusEffect;
+import com.freund.tabletop_assistant.model.statuseffect.StatusEffectInstance;
+import com.freund.tabletop_assistant.model.turnresource.RefillRate;
+import com.freund.tabletop_assistant.model.turnresource.TurnResource;
+import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;

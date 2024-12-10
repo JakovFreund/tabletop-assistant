@@ -1,6 +1,9 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.statuseffect;
 
 import java.util.List;
+
+import com.freund.tabletop_assistant.model.duration.Duration;
+import com.freund.tabletop_assistant.model.source.EffectSource;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.turnresource;
 
 public enum RefillRate { // action, bonus action, reaction, movespeed, spellslots, class actions (action surge, rage)
     TURN,

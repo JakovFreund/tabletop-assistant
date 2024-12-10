@@ -9,6 +9,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.freund.tabletop_assistant.model.creature.Creature;
 import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
 import com.freund.tabletop_assistant.util.JsonHandler;

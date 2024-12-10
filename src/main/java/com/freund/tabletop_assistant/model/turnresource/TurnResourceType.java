@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.turnresource;
 
 public enum TurnResourceType {
     ACTION("Action", 1, RefillRate.TURN),

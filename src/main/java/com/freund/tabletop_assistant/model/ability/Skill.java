@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.ability;
 
 public enum Skill {
     ATHLETICS(Ability.STR),
@@ -20,7 +20,7 @@ public enum Skill {
     PERFORMANCE(Ability.CHA),
     PERSUASION(Ability.CHA);
 
-    final Ability ABILITY;
+    public final Ability ABILITY;
 
     Skill(Ability aBILITY) {
         this.ABILITY = aBILITY;

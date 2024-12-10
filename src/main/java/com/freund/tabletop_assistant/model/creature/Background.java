@@ -1,6 +1,8 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.creature;
 
 import java.util.List;
+
+import com.freund.tabletop_assistant.model.ability.Skill;
 
 public enum Background {  
     ACOLYTE(List.of(Skill.INSIGHT, Skill.RELIGION)),

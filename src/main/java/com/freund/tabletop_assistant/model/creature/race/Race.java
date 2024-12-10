@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.creature.race;
 
 import java.util.List;
 
@@ -52,9 +52,9 @@ public enum Race { // TODO fill in movement speeds
     //http://dndroll.wikidot.com/races
     //https://www.dndbeyond.com/races
 
-    final int MOVEMENT_SPEED;
+    public final int MOVEMENT_SPEED;
 
-    static final List<Race> PLAYABLE_RACES = List.of(Race.HUMAN); //TODO
+    public static final List<Race> PLAYABLE_RACES = List.of(Race.HUMAN); //TODO
 
     Race(int movementSpeed) {
         this.MOVEMENT_SPEED = movementSpeed;

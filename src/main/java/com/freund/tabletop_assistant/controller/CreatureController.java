@@ -18,22 +18,23 @@ import com.freund.tabletop_assistant.mapper.CreatureMapper;
 import com.freund.tabletop_assistant.service.CreatureService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/creatures")
 public class CreatureController {
     @Autowired
     private CreatureService creatureService;
 
-    @GetMapping("/creature/{id}")
-    public CreatureDTO getCreatureById(@PathVariable UUID id) {
+    @GetMapping("/{id}") 
+    public CreatureDTO getCreatureById(@PathVariable UUID id) { // test ResponseEntity<CreatureDTO> ResponseEntity.ok
+        // TODO add 404
         return CreatureMapper.toDTO(creatureService.getCreature(id));
     }
 
-    @PutMapping("/creature/{id}/hp")
+    @PutMapping("/{id}/hp")
     public ResponseEntity<String> updateCreatureHP(@PathVariable UUID id, @RequestBody HPUpdateRequest request) {
         if(creatureService.updateCreatureHP(id, request.getHp())){
-            return new ResponseEntity<>("HP updated successfully", HttpStatus.OK);
+            return ResponseEntity.ok("HP updated successfully");
         }
-        return new ResponseEntity<>("Creature not found", HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Creature not found");
     }
     
 }

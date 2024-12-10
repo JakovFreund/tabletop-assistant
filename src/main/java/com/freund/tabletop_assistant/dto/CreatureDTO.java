@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.freund.tabletop_assistant.model.Ability;
-import com.freund.tabletop_assistant.model.Alignment;
-import com.freund.tabletop_assistant.model.Background;
-import com.freund.tabletop_assistant.model.CreatureSize;
-import com.freund.tabletop_assistant.model.GameClass;
-import com.freund.tabletop_assistant.model.Race;
-import com.freund.tabletop_assistant.model.Skill;
-import com.freund.tabletop_assistant.model.StatusEffectInstance;
-import com.freund.tabletop_assistant.model.Subclass;
-import com.freund.tabletop_assistant.model.Subrace;
-import com.freund.tabletop_assistant.model.TurnResource;
+import com.freund.tabletop_assistant.model.creature.gameclass.GameClass;
+import com.freund.tabletop_assistant.model.creature.gameclass.Subclass;
+import com.freund.tabletop_assistant.model.ability.Ability;
+import com.freund.tabletop_assistant.model.ability.Skill;
+import com.freund.tabletop_assistant.model.creature.Alignment;
+import com.freund.tabletop_assistant.model.creature.Background;
+import com.freund.tabletop_assistant.model.creature.CreatureSize;
+import com.freund.tabletop_assistant.model.creature.race.Race;
+import com.freund.tabletop_assistant.model.creature.race.Subrace;
+import com.freund.tabletop_assistant.model.statuseffect.StatusEffectInstance;
+import com.freund.tabletop_assistant.model.turnresource.TurnResource;
 
 import lombok.Data;
 

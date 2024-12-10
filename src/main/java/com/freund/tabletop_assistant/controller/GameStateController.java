@@ -1,7 +1,5 @@
 package com.freund.tabletop_assistant.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,34 +10,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.freund.tabletop_assistant.dto.GameStateDTO;
 import com.freund.tabletop_assistant.mapper.GameStateMapper;
-import com.freund.tabletop_assistant.model.Creature;
-import com.freund.tabletop_assistant.model.Duration;
-import com.freund.tabletop_assistant.model.DurationType;
-import com.freund.tabletop_assistant.model.StatusEffect;
-import com.freund.tabletop_assistant.model.StatusEffectInstance;
-import com.freund.tabletop_assistant.model.Subrace;
 import com.freund.tabletop_assistant.service.GameStateService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/gamestate")
 public class GameStateController {
     @Autowired
     private GameStateService gameStateService;
 
-    @GetMapping("/gamestate")
-    public GameStateDTO getGameState() {
+    @GetMapping()
+    public GameStateDTO getGameState() { // ok
         return GameStateMapper.toDTO(gameStateService.getGameState());
     }
 
-    @PutMapping("/gamestate")
+    @PutMapping()
     public ResponseEntity<String> saveGameState() {
         if (gameStateService.saveGameState()) {
-            return new ResponseEntity<>("GameState has been successfully saved.", HttpStatus.CREATED);
+            return ResponseEntity.status(HttpStatus.CREATED).body("GameState has been successfully saved.");
         } else {
-            return new ResponseEntity<>("IOException while saving GameState!", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("IOException while saving GameState!");
         }
     }
 
+    /* 
     @GetMapping("/addcreatures")
     public ResponseEntity<String> temporaryCreature() {
         ArrayList<Creature> empty = new ArrayList<>();
@@ -61,6 +54,7 @@ public class GameStateController {
         d.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CHILLED, new Duration(DurationType.TURNS, 3), null, null, "he kinda chill with it tho"));
         gameStateService.addCreature(d);
 
-        return new ResponseEntity<>("Creatures added.", HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Creatures added.");
     }
+    */
 }

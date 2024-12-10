@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.duration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

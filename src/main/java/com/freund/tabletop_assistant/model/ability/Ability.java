@@ -1,7 +1,7 @@
-package com.freund.tabletop_assistant.model;
+package com.freund.tabletop_assistant.model.ability;
 
 public enum Ability {
-    NONE,
+    NONE, // TODO remove (just use null)
     STR,
     DEX,
     CON,
