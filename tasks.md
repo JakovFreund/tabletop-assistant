@@ -1,8 +1,6 @@
 
 ### TASKS
 
-- autofocus/autoselect input in modal
-- do spell attack rolls have the longer range (with disadvantage)?
 - how do mounts work in 5e raw?
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
 - go through all StatusEffects and check common denominators
@@ -13,6 +11,7 @@
 - add StatusEffect.notImplemented list for player feedback - if StatusEffect isn't programmed in or requires player action (add special ui/notification for that)
 - implement the StatusEffectInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
 - try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
+- i can implement the status effects related to caster (ex. Friends) using statuseffectinstance.source.creatureId 
 - convert Items from enum to class
 - items need UUID
 - fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
@@ -35,6 +34,7 @@
 - https://bg3.wiki/wiki/Weapon_actions
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 - finish all statuseffects enum
+- double check each StatusEffect included effects
 - make a static playable races list in Race enum
 - change "Elemental Weapon" spell so it doesn't give +1 to both Attack roll and damgae roll, but only to attack roll
 - check out weapon StatusEffect implementation (MAGIC_WEAPON, PACT_WEAPON...). Can items have StatusEffects?
@@ -59,6 +59,7 @@
 - ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
 - css google when should i target element by tag/type vs className
 - go through all css classNames and change them accordingly
+- add monochrome icons (display in corner) and descriptions to StatusEffect Status Groups
 - spirit guardians spell aoe wrong in json
 - add all wild magic statuseffects from 5e
 - subracial default images (duochrome outlines with different colors - similar to icons from https://www.dndbeyond.com/monsters)
@@ -229,6 +230,7 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 - procitaj Players Handbook "Resting" section za Hit Dice info
 - gridmap aoe spells (nacrtat aoe grid za svaki AreaType.java, pregledat sve spellove i nacrtat kak ce to izgledat za razlicite rangeve - npr. Wall of Fire)
 - kako funkcioniraju hit dice (short rest, long rest, levelup)
+- do spell attack rolls have the longer range (with disadvantage)?
 - koji ability za attack roll a koji za damage roll (napisi listu po klasama i tipovima oruzja ak treba nemam pojma)
 - weapon types and scaling (finesse, versatile, martial...) https://bg3.wiki/wiki/Weapons#Properties
 - prepared spells (how different classes do it), types of spellcasters? (spell refill and spend type)
