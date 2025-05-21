@@ -22,7 +22,7 @@ public enum Subrace { // TODO fill in race
     SOLAR(Race.CELESTIAL, Ability.WIS, CreatureSize.LARGE),
     AASIMON(Race.CELESTIAL, Ability.WIS, CreatureSize.LARGE),
     ELADRIN(Race.CELESTIAL, Ability.WIS, CreatureSize.LARGE),
-    DEVIL(Race.FIEND, Ability.CHA, CreatureSize.LARGE),
+    DEVIL(Race.FIEND, Ability.CHA, CreatureSize.LARGE), // ARCHDEVILS AND ARCHANGELS ?
     DEMON(Race.FIEND, Ability.STR, CreatureSize.MEDIUM),
     DAEMON(Race.FIEND, Ability.WIS, CreatureSize.MEDIUM),
     // check HOMM 3 & HOMM 4 for interesting creatures (that probably also exist in dnd)

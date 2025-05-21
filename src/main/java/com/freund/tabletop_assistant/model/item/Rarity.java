@@ -1,11 +1,14 @@
 package com.freund.tabletop_assistant.model.item;
 
 public enum Rarity {
-    COMMON, //40%
-    UNCOMMON, //30%
-    RARE, //20%
-    EPIC, //8%
-    LEGENDARY; //2%
+    COMMON,
+    UNCOMMON,
+    RARE,
+    VERY_RARE,
+    LEGENDARY,
+    ARTIFACT,
+    
+    VARIES; // TODO fix later (it has a rarity, but its unknown due to how the old json was structured)
 
     Rarity increase() {
         switch (this) {
@@ -14,14 +17,17 @@ public enum Rarity {
             case UNCOMMON:
                 return RARE;
             case RARE:
-                return EPIC;
-            case EPIC:
+                return VERY_RARE;
+            case VERY_RARE:
                 return LEGENDARY;
             case LEGENDARY:
-                return LEGENDARY;
+                return ARTIFACT;
+            case ARTIFACT:
+                return ARTIFACT;
+            case VARIES:
+                return VARIES;
             default:
                 return null;
         }
     }
-
 }

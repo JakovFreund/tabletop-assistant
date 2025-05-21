@@ -1,6 +1,9 @@
 package com.freund.tabletop_assistant.model.statuseffect;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -184,11 +187,6 @@ public enum StatusEffect {
     ELEMENTAL_AFFINITY_FIRE_RESISTANCE("Resistant to Fire damage.", List.of(FIRE_RESISTANCE)),
     ELEMENTAL_AFFINITY_LIGHTNING_RESISTANCE("Resistant to Lightning damage.", List.of(LIGHTNING_RESISTANCE)),
     ELEMENTAL_AFFINITY_POISON_RESISTANCE("Resistant to Poison damage.", List.of(POISON_RESISTANCE)),
-    ELEMENTAL_WEAPON_ACID("Gains a +1 bonus to Attack Rolls and deals an additional 1d4 Acid damage.", List.of()),
-    ELEMENTAL_WEAPON_COLD("Gains a +1 bonus to Attack Rolls and deals an additional 1d4 Cold damage.", List.of()),
-    ELEMENTAL_WEAPON_FIRE("Gains a +1 bonus to Attack Rolls and deals an additional 1d4 Fire damage.", List.of()),
-    ELEMENTAL_WEAPON_LIGHTNING("Gains a +1 bonus to Attack Rolls and deals an additional 1d4 Lightning damage.", List.of()),
-    ELEMENTAL_WEAPON_THUNDER("Gains a +1 bonus to Attack Rolls and deals an additional 1d4 Thunder damage.", List.of()),
     ELVEN_ELEGANCE("Noble elven arcana grants the affected entity an additional 20 ft Movement Speed and Superior Darkvision until Long Rest.", List.of()),
     ENCUMBERED("Carrying too much weight. Jump distance halved. Movement Speed reduced by 10 ft.", List.of()),
     ENHANCED_LEAP("Jump distance is tripled.", List.of()),
@@ -270,7 +268,6 @@ public enum StatusEffect {
     LURED("Attracted to a harpy's luring melody. Must move toward the harpy by the shortest route possible. Makes a 13 DC Wisdom Saving Throw each turn. Being attacked or Shoved will remove the condition.", List.of()),
     MAGE_ARMOUR("If unarmoured, Armour Class becomes 13 + Dexterity Modifier.", List.of()),
     MAGIC_AWARENESS("The barbarian and all creatures within 10 ft add their Proficiency Bonus to Saving Throws against spells.", List.of()),
-    MAGIC_WEAPON("Weapon has become magical, receiving a +1 bonus to Attack Rolls and Damage Rolls.", List.of()),
     MAGICAL_AMBUSH("Affected entity is hidden. Creatures have Disadvantage on Saving Throws against its spells.", List.of()),
     MAIMED("Can't move. Disadvantage on Dexterity Saving Throws. Removed by healing.", List.of(IMMOBILE)),
     MARTIAL_ARTS_BONUS_UNARMED_STRIKE("After making an attack with a Monk Weapon or while unarmed, the affected entity can make another unarmed attack as a Bonus Action.", List.of()),
@@ -286,7 +283,6 @@ public enum StatusEffect {
     ONE_WITH_THE_SHADOWS("Affected entity is Invisible. Invisibility ends early if the invisible entity moves, attacks, casts another spell, takes an Action, or takes damage.", List.of()),
     OWLS_WISDOM("Advantage on Wisdom Checks.", List.of()),
     // PACIFIED ?
-    PACT_WEAPON("The warlock bound to this weapon is always Proficient with it. The weapon uses the caster's Charisma Modifier for Attack Rolls and Damage Rolls. Weapon can't be dropped or otherwise disarmed.", List.of()), // activates automatically if holding pact weapon
     PASS_WITHOUT_TRACE("This entity and nearby allies have a +10 bonus to Stealth Checks.", List.of()),
     PATIENT_DEFENCE(" Advantage on Dexterity Saving Throws. Attack Rolls against the affected entity have Disadvantage.", List.of(ELUSIVE)),
     PETRIFIED("Incapacitated, can't move or speak, and is unaware of its surroundings. Automatically fails Strength and Dexterity Saving Throws. Resistant to all damage. Immune to poison and disease.", List.of(INCAPACITATED, IMMOBILE, POISON_IMMUNITY, DISEASE_IMMUNITY, BLUDGEONING_RESISTANCE, PIERCING_RESISTANCE, SLASHING_RESISTANCE, COLD_RESISTANCE, FIRE_RESISTANCE, LIGHTNING_RESISTANCE, THUNDER_RESISTANCE, ACID_RESISTANCE, RADIANT_RESISTANCE, NECROTIC_RESISTANCE, FORCE_RESISTANCE, PSYCHIC_RESISTANCE)), //TODO silenced?
@@ -341,7 +337,6 @@ public enum StatusEffect {
     RESISTED_THE_SONG("Succeeded a Saving Throw against the harpy's Luring Song and is immune to the effects for 2 turns.", List.of()),
     RESONATING_KI("The ki within the affected entity is resonating with a monk's.", List.of()),
     RESTRAINED("Can't move. Disadvantage on Attack Rolls and Dexterity Saving Throws. Attack Rolls against the affected entity have Advantage.", List.of(IMMOBILE, UNFOCUSED, VULNERABLE)),
-    SACRED_WEAPON("Wielder's Charisma Modifier is added to Attack Rolls made with this weapon. The weapon emits light.", List.of()),
     SANCTUARY("Can't be targeted by enemy attacks or spells, but it can still take damage from AoE effects. Condition ends if the affected entity attacks or harms another creature, and will receive Sanctuary Blocked for 1 turn.", List.of()),
     SANCTUARY_BLOCKED("Can't receive Sanctuary", List.of()),
     SEARING_SMITE("Takes 1d6 Fire damage per turn. Condition ends upon making a successful Constitution Saving Throw.", List.of()),
@@ -390,7 +385,6 @@ public enum StatusEffect {
     WARDING_BOND_CASTER("Bound to an ally. Each time the ally takes damage, the caster takes the same amount of damage.", List.of()),
     WAR_GODS_BLESSING("Gains a +10 bonus to its next Attack Roll.", List.of()),
     WEAK_GRIP("Disadvantage on Attack rolls and Strength Saving throws.", List.of(UNFOCUSED)),
-    WEAPON_BOND("Main hand weapon is ritually bound to its wielder. It can't be knocked out of the wielder's hand, and automatically returns to its wielder when Thrown.", List.of()),
     WET("Immune to Burning. Resistant to Fire damage. Vulnerable to Lightning and Cold damage.", List.of(FIRE_RESISTANCE, LIGHTNING_VULNERABILITY, COLD_VULNERABILITY)),
     WHOLENESS_OF_BODY("Has an extra Bonus Action and regains 1 Ki Point per turn.", List.of()),
     WILD_SHAPE_AIR_MYRMIDON("Wild shaped into an Air Myrmidon.", List.of()),
@@ -415,19 +409,17 @@ public enum StatusEffect {
 
 
 
-    // LIGHTED_WEAPON
 
 
-    // add physical resistances, immunities and vulnerabilities
 
-    // add bleeding, open wound, rotting, flesh rot (don't forget to add to disease status group)
+    // add bleeding, open wound, rotting, flesh rot (do i need to add to disease status group ?)
     
 
     // Inquisitor's Might spell doesn't exist
 
     // Undead (vulnerable to radiant) and other similiar traits - check both PH/DMG and bg3 wiki for info about racial passives
     // Blindsight, Truesight ?
-    // Concentration here or just on
+    // Concentration here or just on creature ?
 
     ;
     // Features (proficiencies, racial traits, class traits, passives)
@@ -460,7 +452,7 @@ public enum StatusEffect {
 
     private final static List<StatusEffect> CHARMED_STATUS_GROUP = List.of(CHARMED, DOMINATED, FRIENDS, HYPNOTIC_GAZE, HYPNOTIZED, IRRESISTIBLE_DANCE, LURED, PLANAR_BINDING);
     private final static List<StatusEffect> FRIGHTENED_STATUS_GROUP = List.of(FRIGHTENED, FEARFUL);
-    private final static List<StatusEffect> DISEASED_STATUS_GROUP = List.of(CRAWLING_GNAW, HARM, INFECTED, SEPTIC, CONTAGION_BLINDING_SICKNESS, CONTAGION_FILTH_FEVER, CONTAGION_FLESH_ROT, CONTAGION_MINDFIRE, CONTAGION_SEIZURE, CONTAGION_SLIMY_DOOM );
+    private final static List<StatusEffect> DISEASED_STATUS_GROUP = List.of(CRAWLING_GNAW, HARM, INFECTED, SEPTIC, CONTAGION_BLINDING_SICKNESS, CONTAGION_FILTH_FEVER, CONTAGION_FLESH_ROT, CONTAGION_MINDFIRE, CONTAGION_SEIZURE, CONTAGION_SLIMY_DOOM);
     private final static List<StatusEffect> HELPABLE_STATUS_GROUP = List.of(BURNING, DAZED, DOWNED, FEIGNING_DEATH, HYPNOTIZED, OFF_BALANCE, SLEEPING, WEAK_GRIP);
     private final static List<StatusEffect> PARALYZED_STATUS_GROUP = List.of(); // TODO https://bg3.wiki/wiki/SG_Paralyzed
 
@@ -493,6 +485,35 @@ public enum StatusEffect {
         return HELPABLE_STATUS_GROUP.contains(this);
     }
 
+    @JsonIgnore
+    public boolean isParalyze(){ // Not implemented, Can be removed by the Help action
+        return PARALYZED_STATUS_GROUP.contains(this);
+    }
+
+    @JsonIgnore
+    public List<StatusEffect> getAllIncludedEffects(){
+        Set<StatusEffect> allIncludedEffects = new HashSet<StatusEffect>();
+        allIncludedEffects.add(this);
+        boolean eachIncludedEffectIsEmpty;
+        do {
+            for(StatusEffect statusEffect : allIncludedEffects){
+                for(StatusEffect includedEffect : statusEffect.INCLUDED_EFFECTS){
+                    allIncludedEffects.add(includedEffect);
+                }
+            }
+            eachIncludedEffectIsEmpty = true;
+            for(StatusEffect statusEffect : allIncludedEffects){
+                if(!statusEffect.INCLUDED_EFFECTS.isEmpty()){
+                    eachIncludedEffectIsEmpty = false;
+                }
+            }
+        }
+        while(!eachIncludedEffectIsEmpty);
+        List<StatusEffect> returnList = new ArrayList<StatusEffect>();
+        returnList.addAll(allIncludedEffects);
+        return returnList;
+    }
+
 
     @JsonIgnore
     public boolean includesEffect(StatusEffect includedEffect){
@@ -506,5 +527,6 @@ public enum StatusEffect {
         }
         return false;
     }
+
 
 }

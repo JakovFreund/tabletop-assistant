@@ -2,6 +2,10 @@ package com.freund.tabletop_assistant.util;
 
 import com.freund.tabletop_assistant.model.castable.spell.Spell;
 import com.freund.tabletop_assistant.model.castable.spell.SpellData;
+import com.freund.tabletop_assistant.model.creature.Creature;
+import com.freund.tabletop_assistant.model.item.Item;
+import com.freund.tabletop_assistant.model.item.ItemCategory;
+import com.freund.tabletop_assistant.model.item.Rarity;
 
 public class TestUtil {
     public static void previousMain() {
@@ -19,6 +23,12 @@ public class TestUtil {
     public static void consoleLog(String string){ // for StatusEffects that don't proc on their own
         System.out.println("MANUAL INPUT: " + string);
         // TODO change output to frontend console
+    }
+
+    public static void addItem(){
+        Creature creature = new Creature();
+        creature.addItem(new Item("name1","img", ItemCategory.RING, Rarity.RARE, 12, 10.2f, false, null,null));
+        System.out.println(creature.getInventory());
     }
 
 }

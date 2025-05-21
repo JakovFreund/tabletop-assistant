@@ -1,83 +1,63 @@
 package com.freund.tabletop_assistant.model.item;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import com.freund.tabletop_assistant.util.DiceNotation;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.freund.tabletop_assistant.model.item.armour.Armour;
+import com.freund.tabletop_assistant.model.item.effect.ItemEffect;
+import com.freund.tabletop_assistant.model.item.weapon.Weapon;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type") // this will add a temporary extra field in the json during serialization (ex. "type":"weapon")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Armour.class, name = "armour"),
+    @JsonSubTypes.Type(value = Weapon.class, name = "weapon"),
+    @JsonSubTypes.Type(value = ItemStack.class, name = "stack"),
+    @JsonSubTypes.Type(value = ContainerItem.class, name = "container")
+})
 public class Item {
-    private ItemType itemType;
+    private UUID itemId;
+    private String name;
+    private String img;
+    private ItemCategory category;
     private Rarity rarity;
-    private ArrayList<ItemEffect> effects;
-    private ArrayList<ItemEffect> newEffects;
-    private int value;
+    private int cost; // in cp
+    private float weight;
+    private boolean needsIdentify; // (true for mysterious items, determines if players can by default see: name, cost, effects, description)
+    private long lastModified;
+    private List<ItemEffect> effects;
+    private List<String> description;
 
-    public Item(ItemType itemType) {
-        System.out.println("Item constructor");
-        this.itemType = itemType;
-        this.effects = new ArrayList<ItemEffect>(this.itemType.BASE_EFFECTS != null ? this.itemType.BASE_EFFECTS : List.of());
-        this.rarity = this.itemType.BASE_RARITY;
-        this.value = this.itemType.BASE_VALUE;
+
+
+    public Item generateRandomItem(){
+        // take random item from ItemData (distribution based on rarity)
+        // use Item.createItem() for Stackable
+        // add random effects/rarity if in MUTABLE_EFFECTS
+        return null;
     }
 
-    public Item(ItemType itemType, ArrayList<ItemEffect> newEffects) {
-        this(itemType);
-        this.newEffects = newEffects;
-        this.recalculate();
+    public Item (String name, String img, ItemCategory category, Rarity rarity, int cost, float weight, boolean needsIdentify, List<ItemEffect> effects, List<String> description){
+        this.name = name;
+        this.img = img;
+        this.category = category;
+        this.rarity = rarity;
+        this.cost = cost;
+        this.weight = weight;
+        this.needsIdentify = needsIdentify;
+        this.effects = effects;
+        this.description = description;
+
+        this.itemId = UUID.randomUUID();
+        this.lastModified = System.currentTimeMillis(); // recently modified is bigger number
     }
 
-    void addEffect(ItemEffect itemEffect) {
-        this.newEffects.add(itemEffect);
-        recalculate();
-    }
-
-    String getEffectModifier(ItemEffectType effectType){
-        ArrayList<String> modifiers = new ArrayList<String>();
-        for (ItemEffect effect : this.effects){
-            if (effect.getEffectType() == effectType){
-                modifiers.add(effect.getStatModifier());
-            }
-        }
-        if (modifiers.isEmpty()){
-            return null;
-        }
-        String value = "0";
-        for (String modifier : modifiers){
-            value = DiceNotation.addDice(modifier, value);
-        }
-        return value;
-    }
-
-    void recalculate() {
-        this.effects = new ArrayList<>(this.itemType.BASE_EFFECTS);
-        this.rarity = this.itemType.BASE_RARITY;
-        this.value = this.itemType.BASE_VALUE;
-        this.effects.addAll(newEffects);
-        if (newEffects.size() > 2) {
-            this.rarity = this.rarity.increase().increase();
-        } else {
-            if (newEffects.size() > 0) {
-                this.rarity = this.rarity.increase();
-            }
-        }
-        // TODO value calculation based on new effect modifiers unless MISC
-    }
-
-    @Override
-    public String toString() {
-        String str = this.itemType.NAME + "@[" + this.itemType.CATEGORY + ", " + this.rarity + ", value: " + this.value
-                + ", weight: " + this.itemType.WEIGHT + ", " + this.itemType.DESCRIPTION + "]{";
-        for (ItemEffect itemEffect : effects) {
-            str += itemEffect.getEffectType() + ": " + itemEffect.getStatModifier();
-        }
-        str += "}";
-        return str;
-    }
-
-    // TODO probably override @Data equals() (or maybe implement) to not compare UUID - for item stacking
 }

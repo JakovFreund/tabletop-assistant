@@ -13,7 +13,7 @@ import com.freund.tabletop_assistant.model.castable.Castable;
 import com.freund.tabletop_assistant.model.creature.race.Race;
 import com.freund.tabletop_assistant.model.creature.race.Subrace;
 import com.freund.tabletop_assistant.model.duration.DurationType;
-import com.freund.tabletop_assistant.model.item.ItemStack;
+import com.freund.tabletop_assistant.model.item.Item;
 import com.freund.tabletop_assistant.model.source.EffectSource;
 import com.freund.tabletop_assistant.model.source.EffectSourceType;
 import com.freund.tabletop_assistant.model.statuseffect.StatusEffect;
@@ -33,7 +33,7 @@ public class Creature {
     private Castable concentratingOn;
     private Background background;
     private Alignment alignment;
-    // Tool/Armour/Weapon Proficiencies ?
+    // Armour/Weapon Proficiencies ?
     private HashMap<Ability, Integer> abilityScores;
     private HashMap<Skill, Boolean> skillProficiencies; //ˇˇ these two could be Lists with only true elements inside but whatever
     private HashMap<Ability, Boolean> savingThrowProficiencies;
@@ -41,7 +41,7 @@ public class Creature {
     private ArrayList<Subclass> subclasses;
     private ArrayList<StatusEffectInstance> statusEffectInstances;
     private ArrayList<TurnResource> turnResources;
-    private ArrayList<ItemStack> inventory;
+    private ArrayList<Item> inventory;
     private UUID equiped[]; // stores ids of equiped items from inventory
 
     // ### SPECIAL
@@ -216,7 +216,7 @@ public class Creature {
 
     @JsonIgnore
     public int getArmourClass() {
-        // TODO return 10 + getAbilityModifier(Ability.DEX) + getEquipedItemStack(EquipSlot.TORSO).getItem() + shield item stat // which equipslots count towards AC?
+        // TODO return 10 + getAbilityModifier(Ability.DEX) + getEquipedItem(EquipSlot.TORSO).getItem() + shield item stat // which equipslots count towards AC?
         return 10 + getAbilityModifier(Ability.DEX);
     }
 
@@ -242,35 +242,31 @@ public class Creature {
             this.removeStatusEffectInstance(StatusEffect.CONCENTRATING);
         } else {
             this.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CONCENTRATING, castable.getDuration(),
-                    new EffectSource(EffectSourceType.SPELL, creatureId), List.of(), ""));
+                    new EffectSource(EffectSourceType.SPELL, creatureId), ""));
 
         }
     }
 
     // ### LIST/MAP
 
-    public void addItems(ArrayList<ItemStack> items) {
-        for (ItemStack item : items) {
+    public void addItems(ArrayList<Item> items) {
+        for (Item item : items) {
             this.addItem(item);
         }
     }
 
-    public void addItem(ItemStack item) {
+    public void addItem(Item item) {
         System.out.println("add item");
         this.inventory.add(item);
         // update item.lastModified
     }
 
-    public ItemStack getItemStackByIndex(int index) {
+    public Item getItemByIndex(int index) {
         return this.getInventory().get(index);
     }
 
-    public ItemStack getItemStack(UUID uuid) {
-        for (ItemStack itemStack : getInventory()) {
-            if (itemStack.getItemId().equals(uuid)) {
-                return itemStack;
-            }
-        }
+    public Item getItem(int slot) { // or UUID ?
+        // TODO
         return null;
     }
 
@@ -278,8 +274,9 @@ public class Creature {
         return getEquiped()[equipSlot.ordinal()];
     }
 
-    public ItemStack getEquipedItemStack(EquipSlot equipSlot) {
-        return getItemStack(getEquipedInSlot(equipSlot));
+    public Item getEquipedItem(EquipSlot equipSlot) {
+        // TODO
+        return null;
     }
 
     public void equipItem(UUID itemId, EquipSlot equipSlot) {
@@ -337,7 +334,6 @@ public class Creature {
         statusEffectInstances.add(statusEffectInstance);
         // print/log if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
         // then have a popup for what he rolled
-        // TODO don't need if tree, just go through StatusEffect.dependancies list and apply them with the same duration and dependsUpon.
     }
 
     public void removeStatusEffectInstance(StatusEffect statusEffect) {
@@ -348,15 +344,27 @@ public class Creature {
         }
     }
 
+    public List<StatusEffect> getIncludedStatusEffects(){
+        List<StatusEffect> statusEffects = new ArrayList<>();
+        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()){
+            for (StatusEffect statusEffect : statusEffectInstance.getStatusEffect().getAllIncludedEffects()){
+                statusEffects.add(statusEffect);
+            }
+        }
+        return statusEffects;
+    }
+
+
     public boolean hasStatusEffect(StatusEffect statusEffect) {
-        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
-            if (statusEffectInstance.getStatusEffect() == statusEffect) {
+        for (StatusEffect includedStatusEffect : getIncludedStatusEffects()) {
+            if (includedStatusEffect == statusEffect) {
                 return true;
             }
         }
         return false;
     }
 
+    
     // ### CONSTRUCTOR
 
     // i probably don't need thisˇˇ (it's just gonna get filled from the gamestate anyway, TODO test array creation with @NoArgsConstructor, what about EquipSlot.values().length ?)
@@ -369,7 +377,7 @@ public class Creature {
         this.subclasses = new ArrayList<Subclass>();
         this.statusEffectInstances = new ArrayList<StatusEffectInstance>();
         this.turnResources = new ArrayList<TurnResource>();
-        this.inventory = new ArrayList<ItemStack>();
+        this.inventory = new ArrayList<Item>();
         this.equiped = new UUID[EquipSlot.values().length];
 
 

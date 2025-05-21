@@ -25,6 +25,6 @@ public abstract class Castable {
     private Map<TurnResourceType, Integer> costs; // convert to minutes/hours at render time if necessary, spellslot not included by default (because of upcast)
     private List<CastableDamageComponent> castableDamageComponents;
     private Map<Integer, String> healAtSlotLevel;
-    private List<StatusEffect> statusEffects;
+    private List<StatusEffect> appliesStatusEffects;
     private List<String> description;
 }

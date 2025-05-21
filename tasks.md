@@ -1,25 +1,29 @@
 
 ### TASKS
+- commit
 
+- color scheme for frontend ? (dark red, black + desaturated yellow parchment)
+- make a proof-of-concept frontend combat simulator
+
+- fill in default WeaponTypes
+- add try-catch to all service/controller files ( #todo ask chatgpt which ones, and should i add to to higher level classes or lower) in case of bad requests
 - how do mounts work in 5e raw?
+- mounts will work like creatures that follow the players (they act in combat)
+- Mount.java (class for mounts from 5e-Equipment.json with all stats (speed, capacity...))
+- search all files for HashMaps and ArrayLists and consider converting to Maps and Lists (research best practices for Java in general and Jackson specifically)
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
-- go through all StatusEffects and check common denominators
 - go through all spells and make status effects if there isn't one
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts)
 - add connection error UI on fetch gamestate fail
-- Mount.java (class for mounts from 5e-Equipment.json with all stats (speed, capacity...))
-- add StatusEffect.notImplemented list for player feedback - if StatusEffect isn't programmed in or requires player action (add special ui/notification for that)
+- do i need StatusEffectInstance.removedOnSourceLostConcentration
+- for the statuseffects you can't proc because of unknown variables or impossible implementation: print out what must happen to log (with a #needsDMaction tag or something) if StatusEffect isn't programmed in or requires player action (add special ui/notification for that)
 - implement the StatusEffectInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
-- try to implement statuseffect procs with Spring @EventListener (test out by printing each step)
+- implement concentration loss and removal of statuseffects from other creatures
+- should i implement statuseffect procs with Spring @EventListener
 - i can implement the status effects related to caster (ex. Friends) using statuseffectinstance.source.creatureId 
-- convert Items from enum to class
-- items need UUID
-- fill in items from 5eMagicItems.json, items.txt and 5eEquipment.json
-- add statuseffects from items
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- maybe make an ItemEffect enum (for lighted and similar)
 - CreatureService.removeConcentration(Creature) - check other creatures for matching statuseffects that need to be removed
 - when you drag a statuseffect on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
 - ^^ If saving throw needed, pop-up that inputs roll amount and adds proficiency, skill modifier or whatever is needed. (log "Saving throw failed..." with all info)
@@ -31,7 +35,13 @@
 - weight and encumbered
 - add ClassActions
 - add default actions (Grab, Shove, Throw, Help, Dash...) - DefaultActions.java ?
-- https://bg3.wiki/wiki/Weapon_actions
+- implement existing ItemEffects
+- go through MagicItems descriptions and add ItemEffects and StatusEffects
+- fill in MagicItems weapons and armour stats
+- add generateRandomItem() + on weapon/armour creation randomly determine rarity upgrade (yes or no boolean) and then add 1 effect or none
+- the environment/scene has an inventory (where ItemStacks go when players drop them)
+- DM also has a seperate inventory
+- https://bg3.wiki/wiki/Weapon_actions (add them to WeaponType and WeaponAttributes)
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
 - finish all statuseffects enum
 - double check each StatusEffect included effects
@@ -63,74 +73,33 @@
 - spirit guardians spell aoe wrong in json
 - add all wild magic statuseffects from 5e
 - subracial default images (duochrome outlines with different colors - similar to icons from https://www.dndbeyond.com/monsters)
+- have the same-race subraces have similar colors
+- ^^ same for item categories (note: weapons have a default icon of an axe crossed with a sword if there is no difference between weapon types (swords, axes...))
 - players with aura effect have to remember to apply them since app doesn't keep track of position
 - fully obscured, half obscured, partial cover ?
-- make a house rules list (no spellcasting components, potion bonus action... look at other bg3 homebrews)
+- look at other bg3 homebrew rules and maybe add some to my house rules list
 - Long range (with disadvantage) for both throwing and shooting is always 3 times the normal range
 - Two-handing a versitile weapon gives a +2 bonus to damage
 - make a rules reminder list
 - add keybinds to MasterInterface actions
 - rename and categorize frontend image resources, cleanup public folder
 - pre-map the finished creatures to deviceNicknames
-
-
-### HTTP
-|Status Code|Description|
-|-|-|
-|**SUCCESS (2xx)**||
-|200 OK|object is found and returned, common response to GET|
-|201 CREATED|object is created, common response to POST, PUT|
-|**CLIENT ERRORS (4xx)**||
-|401 UNAUTHORIZED|authentication failed|
-|403 FORBIDDEN|no permission|
-|404 NOT FOUND|resource not found|
-|**SERVER ERRORS (5xx)**||
-|500 INTERNAL SERVER ERROR|unexpected error|
-|501 NOT IMPLEMENTED|feature in development|
-
-### SPELL EXHAUSTION COST
-Spells that would consume material costs instead grant levels of exhaustion to the caster based on this table:
-
-|Spell|Exhaustion level|
-|-|-|
-|Arcane Lock|level|
-|Astral Projection|level|
-|Awaken|level|
-|Clone|level|
-|Continual Flame|0|
-|Divination|level|
-|Find Familiar|level|
-|Forbiddance|level|
-|Glyph of Warding|level|
-|Greater Restoration|level|
-|Hallow|level|
-|Heroes' Feast|level|
-|Illusory Script|0|
-|Legend Lore|0|
-|Magic Circle|level|
-|Magic Mouth|0|
-|Nondetection|0|
-|Planar Binding|level|
-|Protection from Evil and Good|level|
-|Raise Dead|level|
-|Reincarnate|level|
-|Ressurection|level|
-|Revify|level|
-|Sequester|level|
-|Stoneskin|level|
-|Symbol|level|
-|Teleportation Circle|level|
-|True Ressurection|level|
-
-
-#todo ^^
-
+- geographical areas aoe buffs and debuffs yugioh field spell style
+- add a hungry status effect that gives a small debuff
+- the DM can edit items, statuseffects, characters stats, and everything you can think of (need to add interfaces/menus for all that)
+- DM can search all ItemData, SpellData and StatusEffects and add them to his inventory where they can be edited (items get random id on clone - itemIDs in ItemData don't matter)
+- use Jackson to save ItemData and SpellData to jsons and load them on startup (add "outdated" comment to .py scripts)
+- advanced character sheet (when you click on a stat it shows you how it got that nunber - formula and subnumbers)
+- each creature has a known spell list/statuseffect list and when they view another creature they see "unknown" status effects
+- PCs can learn of a statusEffect, subrace or item by reading a book about it, and they gain it to the known list (also gained if another PC tells them about it)
+- creature.knownStatusEffects (StatusEffect), knownSubraces (Subrace), knownItems (UUID for Items with item.needsIdentify: true)
 
 
 #### STATS/PROFILE TAB
 - add Skills
 
 #### INVENTORY TAB
+- no custom item sorting... (only favorite to show on top, otherwise autosort)
 - item images sources:
     - have both the ItemCategory (and WeaponType) default icon and optional unique icon
     - https://www.dndbeyond.com/magic-items
@@ -156,6 +125,8 @@ Spells that would consume material costs instead grant levels of exhaustion to t
 - display resistances & relevant passives in combat (like minecraft)
 - add a cancel drag n drop area on combat screen
 - render bonus HP counter in a different color - orange
+- player UI when selecting an attack, show percentage to hit AC on each target like in bg3
+- players see all included status effects when they view a creature
 
 ##### COMBAT LOG
 - make eldritch blast have 3 different damage components that have the same damageType
@@ -174,6 +145,8 @@ Spells that would consume material costs instead grant levels of exhaustion to t
 - fog of war + AC style vantage points for map discovery (or more like elden ring map location that discovers an entire area but instead its a vantage point) - make it distinct on the map
 - send full map and discovered mask through endpoint, mask image on frontend (don't overlay)
 - 3 props: x, y, zoom
+- active visibility on the map is determined by day/night, geographical area and racial eyesight
+- add option for DM to "freeze" PC movement on the map while time can still pass (routes stay intact) - usecase for rests, encounters, dungeons, cities...
 
 ```jsx
 import { useGesture } from 'react-use-gesture';
@@ -195,6 +168,8 @@ function MyComponent() {
 }
 ```
 
+- dm can teleport characters or set their destination
+- route can have checkpoints
 
 
 ### LOW PRIORITY IDEAS FOR LATER
@@ -203,8 +178,7 @@ function MyComponent() {
 - add Artificer class
 - convert to 5.5e
 - modify high level spells with a high material cost (or which the spell consumes) to have some sort of penalty/limitation so PCs can't spam them
-
-
+- keep monster AC secret (TODO maybe reveal it either on hit or if a character has some proficiency when he gets closer) instead describe the armour that he is wearing and maybe his class
 
 
 

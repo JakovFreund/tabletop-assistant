@@ -10,7 +10,7 @@ public enum Race { // TODO fill in movement speeds
     HALFLING(30), //List.of(Subrace.LIGHTFOOT, Subrace.STOUT)
     GNOME(30),//List.of(Subrace.FOREST_GNOME, Subrace.ROCK_GNOME)
     TIEFLING(30), //CHA spellcasting ability
-    GITHYANKI(30),
+    GITH(30), // githyanki, githzerai
     ORC(30),
     HALF_ORC(30),
     DRAGON(30), //subraces, subraces have different sizes
