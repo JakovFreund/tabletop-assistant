@@ -1,19 +1,24 @@
 
 ### TASKS
-- commit
+
+- make a proof-of-concept frontend combat simulator
+    - create combat log on the backend
+    - integrate the whole combat system with backend (castables/actions, )
+    - apply statuseffect to creature
+    - implement weapon modifiers
+
 
 - color scheme for frontend ? (dark red, black + desaturated yellow parchment)
-- make a proof-of-concept frontend combat simulator
 
 - fill in default WeaponTypes
 - add try-catch to all service/controller files ( #todo ask chatgpt which ones, and should i add to to higher level classes or lower) in case of bad requests
-- how do mounts work in 5e raw?
-- mounts will work like creatures that follow the players (they act in combat)
+- read how mounts work in 5e raw?
+- mounts will work like creatures attached to the creature riding them (boosting their speed?), they have a turn in combat but cannot move if somebody is riding them.
 - Mount.java (class for mounts from 5e-Equipment.json with all stats (speed, capacity...))
 - search all files for HashMaps and ArrayLists and consider converting to Maps and Lists (research best practices for Java in general and Jackson specifically)
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
 - go through all spells and make status effects if there isn't one
-- how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts)
+- how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts) OR move it to a config file
 - add connection error UI on fetch gamestate fail
 - do i need StatusEffectInstance.removedOnSourceLostConcentration
 - for the statuseffects you can't proc because of unknown variables or impossible implementation: print out what must happen to log (with a #needsDMaction tag or something) if StatusEffect isn't programmed in or requires player action (add special ui/notification for that)
@@ -24,6 +29,13 @@
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
+- is device stuff in my redux store redundant? for example state.device, state.gamestate.devices, state.gamestate.deviceMappings, state.connectedDevices ? should this all be in state.devices ?
+- research and possibly implement store.useAppDispatch
+- fix and cleanup frontend completely
+    - what's redundant
+    - the structure, hierarchy
+    - repeated stuff
+    - redux store
 - CreatureService.removeConcentration(Creature) - check other creatures for matching statuseffects that need to be removed
 - when you drag a statuseffect on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
 - ^^ If saving throw needed, pop-up that inputs roll amount and adds proficiency, skill modifier or whatever is needed. (log "Saving throw failed..." with all info)
@@ -125,7 +137,7 @@
 - display resistances & relevant passives in combat (like minecraft)
 - add a cancel drag n drop area on combat screen
 - render bonus HP counter in a different color - orange
-- player UI when selecting an attack, show percentage to hit AC on each target like in bg3
+- player UI when selecting an attack, show percentage to hit AC on each target like in bg3 (how do i do this if players don't input attacks and select targets?)
 - players see all included status effects when they view a creature
 
 ##### COMBAT LOG
@@ -140,6 +152,9 @@
 - "(0, 10, 0, 6, 0, 0, 0) -> Goblin has taken 8 damage (COLD_RESISTANCE, POISON_RESISTANCE)"
 - Creature.cast() players can ping spells and attacks (Flint casts Icebolt and it does 3d6+5 frost damage) (Flint uses melee attack and it does 3d6+5 bludgeoning damage)
 - players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
+- players don't have to ping just to get information (it's already calculated for each spell)
+- clear combat log button (with "are you sure?" prompt)
+- creature end turn displays in combat log (and start of next creature's turn)
 
 #### MAP TAB
 - fog of war + AC style vantage points for map discovery (or more like elden ring map location that discovers an entire area but instead its a vantage point) - make it distinct on the map
@@ -147,6 +162,7 @@
 - 3 props: x, y, zoom
 - active visibility on the map is determined by day/night, geographical area and racial eyesight
 - add option for DM to "freeze" PC movement on the map while time can still pass (routes stay intact) - usecase for rests, encounters, dungeons, cities...
+- legend (different types of landmark points for city, village, fort, natural landmark)
 
 ```jsx
 import { useGesture } from 'react-use-gesture';
