@@ -17,6 +17,10 @@
 - Mount.java (class for mounts from 5e-Equipment.json with all stats (speed, capacity...))
 - search all files for HashMaps and ArrayLists and consider converting to Maps and Lists (research best practices for Java in general and Jackson specifically)
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
+- combat scene boolean: inside OR outside (apply wet if outside and raining)
+- combat scene lighting that automatically applies disadvantage if no-one is holding a torch (takes into consideration darkvision, weather and time of day if outside) 
+- announce in global log if time-of-day, lighting or weather changes 
+- go through monster manual and add status effects (and actions? - ex. vampire bite)
 - go through all spells and make status effects if there isn't one
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts) OR move it to a config file
 - add connection error UI on fetch gamestate fail
@@ -44,6 +48,7 @@
 - add fantasy datetime to gamestate (check dnd lore, should i use 12 months and 365 days of something else?)
 - fill in race movement speeds
 - finish races & subraces enums
+- race passives ?
 - weight and encumbered
 - add ClassActions
 - add default actions (Grab, Shove, Throw, Help, Dash...) - DefaultActions.java ?

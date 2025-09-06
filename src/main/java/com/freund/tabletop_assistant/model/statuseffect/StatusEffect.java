@@ -420,6 +420,7 @@ public enum StatusEffect {
     // Undead (vulnerable to radiant) and other similiar traits - check both PH/DMG and bg3 wiki for info about racial passives
     // Blindsight, Truesight ?
     // Concentration here or just on creature ?
+    // Ethereal? - can't be Shoved, Thrown, or used as an Improvised Melee Weapon
 
     ;
     // Features (proficiencies, racial traits, class traits, passives)
