@@ -162,6 +162,7 @@ public enum StatusEffect {
     CURSED_STRENGTH("Disadvantage on Ability Checks and Saving Throws using Strength.", List.of()),
     CURSED_WISDOM("Disadvantage on Ability Checks and Saving Throws using Wisdom.", List.of()),
     DARK_ONES_BLESSING("Whenever it reduces a hostile creature to 0 HP, affected entity gains temporary HP equal to its Charisma modifier and Warlock level combined.", List.of()),
+    DARKNESS("In the dark.", List.of()),
     DARKVISION("Can see in the dark up to the range of 40 ft.", List.of()),
     DAZED("Disadvantage on Wisdom Saving Throws, can't take Reactions, and loses the Dexterity bonus to their Armour Class.", List.of(DULL)),
     DEAD("This creature is dead.", List.of()),

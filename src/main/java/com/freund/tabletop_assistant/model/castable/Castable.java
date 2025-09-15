@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Castable {
-    private String name;
+    private String name; // unique
     private boolean ritual;
     private boolean concentration;
     private Ability savingThrow;

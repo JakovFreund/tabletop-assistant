@@ -1,13 +1,14 @@
 package com.freund.tabletop_assistant.model.source;
 
 public enum EffectSourceType { // used for damageinstance, statuseffect
-    SPELL,
+    CASTABLE,
     ITEM,
-    MELEE_ATTACK,
-    RANGED_ATTACK,
     FALL_DAMAGE,
-    EXPLOSION,
-    STARVATION,
+    ENVIRONMENT, // fire, explosion, trap, lightning strike
+    REST, // received hp, bonuses
+    STARVATION, // maybe combine into CONDITION
+    DEHYDRATION,
+    EXHAUSTION,
     TEMPERATURE;
     // ... ?
 }

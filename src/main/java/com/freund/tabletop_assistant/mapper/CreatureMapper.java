@@ -1,5 +1,8 @@
 package com.freund.tabletop_assistant.mapper;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import com.freund.tabletop_assistant.dto.CreatureDTO;
 import com.freund.tabletop_assistant.model.creature.Creature;
 
@@ -24,7 +27,8 @@ public class CreatureMapper {
         dto.setSavingThrowProficiencies(creature.getSavingThrowProficiencies());
         dto.setClasses(creature.getClasses());
         dto.setSubclasses(creature.getSubclasses());
-        dto.setStatusEffectInstances(creature.getStatusEffectInstances());
+        dto.setStatusEffectInstances(creature.getStatusEffectInstances().stream()
+                .map(StatusEffectInstanceMapper::toDTO).collect(Collectors.toCollection(ArrayList::new)));
         dto.setTurnResources(creature.getTurnResources());
         //dto.setInventory(creature.getInventory());
         dto.setEquiped(creature.getEquiped());

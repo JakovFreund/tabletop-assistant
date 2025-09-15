@@ -1,6 +1,6 @@
 package com.freund.tabletop_assistant.model.item.effect;
 
-import java.util.UUID;
+import com.freund.tabletop_assistant.model.creature.Creature;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ItemBoundToCreature extends ItemEffect {
-    private UUID boundCreature;
+    private Creature boundCreature;
 
-    public ItemBoundToCreature(UUID boundCreature){
+    public ItemBoundToCreature(Creature boundCreature){
         super();
         this.boundCreature = boundCreature;
     }

@@ -1,7 +1,7 @@
 package com.freund.tabletop_assistant.dto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.freund.tabletop_assistant.model.creature.gameclass.GameClass;
@@ -13,7 +13,6 @@ import com.freund.tabletop_assistant.model.creature.Background;
 import com.freund.tabletop_assistant.model.creature.CreatureSize;
 import com.freund.tabletop_assistant.model.creature.race.Race;
 import com.freund.tabletop_assistant.model.creature.race.Subrace;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffectInstance;
 import com.freund.tabletop_assistant.model.turnresource.TurnResource;
 
 import lombok.Data;
@@ -28,14 +27,14 @@ public class CreatureDTO {
     private Background background;
     private Alignment alignment;
     // Tool/Armour/Weapon Proficiencies ?
-    private HashMap<Ability, Integer> abilityScores;
-    private HashMap<Skill, Boolean> skillProficiencies;
-    private HashMap<Ability, Boolean> savingThrowProficiencies;
-    private HashMap<GameClass, Integer> classes;
-    private ArrayList<Subclass> subclasses;
-    private ArrayList<StatusEffectInstance> statusEffectInstances;
-    private ArrayList<TurnResource> turnResources;
-    //private ArrayList<ItemStack> inventory;
+    private Map<Ability, Integer> abilityScores;
+    private Map<Skill, Boolean> skillProficiencies;
+    private Map<Ability, Boolean> savingThrowProficiencies;
+    private Map<GameClass, Integer> classes;
+    private List<Subclass> subclasses;
+    private List<StatusEffectInstanceDTO> statusEffectInstances;
+    private List<TurnResource> turnResources;
+    //private List<ItemStack> inventory;
     private UUID equiped[];
 
     // DERIVED ATTRIBUTES

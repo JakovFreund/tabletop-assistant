@@ -19,8 +19,8 @@ public class GameStateController {
     private GameStateService gameStateService;
 
     @GetMapping()
-    public GameStateDTO getGameState() { // ok
-        return GameStateMapper.toDTO(gameStateService.getGameState());
+    public ResponseEntity<GameStateDTO> getGameState() {
+        return ResponseEntity.status(HttpStatus.OK).body(GameStateMapper.toDTO(gameStateService.getGameState()));
     }
 
     @PutMapping()

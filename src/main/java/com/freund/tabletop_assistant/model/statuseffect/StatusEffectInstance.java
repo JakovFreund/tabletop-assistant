@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class StatusEffectInstance {
     private StatusEffect statusEffect;
     private Duration duration;
-    private EffectSource source; // this is unknown to the players
+    private EffectSource effectSource;
     //private boolean removedOnSourceLostConcentration; // do i need this? (or can i just check all effects when concentration is lost)
-    private String customNote; // DM inputed reminder
 }

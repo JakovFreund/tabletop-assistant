@@ -1,8 +1,6 @@
 package com.freund.tabletop_assistant.model.item.effect;
 
-import java.util.Map;
-
-import com.freund.tabletop_assistant.model.damage.DamageType;
+import com.freund.tabletop_assistant.model.damage.Damage;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class WeaponBonusDamage extends ItemEffect{
-    private Map<DamageType, String> damageComponents;
+    private Damage damage;
 
-    public WeaponBonusDamage(Map<DamageType, String> damageComponents){
+    public WeaponBonusDamage(Damage damage){
         super();
-        this.damageComponents = damageComponents;
+        this.damage = damage;
     }
 }

@@ -13,6 +13,7 @@ public class GameStateDTO {
     private List<CreatureDTO> creatures;
     private List<DeviceMapping> deviceMappings;
     private List<Device> devices;
+    // scene
 }
 
     

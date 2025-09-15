@@ -1,15 +1,90 @@
 
 ### TASKS
 
+- add log entry statCalculations
+- single LogEntryFrontendDTO
+- need to setup frontend syncing because gameLog is not part of gamestate
+
+- CreatureDTO.ArrayList<StatusEffectInstance> statusEffectInstances might break on frontend because I changed StatusEffectInstance to DTO
+
+- seperate GameState and GameStateDTO more, have GameStateDTO have IDs where necessary
+- start frontend DTOs, possibly rename some of these old DTOs to fileDTO
+- add LogEntryFrontendDTO.java (name?)
+- try making requests to add to log from frontend
+- make a list of classes/files where a new LogEntry would need to be defined
+
+
+- different types of combat log entry:
+    - Combat started
+    - Combat ended
+    - combat round 1
+    - <creature> ended their turn
+    - <creature> started their turn
+    - <creature> used <castable> (don't mention targets)
+    - <creature> was damaged for <damage_amount> <damage_type> - simply print if any damageType modifiers after (resistances, vulnerabilites, immunities)
+    - <creature> was hit for <damage_amount> <damage_type> by <castable>
+    - <creature> was hit for <damage_amount> <damage_type> by <item>
+    - <creature> received <condition>
+    - <creature> lost <condition> (write source - because not indented)
+    - <creature> got downed
+    - <creature> got killed
+    - <creature> succeeded death saving throw
+    - <creature> failed death saving throw
+    - <creature> used <item>
+    - <creature> missed (should i mention castable?)
+    - <creature> stopped concentrating on <castable>
+    - <creature> was healed for <amount> Hit Points
+    - <creature> succeeded a saving throw against <castable>
+    - <creature> failed a saving throw against <castable>
+    - <creature> succedded an athletics check (<castable>)
+    - <creature> pinged <castable>
+    - <creature> pinged <item>
+    - Weather changed to <weather>
+    - Time of day changed to <day/night>
+    - Location cover changed to <inside/outside> - matters for rain and lighting
+    - Scene light source changed to <lit/notlit> - doesnt overwrite daylight, but is a fallback lightsource
+    - Scene lighting changed to <light/darkness> - derived from all of the above
+    - Short Rest
+    - Long Rest
+
+
+##### COMBAT LOG
+- a LogEntry frontend component needs to be dropdown-like and open a description (ex. Spell description)
+- frontend also needs to visually display the TurnResource getting used
+- on target selection multiple targets can always be selected (damage modal checkbox for use same attack roll and damage roll for every target - to differentiate fireball and eldritch usage)
+- ?? CastableDamage gets turned into Damage between ping and input
+- the castable always gets resolved immediately, meaning CastableUsedLogEntry and ReceivedEffectFromCastableLogEntry have to come together.
+- implement loading a limited number of LogEntries from log file
+- add a CastableHeal object aswell - because of source and drag n dropping
+- a the bottom of the screen is a log (player pings, DM pings, DM actions/changes all go there), has ability to filter only DM actions
+- add a clickable damage object in log that auto copies the damage into calculator (or just queues text pointer on appropriate damage types)
+- when a player pings a spell, the log prints out all the info and buttons for the DM which i can use to autosubtract turnresources, autofocus damage textboxes (by drag n droping damage on the target creature and just entering appropriate amounts for each type, also autofill in if not dice notation) autoapply statuseffect by drag n drop (with info about the target type [self, enemy...] for clearer gameflow)
+- the players see colored labels instead of buttons so they can't use them
+- when taking damage and checking StatusEffects (ex. resistances) there is an empty list of possible procs and procs get added if true so output can be ˇˇ
+- "(0, 10, 0, 6, 0, 0, 0) -> Goblin has taken 8 damage (COLD_RESISTANCE, POISON_RESISTANCE)"
+- Creature.cast() ?
+- players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
+- players don't have to ping just to get information (it's already calculated for each spell)
+- creature end turn displays in combat log (and start of next creature's turn)
+- maybe implement log calculations info later
+- if a creature or whatever is not on scene, players wont see the log about them even if logvisibility is public (example: DM setting monster stats offscreen)
+
+
+---
+
+- i need a scene (GameState.scene - a single object, has creature list, maybe item on ground list?)
+- calculate scene lighting based on weather, timeofday, cover, light source
+- maybe add dawn, twillight to timeofday (for dim light)
+- can players see the clock/date?
+- probably need GameState.List<Item> similar to creatures - since items don't have to be on creatures, especially unknown to players
 - make a proof-of-concept frontend combat simulator
-    - create combat log on the backend
     - integrate the whole combat system with backend (castables/actions, )
     - apply statuseffect to creature
     - implement weapon modifiers
 
-
 - color scheme for frontend ? (dark red, black + desaturated yellow parchment)
 
+- remove EffectSource.java unless needed for concentration or for damage? (because I might be able to get creature through castable anyway)
 - fill in default WeaponTypes
 - add try-catch to all service/controller files ( #todo ask chatgpt which ones, and should i add to to higher level classes or lower) in case of bad requests
 - read how mounts work in 5e raw?
@@ -19,7 +94,7 @@
 - shorten StatusEffects by finding common denominators (ex. can't take Actions)
 - combat scene boolean: inside OR outside (apply wet if outside and raining)
 - combat scene lighting that automatically applies disadvantage if no-one is holding a torch (takes into consideration darkvision, weather and time of day if outside) 
-- announce in global log if time-of-day, lighting or weather changes 
+- announce in global log if time-of-day, lighting or weather changes
 - go through monster manual and add status effects (and actions? - ex. vampire bite)
 - go through all spells and make status effects if there isn't one
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts) OR move it to a config file
@@ -79,6 +154,7 @@
 - Go through each class, subclass, race and subrace and imagine trying to level them up
 - seperate remaining tasks into general, DM UI and PlayerUI
 - test if spell duration is properly implemented - duration needs to be reduced by 1 on end of turn or start of turn? (ex. True Strike needs to end on next turn)
+- go through ALL comments on backend
 - time controls (play, pause, speed, increment a specific amount in either direction, undo(gamestate rollback))
 - manually check SpellData if spell upcast booleans are accurate
 - spells that have multiple damage types were wrong in the json, fix manually in SpellData
@@ -144,22 +220,9 @@
 - render bonus HP counter in a different color - orange
 - player UI when selecting an attack, show percentage to hit AC on each target like in bg3 (how do i do this if players don't input attacks and select targets?)
 - players see all included status effects when they view a creature
-
-##### COMBAT LOG
-- make eldritch blast have 3 different damage components that have the same damageType
-- CastableDamage gets turned into Damage between ping and input
-- add a CastableHeal object aswell - because of source and drag n dropping
-- a the bottom of the screen is a log (player pings, DM pings, DM actions/changes all go there), has ability to filter only DM actions
-- add a clickable damage object in log that auto copies the damage into calculator (or just queues text pointer on appropriate damage types)
-- when a player pings a spell, the log prints out all the info and buttons for the DM which i can use to autosubtract turnresources, autofocus damage textboxes (by drag n droping damage on the target creature and just entering appropriate amounts for each type, also autofill in if not dice notation) autoapply statuseffect by drag n drop (with info about the target type [self, enemy...] for clearer gameflow)
-- the players see colored labels instead of buttons so they can't use them
-- when taking damage and checking StatusEffects (ex. resistances) there is an empty list of possible procs and procs get added if true so output can be ˇˇ
-- "(0, 10, 0, 6, 0, 0, 0) -> Goblin has taken 8 damage (COLD_RESISTANCE, POISON_RESISTANCE)"
-- Creature.cast() players can ping spells and attacks (Flint casts Icebolt and it does 3d6+5 frost damage) (Flint uses melee attack and it does 3d6+5 bludgeoning damage)
-- players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
-- players don't have to ping just to get information (it's already calculated for each spell)
-- clear combat log button (with "are you sure?" prompt)
-- creature end turn displays in combat log (and start of next creature's turn)
+- initative tracker
+- it says who's turn it is
+- buttons for scene inside/outside, change weather, 
 
 #### MAP TAB
 - fog of war + AC style vantage points for map discovery (or more like elden ring map location that discovers an entire area but instead its a vantage point) - make it distinct on the map
@@ -194,13 +257,15 @@ function MyComponent() {
 
 
 ### LOW PRIORITY IDEAS FOR LATER
+- have premade scenes (ex. Cave, Room, Dark Room, Outside Night, Outside Day) with stuff like lighting premade
 - players roll investigation checks on combat start for each new creature type to see their stats and abilities in combat (like homm4 few, band, scores...), on failed roll -> statuseffects and stats greyed out
 - add icons to statuseffects, spells, abilities
 - add Artificer class
 - convert to 5.5e
+- move SpellData, StatusEffects and similar to json
 - modify high level spells with a high material cost (or which the spell consumes) to have some sort of penalty/limitation so PCs can't spam them
 - keep monster AC secret (TODO maybe reveal it either on hit or if a character has some proficiency when he gets closer) instead describe the armour that he is wearing and maybe his class
-
+- the ability to generate a character sheet A4 pdf (print them out before session) if somebody doesnt have a phone
 
 
 ### Windows Hard link command

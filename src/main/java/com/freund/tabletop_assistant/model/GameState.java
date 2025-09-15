@@ -1,18 +1,17 @@
 package com.freund.tabletop_assistant.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
-import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.freund.tabletop_assistant.model.creature.Creature;
 import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
-import com.freund.tabletop_assistant.util.JsonHandler;
 
 
 @Component
@@ -20,32 +19,15 @@ import com.freund.tabletop_assistant.util.JsonHandler;
 @NoArgsConstructor
 public class GameState {
     // fantasy datetime
-    private ArrayList<Creature> creatures;
-    private ArrayList<DeviceMapping> deviceMappings;
-    private ArrayList<Device> devices;
+    private List<Creature> creatures = new ArrayList<>();
+    private List<DeviceMapping> deviceMappings = new ArrayList<>();
+    private List<Device> devices = new ArrayList<>();
+    // scene
+    // item list
 
-    @PostConstruct
-    public void loadGameState(){
-        try {
-            GameState loadedGameState = JsonHandler.loadGameStateFromFile("gamestate.json");
-            this.creatures = loadedGameState.getCreatures();
-            this.deviceMappings = loadedGameState.getDeviceMappings();
-            this.devices = loadedGameState.getDevices();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // possibly move theseˇˇ 3 to service
 
-    public boolean saveGameState(){
-        try {
-            JsonHandler.saveGameStateToFile(this, "gamestate.json");
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
+    @JsonIgnore
     public Creature getCreature (UUID id){
         for (Creature creature : this.getCreatures()){
             if (creature.getCreatureId().equals(id)){
@@ -55,6 +37,7 @@ public class GameState {
         return null;
     }
 
+    @JsonIgnore
     public DeviceMapping getDeviceMapping(String deviceNickname){
         for (DeviceMapping deviceMapping : deviceMappings){
             if (deviceMapping.getDeviceNickname().equals(deviceNickname)){
@@ -64,6 +47,7 @@ public class GameState {
         return null;
     }
 
+    @JsonIgnore
     public Device getDevice(UUID deviceId){
         for (Device device : devices){
             if (device.getDeviceId().equals(deviceId)){

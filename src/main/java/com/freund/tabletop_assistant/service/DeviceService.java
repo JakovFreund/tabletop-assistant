@@ -1,23 +1,29 @@
 package com.freund.tabletop_assistant.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.freund.tabletop_assistant.model.device.ConnectedDevices;
+import com.freund.tabletop_assistant.model.device.Device;
 
 
 @Service
 public class DeviceService {
     @Autowired
-    ConnectedDevices connectedDevices;
+    private ConnectedDevices connectedDevices;
     @Autowired
-    GameStateService gameStateService;
+    private GameStateService gameStateService;
 
-    public ArrayList<UUID> getCurrentlyConnectedDeviceIds(){
+    public List<UUID> getCurrentlyConnectedDeviceIds(){
         return new ArrayList<UUID>(connectedDevices.getCurrentlyConnectedDeviceIds());
+    }
+
+    public Device getDevice(UUID deviceId){
+        return gameStateService.getDevice(deviceId);
     }
 
     public boolean connectDevice(UUID id){ //TODO add try-catch

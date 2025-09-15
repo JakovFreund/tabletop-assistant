@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ItemEffect {
+public abstract class ItemEffect {
     // different effect types with modifiers extend this class
     // duration ?
+    // copy structure from LogEntry.java
 }

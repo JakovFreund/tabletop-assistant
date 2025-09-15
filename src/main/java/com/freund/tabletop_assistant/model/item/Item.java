@@ -1,5 +1,6 @@
 package com.freund.tabletop_assistant.model.item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,10 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type") // this will add a temporary extra field in the json during serialization (ex. "type":"weapon")
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = Armour.class, name = "armour"),
-    @JsonSubTypes.Type(value = Weapon.class, name = "weapon"),
-    @JsonSubTypes.Type(value = ItemStack.class, name = "stack"),
-    @JsonSubTypes.Type(value = ContainerItem.class, name = "container")
+    @JsonSubTypes.Type(value = Armour.class),
+    @JsonSubTypes.Type(value = Weapon.class),
+    @JsonSubTypes.Type(value = ItemStack.class),
+    @JsonSubTypes.Type(value = ContainerItem.class)
 })
 public class Item {
     private UUID itemId;
@@ -33,8 +34,8 @@ public class Item {
     private float weight;
     private boolean needsIdentify; // (true for mysterious items, determines if players can by default see: name, cost, effects, description)
     private long lastModified;
-    private List<ItemEffect> effects;
-    private List<String> description;
+    private List<ItemEffect> effects = new ArrayList<>();
+    private List<String> description = new ArrayList<>();
 
 
 

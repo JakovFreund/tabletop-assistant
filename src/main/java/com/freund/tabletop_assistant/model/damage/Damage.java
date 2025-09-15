@@ -1,9 +1,8 @@
 package com.freund.tabletop_assistant.model.damage;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
-import com.freund.tabletop_assistant.model.source.EffectSource;
 import com.freund.tabletop_assistant.util.StringUtil;
 
 import lombok.AllArgsConstructor;
@@ -14,22 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Damage {
-    private HashMap<DamageType, String> components;
-    EffectSource source;
+    private Map<DamageType, String> components = new HashMap<>();
 
-    // probably remove
-    public Damage(List<String> componentValues) {
-        this.components = new HashMap<DamageType, String>();
-        this.source = null;
-        if (componentValues.size() != DamageType.values().length) {
-            throw new IllegalArgumentException("Damage values list size must be equal to the amount of DamageTypes");
-        }  
-        for (int i = 0; i < DamageType.values().length; i++) {
-            this.components.put(DamageType.values()[i], componentValues.get(i));
-        }
-    }
-
-    public String getComponent(DamageType damageType) {
+    public String getComponentAmount(DamageType damageType) {
         if (!this.components.containsKey(damageType)) {
             return "0";
         }
@@ -40,8 +26,8 @@ public class Damage {
     public String toString() {
         String returnString = "Damage{";
         for (DamageType damageType : DamageType.values()) {
-            if (this.getComponent(damageType) != "0") {
-                returnString += damageType.toString() + ":" + this.getComponent(damageType) + ";";
+            if (this.getComponentAmount(damageType) != "0") {
+                returnString += damageType.toString() + ":" + this.getComponentAmount(damageType) + ";";
             }
         }
         if (returnString != "Damage{") {

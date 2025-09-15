@@ -1,0 +1,20 @@
+meta {
+  name: POST ping castable
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/gamelog/ping-castable
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "deviceId": "553c08eb-08c3-4148-845c-cf8e1fb42a38",
+    "casterId": "047004ff-3400-4379-9154-0860dce728e4",
+    "castableName": "Fireball",
+    "slotLevel": 4
+  }
+}

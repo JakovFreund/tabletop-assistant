@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.freund.tabletop_assistant.model.damage.Damage;
+import com.freund.tabletop_assistant.model.damage.DamageComponent;
 import com.freund.tabletop_assistant.model.damage.DamageType;
-import com.freund.tabletop_assistant.model.source.EffectSource;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,18 +16,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CastableDamageComponent {
     private DamageType damageType;
-    private Map<Integer, String> damageAtCreatureLevel;
-    private Map<Integer, String> damageAtSlotLevel;
+    private Map<Integer, String> damageAtCreatureLevel = new HashMap<>();
+    private Map<Integer, String> damageAtSlotLevel = new HashMap<>();
 
-    public Damage getDamage(int creatureLevel, int slotLevel, EffectSource source) {
+    public DamageComponent getDamageComponent(int creatureLevel, int slotLevel) {
         if (damageAtCreatureLevel.isEmpty()) {
             if (damageAtSlotLevel.isEmpty()) {
                 return null;
             }
             if (damageAtSlotLevel.containsKey(slotLevel)) {
-                HashMap<DamageType, String> components = new HashMap<DamageType, String>();
-                components.put(damageType, damageAtSlotLevel.get(slotLevel));
-                return new Damage(components, source);
+                return new DamageComponent(damageType, damageAtSlotLevel.get(slotLevel));
             } else {
                 System.out.println("Castable slot level not defined.");
                 return null;
@@ -43,9 +40,7 @@ public class CastableDamageComponent {
             // use highestKey and value
             int highestKey = key.get();
             String value = damageAtCreatureLevel.get(highestKey);
-            HashMap<DamageType, String> components = new HashMap<DamageType, String>();
-            components.put(damageType, value);
-            return new Damage(components, source);
+            return new DamageComponent(damageType, value);
         } else {
             System.out.println("Castable level not defined.");
             return null;

@@ -3,6 +3,7 @@ package com.freund.tabletop_assistant.model.creature;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.freund.tabletop_assistant.model.creature.gameclass.GameClass;
@@ -24,25 +25,39 @@ import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Creature {
     private UUID creatureId;
     private String name;
     private Subrace subrace;
-    private Castable concentratingOn;
     private Background background;
     private Alignment alignment;
-    // Armour/Weapon Proficiencies ?
-    private HashMap<Ability, Integer> abilityScores;
-    private HashMap<Skill, Boolean> skillProficiencies; //ˇˇ these two could be Lists with only true elements inside but whatever
-    private HashMap<Ability, Boolean> savingThrowProficiencies;
-    private HashMap<GameClass, Integer> classes;
-    private ArrayList<Subclass> subclasses;
-    private ArrayList<StatusEffectInstance> statusEffectInstances;
-    private ArrayList<TurnResource> turnResources;
-    private ArrayList<Item> inventory;
-    private UUID equiped[]; // stores ids of equiped items from inventory
+    private Castable concentratingOn;
+    // Armour/Weapon Proficiencies ? Derived from class/race ?
+    private Map<Ability, Integer> abilityScores = new HashMap<>();
+    private Map<Skill, Boolean> skillProficiencies = new HashMap<>(); //ˇˇ these two could be Lists with only true elements inside but whatever
+    private Map<Ability, Boolean> savingThrowProficiencies = new HashMap<>();
+    private Map<GameClass, Integer> classes = new HashMap<>();
+    private List<Subclass> subclasses = new ArrayList<>();
+    private List<StatusEffectInstance> statusEffectInstances = new ArrayList<>();
+    private List<TurnResource> turnResources = new ArrayList<>();
+    private List<Item> inventory = new ArrayList<>();
+    private UUID equiped[] = new UUID[EquipSlot.values().length]; // stores ids of equiped items from inventory
+
+
+    // init block runs after field initializers, before constructors
+    {
+        for (Ability ability : Ability.getAll()) {
+            abilityScores.put(ability, 0);
+            savingThrowProficiencies.put(ability, false);
+        }
+        for (Skill skill : Skill.values()) {
+            skillProficiencies.put(skill, false);
+        }
+    }
 
     // ### SPECIAL
 
@@ -238,18 +253,18 @@ public class Creature {
     public void setConcentratingOn(Castable castable) { // sets both the creature's attribute and the concentrating statuseffect  
         this.concentratingOn = castable;
         if (castable == null) {
-        // TODO call CreatureService.remove previous from other creatures
+        // TODO call CreatureService.remove previous from other creatures OR just move this whole function in CreatureService
             this.removeStatusEffectInstance(StatusEffect.CONCENTRATING);
         } else {
             this.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CONCENTRATING, castable.getDuration(),
-                    new EffectSource(EffectSourceType.SPELL, creatureId), ""));
+                    new EffectSource(EffectSourceType.CASTABLE, this)));
 
         }
     }
 
     // ### LIST/MAP
 
-    public void addItems(ArrayList<Item> items) {
+    public void addItems(List<Item> items) {
         for (Item item : items) {
             this.addItem(item);
         }
@@ -367,37 +382,13 @@ public class Creature {
     
     // ### CONSTRUCTOR
 
-    // i probably don't need thisˇˇ (it's just gonna get filled from the gamestate anyway, TODO test array creation with @NoArgsConstructor, what about EquipSlot.values().length ?)
-    public Creature() {
-        this.setCreatureId(UUID.randomUUID());
-        this.abilityScores = new HashMap<Ability, Integer>();
-        this.skillProficiencies = new HashMap<Skill, Boolean>();
-        this.savingThrowProficiencies = new HashMap<Ability, Boolean>();
-        this.classes = new HashMap<GameClass, Integer>();
-        this.subclasses = new ArrayList<Subclass>();
-        this.statusEffectInstances = new ArrayList<StatusEffectInstance>();
-        this.turnResources = new ArrayList<TurnResource>();
-        this.inventory = new ArrayList<Item>();
-        this.equiped = new UUID[EquipSlot.values().length];
-
-
-        for (Ability ability : Ability.getAll()) {
-            abilityScores.put(ability, 0);
-        }
-
-        for (Skill skill : Skill.values()) {
-            skillProficiencies.put(skill, false);
-        }
-
-        for (Ability ability : Ability.getAll()) {
-            savingThrowProficiencies.put(ability, false);
-        }
-    }
-
-    public Creature(String name, Subrace subrace) {
-        this();
-        this.setName(name);
-        this.setSubrace(subrace);
+    public Creature(String name, Subrace subrace, Background background, Alignment alignment) {
+        // TODO how do creatures get added to gamestate? should it be done here automatically?
+        this.creatureId = UUID.randomUUID();
+        this.name = name;
+        this.subrace = subrace;
+        this.background = background;
+        this.alignment = alignment;
 
         //prepared spells (class?)
 

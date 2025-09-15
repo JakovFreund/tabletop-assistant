@@ -1,5 +1,6 @@
 package com.freund.tabletop_assistant.model.item.weapon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ public class WeaponAttributes {
     private WeaponType weaponType;
     private WeaponCategory weaponCategory;
     private WeaponRange weaponRange;
-    private List<WeaponProperty> weaponProperties;
+    private List<WeaponProperty> weaponProperties = new ArrayList<>();
     // List<WeaponAction>
 
     public WeaponAttributes(WeaponType weaponType){

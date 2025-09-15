@@ -1,6 +1,6 @@
 package com.freund.tabletop_assistant.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import com.freund.tabletop_assistant.dto.SaveDeviceMappingRequest;
 import com.freund.tabletop_assistant.dto.SaveDeviceRequest;
 import com.freund.tabletop_assistant.service.DeviceService;
 
-
 @RestController
 @RequestMapping("/api")
 public class DeviceController {
@@ -26,20 +25,20 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @GetMapping("/uuid")
-    public String generateUUID() {
+    public ResponseEntity<String> generateUUID() {
         String id = UUID.randomUUID().toString();
         System.out.println("Generated UUID: " + id);
-        return id;
+        return ResponseEntity.status(HttpStatus.OK).body(id);
     }
 
     @GetMapping("/connected-devices")
-    public ArrayList<UUID> getConnectedDevices() { // ok
-        return deviceService.getCurrentlyConnectedDeviceIds();
+    public ResponseEntity<List<UUID>> getConnectedDevices() {
+        return ResponseEntity.status(HttpStatus.OK).body(deviceService.getCurrentlyConnectedDeviceIds());
     }
 
     @PostMapping("/connected-devices")
     public ResponseEntity<String> connectDevice(@RequestBody ConnectDeviceRequest request) {
-        if(deviceService.connectDevice(request.getDeviceId())){
+        if (deviceService.connectDevice(request.getDeviceId())) {
             return ResponseEntity.status(HttpStatus.CREATED).body("Device connected.");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Device connecting failed.");
@@ -47,8 +46,8 @@ public class DeviceController {
     }
 
     @PutMapping("/devices")
-    public ResponseEntity<String> saveDevice(@RequestBody SaveDeviceRequest request){
-        if(deviceService.saveDevice(request.getDeviceId(), request.getDeviceNickname())){
+    public ResponseEntity<String> saveDevice(@RequestBody SaveDeviceRequest request) {
+        if (deviceService.saveDevice(request.getDeviceId(), request.getDeviceNickname())) {
             return ResponseEntity.status(HttpStatus.CREATED).body("Device saved.");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Device saving failed.");
@@ -56,8 +55,9 @@ public class DeviceController {
     }
 
     @PutMapping("/device-mappings")
-    public ResponseEntity<String> saveDeviceMapping(@RequestBody SaveDeviceMappingRequest request){
-        if(deviceService.saveDeviceMapping(request.getDeviceNickname(), request.getCreatureId(), request.isDungeonMaster())){
+    public ResponseEntity<String> saveDeviceMapping(@RequestBody SaveDeviceMappingRequest request) {
+        if (deviceService.saveDeviceMapping(request.getDeviceNickname(), request.getCreatureId(),
+                request.isDungeonMaster())) {
             return ResponseEntity.status(HttpStatus.CREATED).body("DeviceMapping saved.");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("DeviceMapping saving failed.");
