@@ -18,7 +18,6 @@ import com.freund.tabletop_assistant.model.gamelog.types.ReceivedConditionLogEnt
 import com.freund.tabletop_assistant.model.gamelog.types.ReceivedEffectLogEntry;
 
 public class LogEntryFileMapper {
-
     private static final Map<Class<? extends LogEntry>, Function<LogEntry, LogEntryFileDTO>> registry = new HashMap<>();
 
     static {
@@ -28,7 +27,8 @@ public class LogEntryFileMapper {
         registry.put(DamageLogEntry.class, l -> toDTO((DamageLogEntry) l));
         registry.put(ItemDamageLogEntry.class, l -> toDTO((ItemDamageLogEntry) l));
         registry.put(LostConditionLogEntry.class, l -> toDTO((LostConditionLogEntry) l));
-        registry.put(ReceivedConditionFromCastableLogEntry.class, l -> toDTO((ReceivedConditionFromCastableLogEntry) l));
+        registry.put(ReceivedConditionFromCastableLogEntry.class,
+                l -> toDTO((ReceivedConditionFromCastableLogEntry) l));
         registry.put(ReceivedConditionLogEntry.class, l -> toDTO((ReceivedConditionLogEntry) l));
     }
 
@@ -43,6 +43,7 @@ public class LogEntryFileMapper {
         dto.setLogEntryId(logEntry.getLogEntryId());
         dto.setTimestamp(logEntry.getTimestamp());
         dto.setVisibility(logEntry.getVisibility());
+        dto.setNested(logEntry.isNested());
         dto.setLogEntryType(LogEntryType.fromClass(logEntry.getClass()));
     }
 
@@ -55,19 +56,22 @@ public class LogEntryFileMapper {
 
     private static void mapDamageFields(LogEntryFileDTO dto, DamageLogEntry logEntry) {
         mapReceivedEffectFields(dto, logEntry);
-        dto.setDamageType(logEntry.getDamageType());
-        dto.setDamageAmount(logEntry.getDamageAmount());
+        dto.setDamageEntry(logEntry.getDamageEntry());
+        dto.setStatCalculationBreakdowns(logEntry.getStatCalculationBreakdowns());
     }
 
     private static void mapReceivedConditionFields(LogEntryFileDTO dto, ReceivedConditionLogEntry logEntry) {
         mapReceivedEffectFields(dto, logEntry);
-        dto.setReceivedStatusEffectInstance(StatusEffectInstanceMapper.toDTO(logEntry.getReceivedStatusEffectInstance()));
+        dto.setReceivedStatusEffectInstance(
+                StatusEffectInstanceMapper.toDTO(logEntry.getReceivedStatusEffectInstance()));
     }
 
     public static LogEntryFileDTO toDTO(DamageLogEntry logEntry) {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapDamageFields(dto, logEntry);
-        dto.setText(logEntry.getTargetCreature().getName() + " was damaged for " + logEntry.getDamageAmount() + " " + logEntry.getDamageType() + " damage");
+        dto.setText(logEntry.getTargetCreature().getName() + " was damaged for "
+                + logEntry.getDamageEntry().getDamageAmount() + " " + logEntry.getDamageEntry().getDamageType()
+                + " damage");
         return dto;
     }
 
@@ -75,8 +79,10 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapDamageFields(dto, logEntry);
         dto.setCastableUsedLogEntryId(logEntry.getCastableUsedLogEntry().getLogEntryId());
-        dto.setText(logEntry.getTargetCreature().getName() + " was hit for " + logEntry.getDamageAmount() + " " + logEntry.getDamageType() + " damage by "
-                + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getName());
+        dto.setText(
+                logEntry.getTargetCreature().getName() + " was hit for " + logEntry.getDamageEntry().getDamageAmount()
+                        + " " + logEntry.getDamageEntry().getDamageType() + " damage by "
+                        + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getName());
         return dto;
     }
 
@@ -94,7 +100,8 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapBaseFields(dto, logEntry);
         dto.setCastableInstance(CastableMapper.toDTO(logEntry.getCastableInstance()));
-        dto.setText(logEntry.getCastableInstance().getCaster().getName() + " used " + logEntry.getCastableInstance().getCastable().getName());
+        dto.setText(logEntry.getCastableInstance().getCaster().getName() + " used "
+                + logEntry.getCastableInstance().getCastable().getName());
         return dto;
     }
 
@@ -102,7 +109,9 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapDamageFields(dto, logEntry);
         dto.setItemId(logEntry.getItem().getItemId());
-        dto.setText(logEntry.getTargetCreature().getName() + " was hit for " + logEntry.getDamageAmount() + " " + logEntry.getDamageType() + " damage by " + logEntry.getItem().getName());
+        dto.setText(logEntry.getTargetCreature().getName() + " was hit for "
+                + logEntry.getDamageEntry().getDamageAmount() + " " + logEntry.getDamageEntry().getDamageType()
+                + " damage by " + logEntry.getItem().getName());
         return dto;
     }
 
@@ -111,7 +120,8 @@ public class LogEntryFileMapper {
         mapBaseFields(dto, logEntry);
         dto.setTargetCreatureId(logEntry.getTargetCreature().getCreatureId());
         dto.setLostStatusEffectInstance(StatusEffectInstanceMapper.toDTO(logEntry.getLostStatusEffectInstance()));
-        dto.setText(logEntry.getTargetCreature().getName() + " lost condition " + logEntry.getLostStatusEffectInstance().getStatusEffect().toString());
+        dto.setText(logEntry.getTargetCreature().getName() + " lost condition "
+                + logEntry.getLostStatusEffectInstance().getStatusEffect().toString());
         return dto;
     }
 
@@ -119,14 +129,18 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapReceivedConditionFields(dto, logEntry);
         dto.setCastableUsedLogEntryId(logEntry.getCastableUsedLogEntry().getLogEntryId());
-        dto.setText(logEntry.getTargetCreature().getName() + " received condition " + logEntry.getReceivedStatusEffectInstance().toString() + " from " + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getName() + " - " + logEntry.getCastableUsedLogEntry().getCastableInstance().getCaster().getName());
+        dto.setText(logEntry.getTargetCreature().getName() + " received condition "
+                + logEntry.getReceivedStatusEffectInstance().toString() + " from "
+                + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getName() + " - "
+                + logEntry.getCastableUsedLogEntry().getCastableInstance().getCaster().getName());
         return dto;
     }
 
     public static LogEntryFileDTO toDTO(ReceivedConditionLogEntry logEntry) {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapReceivedConditionFields(dto, logEntry);
-        dto.setText(logEntry.getTargetCreature().getName() + " received condition " + logEntry.getReceivedStatusEffectInstance().toString() + " from " + logEntry.getEffectSourceType());
+        dto.setText(logEntry.getTargetCreature().getName() + " received condition "
+                + logEntry.getReceivedStatusEffectInstance().toString() + " from " + logEntry.getEffectSourceType());
         return dto;
     }
 }

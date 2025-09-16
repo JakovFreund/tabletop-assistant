@@ -16,8 +16,8 @@ public class LostConditionLogEntry extends LogEntry {
     private Creature targetCreature;
     private StatusEffectInstance LostStatusEffectInstance;
 
-    public LostConditionLogEntry (Creature targetCreature, StatusEffectInstance LostStatusEffectInstance){
-        super(LogVisibility.SCENE);
+    public LostConditionLogEntry (boolean isNested, Creature targetCreature, StatusEffectInstance LostStatusEffectInstance){
+        super(LogVisibility.SCENE, isNested);
         this.targetCreature = targetCreature;
         this.LostStatusEffectInstance = LostStatusEffectInstance;
     }

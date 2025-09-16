@@ -19,7 +19,7 @@ import com.freund.tabletop_assistant.model.creature.Creature;
 import com.freund.tabletop_assistant.service.CreatureService;
 
 @RestController
-@RequestMapping("/api/creatures")
+@RequestMapping("/creatures")
 public class CreatureController {
     @Autowired
     private CreatureService creatureService;

@@ -1,57 +1,22 @@
 
 ### TASKS
 
-- add log entry statCalculations
-- single LogEntryFrontendDTO
-- need to setup frontend syncing because gameLog is not part of gamestate
-
-- CreatureDTO.ArrayList<StatusEffectInstance> statusEffectInstances might break on frontend because I changed StatusEffectInstance to DTO
-
-- seperate GameState and GameStateDTO more, have GameStateDTO have IDs where necessary
-- start frontend DTOs, possibly rename some of these old DTOs to fileDTO
-- add LogEntryFrontendDTO.java (name?)
+- convert frontend mock logs to actual
 - try making requests to add to log from frontend
-- make a list of classes/files where a new LogEntry would need to be defined
 
-
-- different types of combat log entry:
-    - Combat started
-    - Combat ended
-    - combat round 1
-    - <creature> ended their turn
-    - <creature> started their turn
-    - <creature> used <castable> (don't mention targets)
-    - <creature> was damaged for <damage_amount> <damage_type> - simply print if any damageType modifiers after (resistances, vulnerabilites, immunities)
-    - <creature> was hit for <damage_amount> <damage_type> by <castable>
-    - <creature> was hit for <damage_amount> <damage_type> by <item>
-    - <creature> received <condition>
-    - <creature> lost <condition> (write source - because not indented)
-    - <creature> got downed
-    - <creature> got killed
-    - <creature> succeeded death saving throw
-    - <creature> failed death saving throw
-    - <creature> used <item>
-    - <creature> missed (should i mention castable?)
-    - <creature> stopped concentrating on <castable>
-    - <creature> was healed for <amount> Hit Points
-    - <creature> succeeded a saving throw against <castable>
-    - <creature> failed a saving throw against <castable>
-    - <creature> succedded an athletics check (<castable>)
-    - <creature> pinged <castable>
-    - <creature> pinged <item>
-    - Weather changed to <weather>
-    - Time of day changed to <day/night>
-    - Location cover changed to <inside/outside> - matters for rain and lighting
-    - Scene light source changed to <lit/notlit> - doesnt overwrite daylight, but is a fallback lightsource
-    - Scene lighting changed to <light/darkness> - derived from all of the above
-    - Short Rest
-    - Long Rest
-
+- need to fix frontend fetching to be on change instead of every 2 seconds
+- move Devices from GameState and GameStateDTO
+- save devices to a seperate file
+- seperate devices and gamestate on frontend redux
+- is device stuff in my redux store redundant? for example state.device, state.gamestate.devices, state.gamestate.deviceMappings, state.connectedDevices ? should this all be in state.devices ?
 
 ##### COMBAT LOG
+- steps to add new LogEntry: create class, LogEntryType, LogEntryFileMapper, LogEntryFrontedMapper, LogEntryReconstructor
 - a LogEntry frontend component needs to be dropdown-like and open a description (ex. Spell description)
 - frontend also needs to visually display the TurnResource getting used
-- on target selection multiple targets can always be selected (damage modal checkbox for use same attack roll and damage roll for every target - to differentiate fireball and eldritch usage)
+- "multiple targets use different roll" checkbox during target selection to differentiate aoe and eldritch blast
+- roll modal reminds and highlights advantage/disadvantage (don't input twice)
+- need to implement critical miss (attack roll 1) and critical hit (attack roll 20) - cannoot miss always hits with double damage
 - ?? CastableDamage gets turned into Damage between ping and input
 - the castable always gets resolved immediately, meaning CastableUsedLogEntry and ReceivedEffectFromCastableLogEntry have to come together.
 - implement loading a limited number of LogEntries from log file
@@ -63,11 +28,72 @@
 - when taking damage and checking StatusEffects (ex. resistances) there is an empty list of possible procs and procs get added if true so output can be ˇˇ
 - "(0, 10, 0, 6, 0, 0, 0) -> Goblin has taken 8 damage (COLD_RESISTANCE, POISON_RESISTANCE)"
 - Creature.cast() ?
+- change LogEntryFrontendDTO.itemId and itemName to ItemDTO (definetly need description and maybe other stuff)
 - players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
 - players don't have to ping just to get information (it's already calculated for each spell)
 - creature end turn displays in combat log (and start of next creature's turn)
 - maybe implement log calculations info later
 - if a creature or whatever is not on scene, players wont see the log about them even if logvisibility is public (example: DM setting monster stats offscreen)
+- add castable description dropdown on creature used castable log entry similar to calculation
+
+- different types of combat log entry (calculations indented):
+    - Combat started
+    - Combat ended
+    - combat round 1
+    - <creature> ended their turn
+    - <creature> started their turn
+    - <creature> used <castable> (don't mention targets)
+        - (not calculation) castable description
+    - <creature> was damaged for <damage_amount> <damage_type>
+        - damage
+    - <creature> was hit for <damage_amount> <damage_type> by <castable>
+        - AC, attackRoll, damageRoll, damage
+    - <creature> was hit for <damage_amount> <damage_type> by <item> // do i need this? aren't items gonna damage using castables anyway
+    - <creature> missed (should i mention castable?)
+        - AC, attackRoll
+    - <creature> received <condition>
+    - <creature> lost <condition> (write source - because not indented)
+    - <creature> got downed
+    - <creature> got killed
+    - <creature> succeeded death saving throw
+    - <creature> failed death saving throw
+    - <creature> recovered (after succesful death saving throw)
+    - <creature> used <item>
+    - <creature> stopped concentrating on <castable>
+    - <creature> was healed for <amount> Hit Points
+        - heal
+    - <creature> succeeded a saving throw against <castable>
+        - DC, savingThrow
+    - <creature> failed a saving throw against <castable>
+        - DC, savingThrow
+    - <creature> succedded an opposed athletics check (<castable>)
+        - casterRoll, targetRoll
+    - <creature> pinged <castable>
+    - <creature> pinged <item>
+    - Weather changed to <weather>
+    - Time of day changed to <day/night>
+    - Location cover changed to <inside/outside> - matters for rain and lighting
+    - Scene light source changed to <lit/notlit> - doesnt overwrite daylight, but is a fallback lightsource
+    - Scene lighting changed to <light/darkness> - derived from all of the above
+    - Short Rest
+    - Long Rest
+
+1. player pings castable
+2. i click castable and select enemies
+3. player physically rolls dice
+4. i fill in result
+5. (if saving throw needed individual enemies roll saving throws)
+6. enemies get damaged
+7. log entry appears with all info
+
+Sword: 2d8 Slashing + 2d6 Fire + BURNING
+Goblin1 has fire resistance
+
+Shadowheart used Main Hand Attack
+Goblin1 was hit for 11 Slashing by Main Hand Attack {AC: 13, attackRoll: 16(1d20) + 2(Proficiency) + 3(Dexterity Modifier) = 25, damageRoll: 8 (2d8) + 3 (Dexterity Modifier) = 11}
+Goblin1 was hit for 3 Fire by Main Hand Attack {AC: 13, attackRoll: 16 (1d20) + 2 (Proficiency) + 3 (Dexterity Modifier) = 25, damageRoll: 6 (2d6), damage: 6(damageRoll) - 3(FIRE_RESISTANCE) = 3}
+Goblin1 failed a saving throw against BURNING {DC: 8 (Base DC) + 1(Wisdom) + 2 (Proficieny) = 11, savingThrow: 5(1d20) + 2(Proficiency) = 7}
+Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 
 
 ---
@@ -108,13 +134,14 @@
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
 - add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
-- is device stuff in my redux store redundant? for example state.device, state.gamestate.devices, state.gamestate.deviceMappings, state.connectedDevices ? should this all be in state.devices ?
 - research and possibly implement store.useAppDispatch
 - fix and cleanup frontend completely
     - what's redundant
-    - the structure, hierarchy
+    - file structure, hierarchy
     - repeated stuff
     - redux store
+    - sync types with backend DTOs
+    - does gamestate/gamelog/device syncing re-render components?
 - CreatureService.removeConcentration(Creature) - check other creatures for matching statuseffects that need to be removed
 - when you drag a statuseffect on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
 - ^^ If saving throw needed, pop-up that inputs roll amount and adds proficiency, skill modifier or whatever is needed. (log "Saving throw failed..." with all info)
@@ -129,9 +156,11 @@
 - add default actions (Grab, Shove, Throw, Help, Dash...) - DefaultActions.java ?
 - implement existing ItemEffects
 - go through MagicItems descriptions and add ItemEffects and StatusEffects
+- WeaponProperties functionality and calculations (different scaling/damage)
 - fill in MagicItems weapons and armour stats
 - add generateRandomItem() + on weapon/armour creation randomly determine rarity upgrade (yes or no boolean) and then add 1 effect or none
 - the environment/scene has an inventory (where ItemStacks go when players drop them)
+- how am i gonna display ItemEffects on frontend?
 - DM also has a seperate inventory
 - https://bg3.wiki/wiki/Weapon_actions (add them to WeaponType and WeaponAttributes)
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
@@ -183,6 +212,7 @@
 - DM can search all ItemData, SpellData and StatusEffects and add them to his inventory where they can be edited (items get random id on clone - itemIDs in ItemData don't matter)
 - use Jackson to save ItemData and SpellData to jsons and load them on startup (add "outdated" comment to .py scripts)
 - advanced character sheet (when you click on a stat it shows you how it got that nunber - formula and subnumbers)
+- backend custom errors/exceptions and remove/replace all System.out.println with exceptions
 - each creature has a known spell list/statuseffect list and when they view another creature they see "unknown" status effects
 - PCs can learn of a statusEffect, subrace or item by reading a book about it, and they gain it to the known list (also gained if another PC tells them about it)
 - creature.knownStatusEffects (StatusEffect), knownSubraces (Subrace), knownItems (UUID for Items with item.needsIdentify: true)
@@ -190,6 +220,7 @@
 
 #### STATS/PROFILE TAB
 - add Skills
+- on display Conditions, sort them by duration ascending
 
 #### INVENTORY TAB
 - no custom item sorting... (only favorite to show on top, otherwise autosort)
@@ -220,7 +251,7 @@
 - render bonus HP counter in a different color - orange
 - player UI when selecting an attack, show percentage to hit AC on each target like in bg3 (how do i do this if players don't input attacks and select targets?)
 - players see all included status effects when they view a creature
-- initative tracker
+- automatic initiative sort
 - it says who's turn it is
 - buttons for scene inside/outside, change weather, 
 

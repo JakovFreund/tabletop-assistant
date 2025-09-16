@@ -13,7 +13,7 @@ import com.freund.tabletop_assistant.mapper.GameStateMapper;
 import com.freund.tabletop_assistant.service.GameStateService;
 
 @RestController
-@RequestMapping("/api/gamestate")
+@RequestMapping("/gamestate")
 public class GameStateController {
     @Autowired
     private GameStateService gameStateService;

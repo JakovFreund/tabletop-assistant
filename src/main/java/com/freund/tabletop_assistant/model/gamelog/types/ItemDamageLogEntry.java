@@ -1,7 +1,10 @@
 package com.freund.tabletop_assistant.model.gamelog.types;
 
+import java.util.List;
+
 import com.freund.tabletop_assistant.model.creature.Creature;
-import com.freund.tabletop_assistant.model.damage.DamageType;
+import com.freund.tabletop_assistant.model.damage.DamageEntry;
+import com.freund.tabletop_assistant.model.gamelog.statcalculation.StatCalculationBreakdown;
 import com.freund.tabletop_assistant.model.item.Item;
 import com.freund.tabletop_assistant.model.source.EffectSourceType;
 
@@ -15,8 +18,8 @@ import lombok.NoArgsConstructor;
 public class ItemDamageLogEntry extends DamageLogEntry {
     private Item item;
 
-    public ItemDamageLogEntry(Creature targetCreature, DamageType damageType, String damageAmount, Item item){
-        super(targetCreature, EffectSourceType.ITEM, damageType, damageAmount);
+    public ItemDamageLogEntry(boolean isNested, Creature targetCreature, DamageEntry damageComponent, List<StatCalculationBreakdown> statCalculationBreakdowns, Item item){
+        super(isNested, targetCreature, EffectSourceType.ITEM, damageComponent, statCalculationBreakdowns);
         this.item = item;
     }
 }

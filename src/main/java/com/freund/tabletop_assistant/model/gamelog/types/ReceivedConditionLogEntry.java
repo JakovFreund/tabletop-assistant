@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class ReceivedConditionLogEntry extends ReceivedEffectLogEntry {
     private StatusEffectInstance receivedStatusEffectInstance;
 
-    public ReceivedConditionLogEntry(Creature targetCreature, StatusEffectInstance receivedStatusEffectInstance) {
-        super(targetCreature, receivedStatusEffectInstance.getEffectSource().getEffectSourceType());
+    public ReceivedConditionLogEntry(boolean isNested, Creature targetCreature, StatusEffectInstance receivedStatusEffectInstance) {
+        super(isNested, targetCreature, receivedStatusEffectInstance.getEffectSource().getEffectSourceType());
         this.receivedStatusEffectInstance = receivedStatusEffectInstance;
     }
 }

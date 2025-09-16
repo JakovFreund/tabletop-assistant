@@ -245,7 +245,6 @@ public class Creature {
         return 3 + getAbilityModifier(Ability.STR);
     }
 
-    @JsonIgnore
     public int getSavingThrowDC(Ability spellcastingAbility) { // TODO change to getDC(SavedSpell savedSpell) - get ability from map spell class origin
         return 8 + this.getAbilityModifier(spellcastingAbility) + this.getProficiencyBonus();
     }

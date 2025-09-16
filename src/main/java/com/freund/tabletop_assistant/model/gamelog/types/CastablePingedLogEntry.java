@@ -17,7 +17,7 @@ public class CastablePingedLogEntry extends LogEntry {
     private CastableInstance castableInstance;
 
     public CastablePingedLogEntry (Device device, CastableInstance castableInstance){
-        super(LogVisibility.PLAYER_PING);
+        super(LogVisibility.PLAYER_PING, false);
         this.device = device;
         this.castableInstance = castableInstance;
     }

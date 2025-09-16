@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DamageComponent {
+public class DamageEntry { // use only for DTOs and logging
     DamageType damageType;
     String damageAmount;
 }

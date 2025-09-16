@@ -1,6 +1,5 @@
 package com.freund.tabletop_assistant.dto;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,28 +19,30 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LogEntryFileDTO {
+public class LogEntryFrontendDTO {
     private UUID logEntryId;
-    private Instant timestamp;
+    private String timestamp;
     private LogVisibility visibility;
     private boolean isNested;
     private LogEntryType logEntryType;
 
-    private String text;
-
     private UUID targetCreatureId;
+    private String targetCreatureName;
     private UUID sourceCreatureId;
+    private String sourceCreatureName;
     private UUID itemId;
-    private UUID castableUsedLogEntryId;
-    private UUID deviceId;
+    private String itemName;
+    // probably don't need this since i have isNested for rendering
+    // private UUID castableUsedLogEntryId;
+    private String deviceNickname;
     private DamageEntry damageEntry;
     private EffectSourceType effectSourceType;
-    private CastableInstanceDTO castableInstance;
+    private CastableInstanceFrontendDTO castableInstance;
     private StatusEffectInstanceDTO lostStatusEffectInstance;
     private StatusEffectInstanceDTO receivedStatusEffectInstance;
 
     private List<StatCalculationBreakdown> statCalculationBreakdowns;
-    
+
     private int roundNumber;
     private Weather weather;
     private TimeOfDay timeOfDay;

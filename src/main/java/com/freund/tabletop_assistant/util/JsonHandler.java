@@ -12,7 +12,6 @@ import com.freund.tabletop_assistant.model.gamelog.GameLog;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class JsonHandler {
 
@@ -35,7 +34,7 @@ public final class JsonHandler {
         System.out.println("GameLog saved to file: " + filename);
         objectMapper.writeValue(new File(filename), gameLog.getLogEntries().stream()
                 .map(LogEntryFileMapper::toDTO)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     public static List<LogEntryFileDTO> loadGameLogDTOsFromFile(String filename) throws IOException {

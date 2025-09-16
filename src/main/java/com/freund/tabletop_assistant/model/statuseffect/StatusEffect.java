@@ -516,8 +516,6 @@ public enum StatusEffect {
         return returnList;
     }
 
-
-    @JsonIgnore
     public boolean includesEffect(StatusEffect includedEffect){
         if (this.equals(includedEffect)){
             return true;

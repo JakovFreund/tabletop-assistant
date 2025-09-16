@@ -41,7 +41,7 @@ public class LogEntryReconstructorService {
     public List<LogEntry> fromDTOs(List<LogEntryFileDTO> dtoList) {
         Map<UUID, LogEntry> reconstructed = new HashMap<>();
 
-        // Pass 1: create skeletons
+        // Pass 1
         for (LogEntryFileDTO dto : dtoList) {
             LogEntry entry = firstPass(dto);
             reconstructed.put(entry.getLogEntryId(), entry);
@@ -104,8 +104,8 @@ public class LogEntryReconstructorService {
 
     private void mapDamageFields(DamageLogEntry entry, LogEntryFileDTO dto) {
         mapReceivedEffectFields(entry, dto);
-        entry.setDamageType(dto.getDamageType());
-        entry.setDamageAmount(dto.getDamageAmount());
+        entry.setDamageEntry(dto.getDamageEntry());
+        entry.setStatCalculationBreakdowns(dto.getStatCalculationBreakdowns());
     }
 
     private void mapReceivedConditionFields(ReceivedConditionLogEntry entry, LogEntryFileDTO dto) {
@@ -122,7 +122,7 @@ public class LogEntryReconstructorService {
         return castableIntance;
     }
 
-    private StatusEffectInstance mapStatusEffectInstance(StatusEffectInstanceDTO dto){
+    private StatusEffectInstance mapStatusEffectInstance(StatusEffectInstanceDTO dto) {
         StatusEffectInstance statusEffectInstance = new StatusEffectInstance();
         statusEffectInstance.setStatusEffect(dto.getStatusEffect());
         statusEffectInstance.setDuration(dto.getDuration());

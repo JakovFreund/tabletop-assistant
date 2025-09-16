@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.freund.tabletop_assistant.model.creature.Creature;
 import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
@@ -27,7 +26,6 @@ public class GameState {
 
     // possibly move theseˇˇ 3 to service
 
-    @JsonIgnore
     public Creature getCreature (UUID id){
         for (Creature creature : this.getCreatures()){
             if (creature.getCreatureId().equals(id)){
@@ -37,7 +35,6 @@ public class GameState {
         return null;
     }
 
-    @JsonIgnore
     public DeviceMapping getDeviceMapping(String deviceNickname){
         for (DeviceMapping deviceMapping : deviceMappings){
             if (deviceMapping.getDeviceNickname().equals(deviceNickname)){
@@ -47,7 +44,6 @@ public class GameState {
         return null;
     }
 
-    @JsonIgnore
     public Device getDevice(UUID deviceId){
         for (Device device : devices){
             if (device.getDeviceId().equals(deviceId)){

@@ -27,8 +27,7 @@ public class CastableInstance {
         damageInstance.setSource(source);
         Damage totalDamage = new Damage();
         for (CastableDamageComponent castableDamageComponent : getCastable().getCastableDamageComponents()){
-            String damageAmount = castableDamageComponent.getDamageComponent(getCurrentCasterLevel(), getSlotLevel()).getDamageAmount();
-            totalDamage.getComponents().put(castableDamageComponent.getDamageType(), damageAmount);
+            totalDamage.addDamage(castableDamageComponent.getDamage(currentCasterLevel, slotLevel));
         }
         damageInstance.setDamage(totalDamage);
         return damageInstance;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.freund.tabletop_assistant.model.damage.DamageComponent;
+import com.freund.tabletop_assistant.model.damage.Damage;
 import com.freund.tabletop_assistant.model.damage.DamageType;
 
 import lombok.AllArgsConstructor;
@@ -19,13 +19,15 @@ public class CastableDamageComponent {
     private Map<Integer, String> damageAtCreatureLevel = new HashMap<>();
     private Map<Integer, String> damageAtSlotLevel = new HashMap<>();
 
-    public DamageComponent getDamageComponent(int creatureLevel, int slotLevel) {
+    public Damage getDamage(int creatureLevel, int slotLevel) {
+        Damage damage = new Damage();
         if (damageAtCreatureLevel.isEmpty()) {
             if (damageAtSlotLevel.isEmpty()) {
                 return null;
             }
             if (damageAtSlotLevel.containsKey(slotLevel)) {
-                return new DamageComponent(damageType, damageAtSlotLevel.get(slotLevel));
+                damage.addDamageComponent(damageAtSlotLevel.get(slotLevel), damageType);
+                return damage;
             } else {
                 System.out.println("Castable slot level not defined.");
                 return null;
@@ -40,7 +42,8 @@ public class CastableDamageComponent {
             // use highestKey and value
             int highestKey = key.get();
             String value = damageAtCreatureLevel.get(highestKey);
-            return new DamageComponent(damageType, value);
+            damage.addDamageComponent(value, damageType);
+            return damage;
         } else {
             System.out.println("Castable level not defined.");
             return null;

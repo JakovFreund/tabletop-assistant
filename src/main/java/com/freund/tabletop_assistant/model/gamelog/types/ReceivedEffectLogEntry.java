@@ -16,8 +16,8 @@ public abstract class ReceivedEffectLogEntry extends LogEntry {
     private Creature targetCreature;
     private EffectSourceType effectSourceType;
 
-    public ReceivedEffectLogEntry(Creature targetCreature, EffectSourceType effectSourceType){
-        super(LogVisibility.SCENE);
+    public ReceivedEffectLogEntry(boolean isNested, Creature targetCreature, EffectSourceType effectSourceType){
+        super(LogVisibility.SCENE, isNested);
         this.targetCreature = targetCreature;
         this.effectSourceType = effectSourceType;
     }

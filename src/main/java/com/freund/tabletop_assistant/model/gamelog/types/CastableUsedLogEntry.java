@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class CastableUsedLogEntry extends LogEntry {
     private CastableInstance castableInstance;
 
-    public CastableUsedLogEntry (CastableInstance castableInstance){
-        super(LogVisibility.SCENE);
+    public CastableUsedLogEntry (boolean isNested, CastableInstance castableInstance){
+        super(LogVisibility.SCENE, isNested);
         this.castableInstance = castableInstance;
     }
 }
