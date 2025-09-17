@@ -9,7 +9,7 @@ public enum EquipSlot {
     AMULET,
     RING_1,
     RING_2,
-    RIGHT_HAND,
-    LEFT_HAND,
+    MAIN_HAND,
+    OFF_HAND,
     RANGED
 }

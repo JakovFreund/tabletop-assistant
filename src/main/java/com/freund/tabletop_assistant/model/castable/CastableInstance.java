@@ -23,8 +23,8 @@ public class CastableInstance {
     @JsonIgnore
     public DamageInstance getDamageInstance(){
         DamageInstance damageInstance = new DamageInstance();
-        EffectSource source = new EffectSource(EffectSourceType.CASTABLE, getCaster());
-        damageInstance.setSource(source);
+        EffectSource effectSource = new EffectSource(EffectSourceType.CASTABLE, getCaster());
+        damageInstance.setEffectSource(effectSource);
         Damage totalDamage = new Damage();
         for (CastableDamageComponent castableDamageComponent : getCastable().getCastableDamageComponents()){
             totalDamage.addDamage(castableDamageComponent.getDamage(currentCasterLevel, slotLevel));

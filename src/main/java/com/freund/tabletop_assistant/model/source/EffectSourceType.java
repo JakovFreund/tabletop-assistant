@@ -6,9 +6,5 @@ public enum EffectSourceType { // used for damageinstance, statuseffect
     FALL_DAMAGE,
     ENVIRONMENT, // fire, explosion, trap, lightning strike
     REST, // received hp, bonuses
-    STARVATION, // maybe combine into CONDITION
-    DEHYDRATION,
-    EXHAUSTION,
-    TEMPERATURE;
-    // ... ?
+    CONDITION // status efects
 }

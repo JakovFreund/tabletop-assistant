@@ -23,13 +23,14 @@ public class CastableDamageComponent {
         Damage damage = new Damage();
         if (damageAtCreatureLevel.isEmpty()) {
             if (damageAtSlotLevel.isEmpty()) {
+                System.out.println("CastableDamageComponent: damage not defined.");
                 return null;
             }
             if (damageAtSlotLevel.containsKey(slotLevel)) {
                 damage.addDamageComponent(damageAtSlotLevel.get(slotLevel), damageType);
                 return damage;
             } else {
-                System.out.println("Castable slot level not defined.");
+                System.out.println("CastableDamageComponent: Castable slot level not defined.");
                 return null;
             }
         }
@@ -45,7 +46,7 @@ public class CastableDamageComponent {
             damage.addDamageComponent(value, damageType);
             return damage;
         } else {
-            System.out.println("Castable level not defined.");
+            System.out.println("CastableDamageComponent: Castable creature level not defined.");
             return null;
         }
     }

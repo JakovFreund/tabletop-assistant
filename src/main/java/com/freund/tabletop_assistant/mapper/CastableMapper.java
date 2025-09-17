@@ -26,7 +26,7 @@ public class CastableMapper {
         dto.setCasterId(castableInstance.getCaster().getCreatureId());
         dto.setCasterName(castableInstance.getCaster().getName());
         dto.setSlotLevel(castableInstance.getSlotLevel());
-        dto.setDamageInstance(castableInstance.getDamageInstance());
+        dto.setDamageInstance(DamageInstanceMapper.toDTO(castableInstance.getDamageInstance()));
         return dto;
     }
 }

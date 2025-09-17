@@ -1,6 +1,6 @@
 package com.freund.tabletop_assistant.model.scene;
 
-public enum SceneLighting {
+public enum SceneLightLevel {
     BRIGHT,
     DIM,
     DARKNESS

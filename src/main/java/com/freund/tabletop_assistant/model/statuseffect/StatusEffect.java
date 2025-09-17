@@ -423,6 +423,10 @@ public enum StatusEffect {
     // Concentration here or just on creature ?
     // Ethereal? - can't be Shoved, Thrown, or used as an Improvised Melee Weapon
 
+    // STARVATION
+    // DEHYDRATION
+    // TEMPERATURE
+
     ;
     // Features (proficiencies, racial traits, class traits, passives)
     // Feats // Character.addFeat(FEAT.blabla); Character.addBuff(Buff.STR_IMPROVEMENT, Duration.UNLIMITED) - increases STR by 1

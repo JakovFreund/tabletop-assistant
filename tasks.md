@@ -1,17 +1,15 @@
 
 ### TASKS
 
-- convert frontend mock logs to actual
-- try making requests to add to log from frontend
-
-- need to fix frontend fetching to be on change instead of every 2 seconds
 - move Devices from GameState and GameStateDTO
 - save devices to a seperate file
 - seperate devices and gamestate on frontend redux
+- add redux.device.deviceId (not just name and gm) - needed for ping castable
 - is device stuff in my redux store redundant? for example state.device, state.gamestate.devices, state.gamestate.deviceMappings, state.connectedDevices ? should this all be in state.devices ?
+- also random component state stuff unrelated to gamestate is in redux.gamestate when it should be a new category
 
 ##### COMBAT LOG
-- steps to add new LogEntry: create class, LogEntryType, LogEntryFileMapper, LogEntryFrontedMapper, LogEntryReconstructor
+- steps to add new LogEntry class: create class, LogEntryType, LogEntryFileMapper, LogEntryFrontedMapper, LogEntryReconstructor
 - a LogEntry frontend component needs to be dropdown-like and open a description (ex. Spell description)
 - frontend also needs to visually display the TurnResource getting used
 - "multiple targets use different roll" checkbox during target selection to differentiate aoe and eldritch blast

@@ -11,7 +11,7 @@ import com.freund.tabletop_assistant.model.gamelog.LogVisibility;
 import com.freund.tabletop_assistant.model.gamelog.statcalculation.StatCalculationBreakdown;
 import com.freund.tabletop_assistant.model.scene.SceneCover;
 import com.freund.tabletop_assistant.model.scene.SceneLightSource;
-import com.freund.tabletop_assistant.model.scene.SceneLighting;
+import com.freund.tabletop_assistant.model.scene.SceneLightLevel;
 import com.freund.tabletop_assistant.model.scene.TimeOfDay;
 import com.freund.tabletop_assistant.model.scene.Weather;
 import com.freund.tabletop_assistant.model.source.EffectSourceType;
@@ -47,5 +47,5 @@ public class LogEntryFileDTO {
     private TimeOfDay timeOfDay;
     private SceneCover sceneCover;
     private SceneLightSource sceneLightSource;
-    private SceneLighting sceneLighting;
+    private SceneLightLevel sceneLighting;
 }

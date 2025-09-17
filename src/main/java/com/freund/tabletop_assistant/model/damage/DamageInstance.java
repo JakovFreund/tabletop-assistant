@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DamageInstance {
     private Damage damage;
-    private EffectSource source;
+    private EffectSource effectSource;
 }
