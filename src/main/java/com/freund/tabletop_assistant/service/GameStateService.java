@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.freund.tabletop_assistant.model.GameState;
 import com.freund.tabletop_assistant.model.creature.Creature;
-import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
 import com.freund.tabletop_assistant.model.item.Item;
 import com.freund.tabletop_assistant.util.JsonHandler;
@@ -37,7 +36,6 @@ public class GameStateService {
             GameState loaded = JsonHandler.loadGameStateFromFile(FILE_PATH);
             gameState.setCreatures(loaded.getCreatures());
             gameState.setDeviceMappings(loaded.getDeviceMappings());
-            gameState.setDevices(loaded.getDevices());
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,10 +51,6 @@ public class GameStateService {
         return gameState.getCreature(id);
     }
 
-    public Device getDevice(UUID id){
-        return gameState.getDevice(id);
-    }
-
     public void addCreature(Creature creature){
         gameState.getCreatures().add(creature);
     }
@@ -70,15 +64,6 @@ public class GameStateService {
             }
         }
         return null;
-    }
-
-    public boolean saveDevice(UUID deviceId, String deviceNickname){
-        if(gameState.getDevice(deviceId)==null){
-            gameState.getDevices().add(new Device(deviceId, deviceNickname));
-        } else {
-            gameState.getDevice(deviceId).setDeviceNickname(deviceNickname);
-        }
-        return true;
     }
 
     public boolean saveDeviceMapping(String deviceNickname, UUID creatureId, boolean dungeonMaster){

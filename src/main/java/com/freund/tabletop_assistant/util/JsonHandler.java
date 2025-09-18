@@ -7,10 +7,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.freund.tabletop_assistant.dto.LogEntryFileDTO;
 import com.freund.tabletop_assistant.mapper.LogEntryFileMapper;
 import com.freund.tabletop_assistant.model.GameState;
+import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.gamelog.GameLog;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class JsonHandler {
@@ -45,4 +47,17 @@ public final class JsonHandler {
                 });
     }
 
+    public static void saveDevicesToFile(List<Device> devices, String filename) throws IOException {
+        objectMapper.writeValue(new File(filename), devices);
+        System.out.println("Devices saved to file: " + filename);
+    }
+
+    public static List<Device> loadDevicesFromFile(String filename) throws IOException {
+        File file = new File(filename);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+        System.out.println("Devices loaded from file: " + filename);
+        return objectMapper.readValue(file, new TypeReference<List<Device>>() {});
+    }
 }

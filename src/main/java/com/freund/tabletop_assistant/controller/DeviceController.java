@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.freund.tabletop_assistant.dto.ConnectDeviceRequest;
 import com.freund.tabletop_assistant.dto.SaveDeviceMappingRequest;
 import com.freund.tabletop_assistant.dto.SaveDeviceRequest;
+import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.service.DeviceService;
+
 
 @RestController
 @RequestMapping("/devices")
@@ -31,6 +33,11 @@ public class DeviceController {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Device saving failed.");
         }
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Device>> getDevices() {
+        return ResponseEntity.status(HttpStatus.OK).body(deviceService.getDeviceRegistry().getDevices());
     }
 
     @GetMapping("/connected")

@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import com.freund.tabletop_assistant.model.creature.Creature;
-import com.freund.tabletop_assistant.model.device.Device;
 import com.freund.tabletop_assistant.model.device.DeviceMapping;
 
 
@@ -20,7 +19,6 @@ public class GameState {
     // fantasy datetime
     private List<Creature> creatures = new ArrayList<>();
     private List<DeviceMapping> deviceMappings = new ArrayList<>();
-    private List<Device> devices = new ArrayList<>();
     // scene
     // item list
 
@@ -39,15 +37,6 @@ public class GameState {
         for (DeviceMapping deviceMapping : deviceMappings){
             if (deviceMapping.getDeviceNickname().equals(deviceNickname)){
                 return deviceMapping;
-            }
-        }
-        return null;
-    }
-
-    public Device getDevice(UUID deviceId){
-        for (Device device : devices){
-            if (device.getDeviceId().equals(deviceId)){
-                return device;
             }
         }
         return null;

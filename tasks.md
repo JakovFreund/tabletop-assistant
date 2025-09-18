@@ -1,12 +1,6 @@
 
 ### TASKS
 
-- move Devices from GameState and GameStateDTO
-- save devices to a seperate file
-- seperate devices and gamestate on frontend redux
-- add redux.device.deviceId (not just name and gm) - needed for ping castable
-- is device stuff in my redux store redundant? for example state.device, state.gamestate.devices, state.gamestate.deviceMappings, state.connectedDevices ? should this all be in state.devices ?
-- also random component state stuff unrelated to gamestate is in redux.gamestate when it should be a new category
 
 ##### COMBAT LOG
 - steps to add new LogEntry class: create class, LogEntryType, LogEntryFileMapper, LogEntryFrontedMapper, LogEntryReconstructor

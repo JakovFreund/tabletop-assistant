@@ -1,6 +1,7 @@
 package com.freund.tabletop_assistant.model.device;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ConnectedDevices {
-    private HashSet<UUID> currentlyConnectedDeviceIds = new HashSet<UUID>();
+    private Set<UUID> currentlyConnectedDeviceIds = new HashSet<UUID>();
 
     public void addDevice(UUID deviceId){
         this.currentlyConnectedDeviceIds.add(deviceId);

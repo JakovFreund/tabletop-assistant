@@ -115,8 +115,8 @@ public class LogEntryReconstructorService {
 
     private CastableInstance mapCastableInstance(CastableInstanceDTO dto) {
         CastableInstance castableIntance = new CastableInstance();
-        castableIntance.setCastable(castableService.getCastable(dto.getCastableName()));
         castableIntance.setCaster(creatureService.getCreature(dto.getCasterId()));
+        castableIntance.setCastable(castableService.getCastable(dto.getCastableName()));
         castableIntance.setCurrentCasterLevel(dto.getCurrentCasterLevel());
         castableIntance.setSlotLevel(dto.getSlotLevel());
         return castableIntance;

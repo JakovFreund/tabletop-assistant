@@ -11,8 +11,6 @@ public class GameStateMapper {
         dto.setCreatures(gameState.getCreatures().stream().map(CreatureMapper::toDTO)
                 .collect(Collectors.toList()));
         dto.setDeviceMappings(gameState.getDeviceMappings());
-        dto.setDevices(gameState.getDevices());
-
         return dto;
     }
 }
