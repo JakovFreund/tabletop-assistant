@@ -38,9 +38,9 @@ public class Creature {
     private Castable concentratingOn;
     // Armour/Weapon Proficiencies ? Derived from class/race ?
     private Map<Ability, Integer> abilityScores = new HashMap<>();
-    private Map<Skill, Boolean> skillProficiencies = new HashMap<>(); //ˇˇ these two could be Lists with only true elements inside but whatever
+    private Map<Skill, Boolean> skillProficiencies = new HashMap<>(); //ˇˇ TODO change these two to Lists with only true elements inside
     private Map<Ability, Boolean> savingThrowProficiencies = new HashMap<>();
-    private Map<GameClass, Integer> classes = new HashMap<>();
+    private Map<GameClass, Integer> classes = new HashMap<>(); // TODO change to list because i need to know first class for proficiencies and whatnot
     private List<Subclass> subclasses = new ArrayList<>();
     private List<StatusEffectInstance> statusEffectInstances = new ArrayList<>();
     private List<TurnResource> turnResources = new ArrayList<>();
@@ -61,6 +61,9 @@ public class Creature {
 
     // ### SPECIAL
 
+    
+    // never works like this (always Damage object)
+    // move this to creatureService instead
     public void damage(int damageAmount) {
         if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > 0) {
             if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > damageAmount) {

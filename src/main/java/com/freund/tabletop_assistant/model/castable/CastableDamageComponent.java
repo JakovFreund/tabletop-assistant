@@ -2,10 +2,10 @@ package com.freund.tabletop_assistant.model.castable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import com.freund.tabletop_assistant.model.damage.Damage;
 import com.freund.tabletop_assistant.model.damage.DamageType;
+import com.freund.tabletop_assistant.util.TabletopAssistantUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,14 +35,9 @@ public class CastableDamageComponent {
             }
         }
         // find damageAtCreatureLevel's max key < creatureLevel
-        Optional<Integer> key = damageAtCreatureLevel.keySet().stream()
-                .filter(k -> k < creatureLevel)
-                .max(Integer::compareTo);
-
-        if (key.isPresent()) {
-            // use highestKey and value
-            int highestKey = key.get();
-            String value = damageAtCreatureLevel.get(highestKey);
+        Integer key = TabletopAssistantUtil.findMaxNumberSmallerOrEqualThan(damageAtCreatureLevel.keySet(), creatureLevel);
+        if (key!=null) {
+            String value = damageAtCreatureLevel.get(key);
             damage.addDamageComponent(value, damageType);
             return damage;
         } else {

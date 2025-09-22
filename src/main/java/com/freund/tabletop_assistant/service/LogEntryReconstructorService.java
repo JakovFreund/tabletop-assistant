@@ -9,7 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.freund.tabletop_assistant.dto.CastableInstanceDTO;
+import com.freund.tabletop_assistant.dto.CastableInstanceFileDTO;
 import com.freund.tabletop_assistant.dto.EffectSourceDTO;
 import com.freund.tabletop_assistant.dto.LogEntryFileDTO;
 import com.freund.tabletop_assistant.dto.StatusEffectInstanceDTO;
@@ -113,10 +113,10 @@ public class LogEntryReconstructorService {
         entry.setReceivedStatusEffectInstance(mapStatusEffectInstance(dto.getReceivedStatusEffectInstance()));
     }
 
-    private CastableInstance mapCastableInstance(CastableInstanceDTO dto) {
+    private CastableInstance mapCastableInstance(CastableInstanceFileDTO dto) {
         CastableInstance castableIntance = new CastableInstance();
         castableIntance.setCaster(creatureService.getCreature(dto.getCasterId()));
-        castableIntance.setCastable(castableService.getCastable(dto.getCastableName()));
+        castableIntance.setCastable(castableService.getCastable(dto.getCastableType()));
         castableIntance.setCurrentCasterLevel(dto.getCurrentCasterLevel());
         castableIntance.setSlotLevel(dto.getSlotLevel());
         return castableIntance;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.freund.tabletop_assistant.util.DiceNotation;
-import com.freund.tabletop_assistant.util.StringUtil;
+import com.freund.tabletop_assistant.util.TabletopAssistantUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -61,7 +61,7 @@ public class Damage {
             }
         }
         if (returnString != "Damage{") {
-            returnString = StringUtil.removeLastChar(returnString);
+            returnString = TabletopAssistantUtil.removeLastChar(returnString);
         }
         returnString += "}";
         return returnString;

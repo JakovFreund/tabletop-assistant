@@ -85,14 +85,14 @@ public class LogEntryFrontendMapper {
         LogEntryFrontendDTO dto = new LogEntryFrontendDTO();
         mapBaseFields(dto, logEntry);
         dto.setDeviceNickname(logEntry.getDevice().getDeviceNickname());
-        dto.setCastableInstance(CastableMapper.toFrontendDTO(logEntry.getCastableInstance()));
+        dto.setCastableInstance(CastableInstanceMapper.toFrontendDTO(logEntry.getCastableInstance()));
         return dto;
     }
 
     public static LogEntryFrontendDTO toDTO(CastableUsedLogEntry logEntry) {
         LogEntryFrontendDTO dto = new LogEntryFrontendDTO();
         mapBaseFields(dto, logEntry);
-        dto.setCastableInstance(CastableMapper.toFrontendDTO(logEntry.getCastableInstance()));
+        dto.setCastableInstance(CastableInstanceMapper.toFrontendDTO(logEntry.getCastableInstance()));
         return dto;
     }
 

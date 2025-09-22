@@ -39,7 +39,7 @@ public class GameLogService {
 
     public void addCastablePingedLogEntry(PingCastableRequest request){
         CastableInstance castableInstance = new CastableInstance(
-            castableService.getCastable(request.getCastableName()),
+            castableService.getCastable(request.getCastableType()),
             creatureService.getCreature(request.getCasterId()),
             creatureService.getCreature(request.getCasterId()).getLevel(),
             request.getSlotLevel()

@@ -35,7 +35,7 @@ public class CreatureController {
 
     @PutMapping("/{id}/hp")
     public ResponseEntity<String> updateCreatureHP(@PathVariable UUID id, @RequestBody HPUpdateRequest request) {
-        if (creatureService.updateCreatureHP(id, request.getHp())) {
+        if (creatureService.setCreatureHP(id, request.getHp())) {
             return ResponseEntity.ok("HP updated successfully");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Creature not found");

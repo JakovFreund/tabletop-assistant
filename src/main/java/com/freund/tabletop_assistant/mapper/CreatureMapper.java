@@ -17,7 +17,7 @@ public class CreatureMapper {
         if (creature.getConcentratingOn() == null) {
             dto.setConcentratingOn("");
         } else {
-            dto.setConcentratingOn(creature.getConcentratingOn().getName());
+            dto.setConcentratingOn(creature.getConcentratingOn().getCastableType().CASTABLE_NAME);
         }
         dto.setBackground(creature.getBackground());
         dto.setAlignment(creature.getAlignment());

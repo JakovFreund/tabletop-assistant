@@ -1,6 +1,34 @@
-
 ### TASKS
-
+- rename StatusEffect (and all mentions, variable names) to Condition
+- define each class levelup
+    - fill in bg3 classes to docx
+    - compare bg3 and dnd subclasses
+    - fix spelllists in docx (probably different from dnd)
+- Default Actions
+    - Main Hand Attack
+    - Off Hand Attack(bonus)
+    - Ranged Attack
+    - grab
+    - shove
+    - throw
+    - dash
+    - disengage
+    - dodge
+    - help
+    - ready action
+    - drink potion (bonus)
+    - opportunity attack (reaction)
+    - jump (movement)
+    - fly (movement)
+    - drop prone (movement)
+    - stand up (movement)
+- Class Actions
+- Weapon Actions
+- Race Actions ?
+- backend: get all Castables that a creature can take
+- instead of opening castable list in combat, display it and all other info in a seperate creature tab
+- frontend ping actual castables and they deal damage (not setCreatureHP, but instead send request from logEntryId)
+- heal class, healInstance?, castableHealLogEntry
 
 ##### COMBAT LOG
 - steps to add new LogEntry class: create class, LogEntryType, LogEntryFileMapper, LogEntryFrontedMapper, LogEntryReconstructor
@@ -8,11 +36,13 @@
 - frontend also needs to visually display the TurnResource getting used
 - "multiple targets use different roll" checkbox during target selection to differentiate aoe and eldritch blast
 - roll modal reminds and highlights advantage/disadvantage (don't input twice)
+- roll modal reminds all currently castable reactions (hesitate with input, some reactions change roll amount)
 - need to implement critical miss (attack roll 1) and critical hit (attack roll 20) - cannoot miss always hits with double damage
 - ?? CastableDamage gets turned into Damage between ping and input
 - the castable always gets resolved immediately, meaning CastableUsedLogEntry and ReceivedEffectFromCastableLogEntry have to come together.
 - implement loading a limited number of LogEntries from log file
 - add a CastableHeal object aswell - because of source and drag n dropping
+- pressing CastableUsedLogEntry on DM sandbox screen copies all Damage and StatusEffect objects there
 - a the bottom of the screen is a log (player pings, DM pings, DM actions/changes all go there), has ability to filter only DM actions
 - add a clickable damage object in log that auto copies the damage into calculator (or just queues text pointer on appropriate damage types)
 - when a player pings a spell, the log prints out all the info and buttons for the DM which i can use to autosubtract turnresources, autofocus damage textboxes (by drag n droping damage on the target creature and just entering appropriate amounts for each type, also autofill in if not dice notation) autoapply statuseffect by drag n drop (with info about the target type [self, enemy...] for clearer gameflow)
@@ -70,13 +100,17 @@
     - Short Rest
     - Long Rest
 
-1. player pings castable
-2. i click castable and select enemies
+1. player pings castable (creating a castableInstance)
+2. i click castableInstance from log and select enemies
 3. player physically rolls dice
 4. i fill in result
 5. (if saving throw needed individual enemies roll saving throws)
-6. enemies get damaged
-7. log entry appears with all info
+6. enemies get hit
+    - loop through all enemies, damages and statusEffects and ouput logentries one by one for each
+    - creatureService.hitCreatureWithCastableInstance(creature, castableInstance) -> creatureService.damageCreature(creature, damageInstance(castableInstance))
+    - creatureService.addStatusEffectInstance(creature, statusEffectInstance(castableInstance))
+    ^^ #todo i should name these functions better
+7. log entries
 
 Sword: 2d8 Slashing + 2d6 Fire + BURNING
 Goblin1 has fire resistance
@@ -144,8 +178,9 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - finish races & subraces enums
 - race passives ?
 - weight and encumbered
-- add ClassActions
+- add ClassActions from Classes.docx
 - add default actions (Grab, Shove, Throw, Help, Dash...) - DefaultActions.java ?
+- you can extend Spell for a special case/functionality like with DefaultAction
 - implement existing ItemEffects
 - go through MagicItems descriptions and add ItemEffects and StatusEffects
 - WeaponProperties functionality and calculations (different scaling/damage)
@@ -175,6 +210,7 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - Go through each class, subclass, race and subrace and imagine trying to level them up
 - seperate remaining tasks into general, DM UI and PlayerUI
 - test if spell duration is properly implemented - duration needs to be reduced by 1 on end of turn or start of turn? (ex. True Strike needs to end on next turn)
+- prepare action
 - go through ALL comments on backend
 - time controls (play, pause, speed, increment a specific amount in either direction, undo(gamestate rollback))
 - manually check SpellData if spell upcast booleans are accurate
@@ -201,6 +237,7 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - geographical areas aoe buffs and debuffs yugioh field spell style
 - add a hungry status effect that gives a small debuff
 - the DM can edit items, statuseffects, characters stats, and everything you can think of (need to add interfaces/menus for all that)
+- for dm screen make a "DmObject" class that gets extended by StatusEffectInstanceDmObject, CreatureDmObject... This way I can bundle different object types together in "folders"
 - DM can search all ItemData, SpellData and StatusEffects and add them to his inventory where they can be edited (items get random id on clone - itemIDs in ItemData don't matter)
 - use Jackson to save ItemData and SpellData to jsons and load them on startup (add "outdated" comment to .py scripts)
 - advanced character sheet (when you click on a stat it shows you how it got that nunber - formula and subnumbers)
@@ -210,11 +247,9 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - creature.knownStatusEffects (StatusEffect), knownSubraces (Subrace), knownItems (UUID for Items with item.needsIdentify: true)
 
 
-#### STATS/PROFILE TAB
+#### STATS/PROFILE + INVENTORY TAB
 - add Skills
 - on display Conditions, sort them by duration ascending
-
-#### INVENTORY TAB
 - no custom item sorting... (only favorite to show on top, otherwise autosort)
 - item images sources:
     - have both the ItemCategory (and WeaponType) default icon and optional unique icon
@@ -234,6 +269,8 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 #### COMBAT/SCENE TAB
 - need a SceneObject class (Creature, Item and Object (tree, rock...) inherit from it) - has size, id
 - DM UI to create a Damage object with all properties
+- need to implement damage not only through gameLog, but also DM custom Damage objects, and also just +- health manipulation
+- players can favorite castables to be on top of the list (will need to save to gamestate somehow)
 - player can see all the creatures on scene, actions he can take (with unavailable ones greyed out), full spellbook
 - player can in combat see a list of Default Actions, Spells, Weapon Actions, Class Actions to choose from
 - need to be able to display/preview summon's abilities before summoning them
@@ -244,8 +281,11 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - player UI when selecting an attack, show percentage to hit AC on each target like in bg3 (how do i do this if players don't input attacks and select targets?)
 - players see all included status effects when they view a creature
 - automatic initiative sort
+- castable hightlighting based on available turn resources (can he take that action) and automatic sorting of available castables to top
 - it says who's turn it is
-- buttons for scene inside/outside, change weather, 
+- buttons for scene inside/outside, change weather...
+- easy way to add THREATENED condition (maybe a checkbox or smth)
+- highlight creature outline in red (or red shadow backlight) when Threatened
 
 #### MAP TAB
 - fog of war + AC style vantage points for map discovery (or more like elden ring map location that discovers an entire area but instead its a vantage point) - make it distinct on the map

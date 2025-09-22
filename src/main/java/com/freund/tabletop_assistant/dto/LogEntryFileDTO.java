@@ -36,7 +36,7 @@ public class LogEntryFileDTO {
     private UUID deviceId;
     private DamageEntry damageEntry;
     private EffectSourceType effectSourceType;
-    private CastableInstanceDTO castableInstance;
+    private CastableInstanceFileDTO castableInstance;
     private StatusEffectInstanceDTO lostStatusEffectInstance;
     private StatusEffectInstanceDTO receivedStatusEffectInstance;
 

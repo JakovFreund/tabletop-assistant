@@ -82,7 +82,8 @@ public class LogEntryFileMapper {
         dto.setText(
                 logEntry.getTargetCreature().getName() + " was hit for " + logEntry.getDamageEntry().getDamageAmount()
                         + " " + logEntry.getDamageEntry().getDamageType() + " damage by "
-                        + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getName());
+                        + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable()
+                                .getCastableType().CASTABLE_NAME);
         return dto;
     }
 
@@ -90,18 +91,18 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapBaseFields(dto, logEntry);
         dto.setDeviceId(logEntry.getDevice().getDeviceId());
-        dto.setCastableInstance(CastableMapper.toDTO(logEntry.getCastableInstance()));
+        dto.setCastableInstance(CastableInstanceMapper.toFileDTO(logEntry.getCastableInstance()));
         dto.setText(logEntry.getDevice().getDeviceNickname() + " pinged "
-                + logEntry.getCastableInstance().getCastable().getName());
+                + logEntry.getCastableInstance().getCastable().getCastableType().CASTABLE_NAME);
         return dto;
     }
 
     public static LogEntryFileDTO toDTO(CastableUsedLogEntry logEntry) {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapBaseFields(dto, logEntry);
-        dto.setCastableInstance(CastableMapper.toDTO(logEntry.getCastableInstance()));
+        dto.setCastableInstance(CastableInstanceMapper.toFileDTO(logEntry.getCastableInstance()));
         dto.setText(logEntry.getCastableInstance().getCaster().getName() + " used "
-                + logEntry.getCastableInstance().getCastable().getName());
+                + logEntry.getCastableInstance().getCastable().getCastableType().CASTABLE_NAME);
         return dto;
     }
 
@@ -131,7 +132,8 @@ public class LogEntryFileMapper {
         dto.setCastableUsedLogEntryId(logEntry.getCastableUsedLogEntry().getLogEntryId());
         dto.setText(logEntry.getTargetCreature().getName() + " received condition "
                 + logEntry.getReceivedStatusEffectInstance().toString() + " from "
-                + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getName() + " - "
+                + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getCastableType().CASTABLE_NAME
+                + " - "
                 + logEntry.getCastableUsedLogEntry().getCastableInstance().getCaster().getName());
         return dto;
     }

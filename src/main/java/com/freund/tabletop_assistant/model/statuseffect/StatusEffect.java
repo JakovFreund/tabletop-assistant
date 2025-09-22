@@ -75,6 +75,7 @@ public enum StatusEffect {
     // ---
 
     ACID("Armour Class reduced by 2.", List.of()),
+    ACID_ARROW("Affected entity takes 2d4 Acid damage at the end of their turn.", List.of()),
     AID("HP maximum increased by 5 points.", List.of()),
     ANIMALISTIC_VITALITY("Affected entity regains 1d8 HP every round when below 60 HP. Gains an additional 12 ft of Movement Speed.", List.of()),
     ARCANE_ACUITY("Affected entity gains a +1 bonus to its spell Attack Rolls and spell save DC for each remaining turn. Reduce the duration by 2 each time the entity takes damage.", List.of()),
@@ -222,6 +223,7 @@ public enum StatusEffect {
     FROZEN("Incapacitated. Vulnerable to Bludgeoning, Thunder, and Force damage. Resistant to Fire damage. Immune to Burning. If it is dealt Bludgeoning, Thunder, or Force damage, the ice shatters, ending the condition.", List.of(INCAPACITATED, BLUDGEONING_VULNERABILITY, THUNDER_VULNERABILITY, FORCE_VULNERABILITY, FIRE_RESISTANCE)),
     GAPING_WOUNDS("Attacks against this creature deal an additional 2 Piercing damage. Removed by healing.", List.of()),
     GASEOUS_FORM("Transformed into a cloud of mist. Resistant to all damage. Advantage on Constitution, Dexterity, and Strength Saving Throws. Becomes Tiny in size. Can't attack, cast spells, or speak. The affected entity's Strength and Dexterity scores are set to 10 while in this form.", List.of(BLUDGEONING_RESISTANCE, PIERCING_RESISTANCE, SLASHING_RESISTANCE, COLD_RESISTANCE, FIRE_RESISTANCE, LIGHTNING_RESISTANCE, THUNDER_RESISTANCE, ACID_RESISTANCE, POISON_RESISTANCE, RADIANT_RESISTANCE, NECROTIC_RESISTANCE, FORCE_RESISTANCE, PSYCHIC_RESISTANCE)),
+    GIANTS_RAGE("In Rage. Increased size.",List.of(RAGE, ENLARGED)),
     GOADED("Must attack the goading creature, if possible. Disadvantage against targets other than the spellcaster.", List.of()),
     GRAPPLED("Can't move. Condition ends if the grappler is Incapacitated or an effect removes the grappled creature from the reach of the grappler, such as when a creature is hurled away by the thunderwave spell.", List.of(IMMOBILE)),
     GREAT_WEAPON_MASTER("If affected entity kills a target or lands a Critical Hit with a melee weapon, it can use a Bonus Action to make another melee weapon attack.", List.of()),
@@ -272,7 +274,6 @@ public enum StatusEffect {
     MAGICAL_AMBUSH("Affected entity is hidden. Creatures have Disadvantage on Saving Throws against its spells.", List.of()),
     MAIMED("Can't move. Disadvantage on Dexterity Saving Throws. Removed by healing.", List.of(IMMOBILE)),
     MARTIAL_ARTS_BONUS_UNARMED_STRIKE("After making an attack with a Monk Weapon or while unarmed, the affected entity can make another unarmed attack as a Bonus Action.", List.of()),
-    MELFS_ACID_ARROW("Affected entity takes 2d4 Acid damage at the end of their turn.", List.of()),
     MOBILE("Movement Speed increased by 10ft and doesn't provoke melee Opportunity Attacks. Isn't slowed down by Difficult Terrain while Dashing.", List.of()),
     MULTIATTACK_DEFENCE("Affected entity has a -4 penalty to Attack Rolls against the ranger it just attacked.", List.of()),
     NATURES_WRATH("Can't move. Disadvantage on Attack Rolls and Dexterity Saving Throws. Attack Rolls against the affected entity have Advantage.", List.of(IMMOBILE, UNFOCUSED, VULNERABLE)), // TODO remove and change spell description to "Restrain"
@@ -370,6 +371,7 @@ public enum StatusEffect {
     TEMPESTOUS_MAGIC_FLY("Can Fly as Bonus Action", List.of()),
     THAUMATURGY("Advantage on Intimidation and Performance Checks", List.of()),
     THIRD_EYE_DARKVISION("Can see in the dark up to the range of 80ft.", List.of()),
+    THREATENED("An enemy is close. Disadvantage on ranged Attack Rolls. Moving will provoke opportunity attack.",List.of()),
     TIDES_OF_CHAOS("Increased chance of Wild Magic surge (DC 11). Condition ends after rolling a Wild Magic check.", List.of()),
     TRANSMUTATION_STONE_CONSTITUTION("Proficiency in Constitution Saving Throws", List.of()),
     TRANSMUTATION_STONE_DEPLETED_MAGIC("Recently created a Transmuter's Stone. Needs to cast a Transmutation spell of Level 1 or higher or take a Long Rest before it can create another one.", List.of()),
@@ -379,6 +381,7 @@ public enum StatusEffect {
     UMBRAL_SHROULD("Invisible if obscured in shadows.", List.of()),
     UNDEAD_FORTITUDE("When reduced to 0 hit points, regain 1 hit point instead, unless hit with a Critical Hit or Radiant damage.", List.of()),
     VAMPIRIC_TOUCH("Can recast Vampiric Touch without expending a Spell Slot.", List.of()),
+    VAPRAKS_GREED("Carrying capacity increased by 25%", List.of()),
     VISCIOUS_MOCKERY("Disadvantage on next Attack Roll.", List.of(UNFOCUSED)),
     VOW_OF_ENMITY("Spellcaster has Advantage on Attack Rolls against the affected entity.", List.of()),
     WARDEN_OF_VITALITY("Can use Restore Vitality to heal itself or nearby allies.", List.of()),

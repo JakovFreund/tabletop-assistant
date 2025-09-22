@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ClassAction extends Castable {
-    public ClassAction(String name, boolean ritual, boolean concentration, Ability savingThrow,
+    public ClassAction(CastableType castableType, boolean ritual, boolean concentration, Ability savingThrow,
             EffectTarget effectTarget, Duration duration, Map<TurnResourceType, Integer> costs,
             List<CastableDamageComponent> castableDamageComponents, Map<Integer, String> healAtSlotLevel,
             List<StatusEffect> statusEffects, List<String> description) {
-        super(name, ritual, concentration, savingThrow, effectTarget, duration, costs, castableDamageComponents,
+        super(castableType, ritual, concentration, savingThrow, effectTarget, duration, costs, castableDamageComponents,
                 healAtSlotLevel, statusEffects, description);
     }
 }
