@@ -11,14 +11,14 @@ import com.freund.tabletop_assistant.model.creature.gameclass.Subclass;
 import com.freund.tabletop_assistant.model.ability.Ability;
 import com.freund.tabletop_assistant.model.ability.Skill;
 import com.freund.tabletop_assistant.model.castable.Castable;
+import com.freund.tabletop_assistant.model.condition.Condition;
+import com.freund.tabletop_assistant.model.condition.ConditionInstance;
 import com.freund.tabletop_assistant.model.creature.race.Race;
 import com.freund.tabletop_assistant.model.creature.race.Subrace;
 import com.freund.tabletop_assistant.model.duration.DurationType;
 import com.freund.tabletop_assistant.model.item.Item;
 import com.freund.tabletop_assistant.model.source.EffectSource;
 import com.freund.tabletop_assistant.model.source.EffectSourceType;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffect;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffectInstance;
 import com.freund.tabletop_assistant.model.turnresource.RefillRate;
 import com.freund.tabletop_assistant.model.turnresource.TurnResource;
 import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
@@ -42,7 +42,7 @@ public class Creature {
     private Map<Ability, Boolean> savingThrowProficiencies = new HashMap<>();
     private Map<GameClass, Integer> classes = new HashMap<>(); // TODO change to list because i need to know first class for proficiencies and whatnot
     private List<Subclass> subclasses = new ArrayList<>();
-    private List<StatusEffectInstance> statusEffectInstances = new ArrayList<>();
+    private List<ConditionInstance> conditionInstances = new ArrayList<>();
     private List<TurnResource> turnResources = new ArrayList<>();
     private List<Item> inventory = new ArrayList<>();
     private UUID equiped[] = new UUID[EquipSlot.values().length]; // stores ids of equiped items from inventory
@@ -69,7 +69,7 @@ public class Creature {
             if (getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() > damageAmount) {
                 getTurnResource(TurnResourceType.TEMPORARY_HP)
                         .setAmount(getTurnResource(TurnResourceType.TEMPORARY_HP).getAmount() - damageAmount);
-                if (this.hasStatusEffect(StatusEffect.ARMOUR_OF_AGATHYS)) {
+                if (this.hasCondition(Condition.ARMOUR_OF_AGATHYS)) {
                     // TODO armour of agahtys proc
                 }
                 // TODO other cases
@@ -102,20 +102,20 @@ public class Creature {
             turnResource.setAmount(turnResource.getMaxAmount());
         }
 
-        // TODO proc StatusEffects, saving throws or whatever, if tree
+        // TODO proc Conditions, saving throws or whatever, if tree
 
         // ˇˇremoves 1 duration from effects, check if works
-        ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
-            if (statusEffectInstance.getDuration().getDurationType() == DurationType.TURNS) {
-                statusEffectInstance.getDuration()
-                        .setTurnsDuration(statusEffectInstance.getDuration().getTurnsDuration() - 1);
-                if (statusEffectInstance.getDuration().getTurnsDuration() == 0) {
-                    toRemove.add(statusEffectInstance);
+        ArrayList<ConditionInstance> toRemove = new ArrayList<ConditionInstance>();
+        for (ConditionInstance conditionInstance : getConditionInstances()) {
+            if (conditionInstance.getDuration().getDurationType() == DurationType.TURNS) {
+                conditionInstance.getDuration()
+                        .setTurnsDuration(conditionInstance.getDuration().getTurnsDuration() - 1);
+                if (conditionInstance.getDuration().getTurnsDuration() == 0) {
+                    toRemove.add(conditionInstance);
                 }
             }
         }
-        statusEffectInstances.removeAll(toRemove);
+        conditionInstances.removeAll(toRemove);
     }
 
     public void endTurn() {
@@ -131,24 +131,24 @@ public class Creature {
 
     public void shortRest() {
         // TODO HP, SPELLSLOTS...
-        ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
-            if (statusEffectInstance.getDuration().getDurationType() == DurationType.SHORT_REST) {
-                toRemove.add(statusEffectInstance);
+        ArrayList<ConditionInstance> toRemove = new ArrayList<ConditionInstance>();
+        for (ConditionInstance conditionInstance : getConditionInstances()) {
+            if (conditionInstance.getDuration().getDurationType() == DurationType.SHORT_REST) {
+                toRemove.add(conditionInstance);
             }
         }
-        statusEffectInstances.removeAll(toRemove);
+        conditionInstances.removeAll(toRemove);
     }
 
     public void longRest() {
         // TODO HP, SPELLSLOTS...
-        ArrayList<StatusEffectInstance> toRemove = new ArrayList<StatusEffectInstance>();
-        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
-            if (statusEffectInstance.getDuration().getDurationType() == DurationType.LONG_REST) { //probably need to refresh all, not just LONG_REST
-                toRemove.add(statusEffectInstance);
+        ArrayList<ConditionInstance> toRemove = new ArrayList<ConditionInstance>();
+        for (ConditionInstance conditionInstance : getConditionInstances()) {
+            if (conditionInstance.getDuration().getDurationType() == DurationType.LONG_REST) { //probably need to refresh all, not just LONG_REST
+                toRemove.add(conditionInstance);
             }
         }
-        statusEffectInstances.removeAll(toRemove);
+        conditionInstances.removeAll(toRemove);
     }
 
     // ### GETTERS, SETTERS, ADDERS 
@@ -252,13 +252,13 @@ public class Creature {
         return 8 + this.getAbilityModifier(spellcastingAbility) + this.getProficiencyBonus();
     }
 
-    public void setConcentratingOn(Castable castable) { // sets both the creature's attribute and the concentrating statuseffect  
+    public void setConcentratingOn(Castable castable) { // sets both the creature's attribute and the concentrating condition  
         this.concentratingOn = castable;
         if (castable == null) {
         // TODO call CreatureService.remove previous from other creatures OR just move this whole function in CreatureService
-            this.removeStatusEffectInstance(StatusEffect.CONCENTRATING);
+            this.removeConditionInstance(Condition.CONCENTRATING);
         } else {
-            this.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CONCENTRATING, castable.getDuration(),
+            this.addConditionInstance(new ConditionInstance(Condition.CONCENTRATING, castable.getDuration(),
                     new EffectSource(EffectSourceType.CASTABLE, this)));
 
         }
@@ -299,7 +299,7 @@ public class Creature {
     public void equipItem(UUID itemId, EquipSlot equipSlot) {
         // remove buffs from previous in that slot (add function to recalculate all status effects)
         // getEquipedInSlot(EquipSlot equipSlot) = this.getItem(itemId);
-        // if creature is holding Produce Flame gain Lighted StatusEffect (or just add a lighted boolean to all items and add status effect if holding item)
+        // if creature is holding Produce Flame gain Lighted Condition (or just add a lighted boolean to all items and add status effect if holding item)
     }
 
     public TurnResource getTurnResource(TurnResourceType turnResourceType) {
@@ -347,34 +347,34 @@ public class Creature {
         this.turnResources.add(turnResource);
     }
 
-    public void addStatusEffectInstance(StatusEffectInstance statusEffectInstance) {
-        statusEffectInstances.add(statusEffectInstance);
+    public void addConditionInstance(ConditionInstance conditionInstance) {
+        conditionInstances.add(conditionInstance);
         // print/log if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
         // then have a popup for what he rolled
     }
 
-    public void removeStatusEffectInstance(StatusEffect statusEffect) {
-        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()) {
-            if (statusEffectInstance.getStatusEffect().equals(statusEffect)) {
-                getStatusEffectInstances().remove(statusEffectInstance);
+    public void removeConditionInstance(Condition condition) {
+        for (ConditionInstance conditionInstance : getConditionInstances()) {
+            if (conditionInstance.getCondition().equals(condition)) {
+                getConditionInstances().remove(conditionInstance);
             }
         }
     }
 
-    public List<StatusEffect> getIncludedStatusEffects(){
-        List<StatusEffect> statusEffects = new ArrayList<>();
-        for (StatusEffectInstance statusEffectInstance : getStatusEffectInstances()){
-            for (StatusEffect statusEffect : statusEffectInstance.getStatusEffect().getAllIncludedEffects()){
-                statusEffects.add(statusEffect);
+    public List<Condition> getIncludedConditions(){
+        List<Condition> conditions = new ArrayList<>();
+        for (ConditionInstance conditionInstance : getConditionInstances()){
+            for (Condition condition : conditionInstance.getCondition().getAllIncludedEffects()){
+                conditions.add(condition);
             }
         }
-        return statusEffects;
+        return conditions;
     }
 
 
-    public boolean hasStatusEffect(StatusEffect statusEffect) {
-        for (StatusEffect includedStatusEffect : getIncludedStatusEffects()) {
-            if (includedStatusEffect == statusEffect) {
+    public boolean hasCondition(Condition condition) {
+        for (Condition includedCondition : getIncludedConditions()) {
+            if (includedCondition == condition) {
                 return true;
             }
         }

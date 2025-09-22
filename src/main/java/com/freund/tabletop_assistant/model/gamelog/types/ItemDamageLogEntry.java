@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ItemDamageLogEntry extends DamageLogEntry { // TODO probably remove (when does an item damage without a castable or a statuseffect?)
+public class ItemDamageLogEntry extends DamageLogEntry { // TODO probably remove (when does an item damage without a castable or a condition?)
     private Item item;
 
     public ItemDamageLogEntry(boolean isNested, Creature targetCreature, DamageEntry damageComponent, List<StatCalculationBreakdown> statCalculationBreakdowns, Item item){

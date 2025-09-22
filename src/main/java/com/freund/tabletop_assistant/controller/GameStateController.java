@@ -31,30 +31,4 @@ public class GameStateController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("IOException while saving GameState!");
         }
     }
-
-    /* 
-    @GetMapping("/addcreatures")
-    public ResponseEntity<String> temporaryCreature() {
-        ArrayList<Creature> empty = new ArrayList<>();
-        gameStateService.getGameState().setCreatures(empty);
-
-        Creature a = new Creature("Creature Ninjani", Subrace.DROW);
-        gameStateService.addCreature(a);
-
-        Creature b = new Creature("Second", Subrace.DEMON);
-        b.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.BLINDED, new Duration(DurationType.INDEFINITE), null, null, "lmao"));
-        gameStateService.addCreature(b);
-
-        Creature c = new Creature("Player", Subrace.HALF_ELF);
-        c.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.BLESS, new Duration(DurationType.LONG_REST), null, null, "long note"));
-        c.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.BARKSKIN, new Duration(DurationType.LONG_REST), null, null, ""));
-        gameStateService.addCreature(c);
-
-        Creature d = new Creature("Fourth", Subrace.HILL_DWARF);
-        d.addStatusEffectInstance(new StatusEffectInstance(StatusEffect.CHILLED, new Duration(DurationType.TURNS, 3), null, null, "he kinda chill with it tho"));
-        gameStateService.addCreature(d);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("Creatures added.");
-    }
-    */
 }

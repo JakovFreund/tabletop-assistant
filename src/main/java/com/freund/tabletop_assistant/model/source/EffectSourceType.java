@@ -1,6 +1,6 @@
 package com.freund.tabletop_assistant.model.source;
 
-public enum EffectSourceType { // used for damageinstance, statuseffect
+public enum EffectSourceType { // used for damageinstance, condition
     CASTABLE,
     ITEM,
     FALL_DAMAGE,

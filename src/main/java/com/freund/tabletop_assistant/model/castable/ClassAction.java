@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.freund.tabletop_assistant.model.ability.Ability;
+import com.freund.tabletop_assistant.model.condition.Condition;
 import com.freund.tabletop_assistant.model.duration.Duration;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffect;
 import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
 
 import lombok.Data;
@@ -19,9 +19,9 @@ public class ClassAction extends Castable {
     public ClassAction(CastableType castableType, boolean ritual, boolean concentration, Ability savingThrow,
             EffectTarget effectTarget, Duration duration, Map<TurnResourceType, Integer> costs,
             List<CastableDamageComponent> castableDamageComponents, Map<Integer, String> healAtSlotLevel,
-            List<StatusEffect> statusEffects, List<String> description) {
+            List<Condition> conditions, List<String> description) {
         super(castableType, ritual, concentration, savingThrow, effectTarget, duration, costs, castableDamageComponents,
-                healAtSlotLevel, statusEffects, description);
+                healAtSlotLevel, conditions, description);
     }
 }
 

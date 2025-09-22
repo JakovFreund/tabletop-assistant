@@ -32,7 +32,7 @@ public class CreatureDTO {
     private Map<Ability, Boolean> savingThrowProficiencies;
     private Map<GameClass, Integer> classes;
     private List<Subclass> subclasses;
-    private List<StatusEffectInstanceDTO> statusEffectInstances;
+    private List<ConditionInstanceDTO> conditionInstances;
     private List<TurnResource> turnResources;
     //private List<ItemStack> inventory;
     private UUID equiped[];

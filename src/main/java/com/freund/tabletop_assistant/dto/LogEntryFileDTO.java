@@ -37,8 +37,8 @@ public class LogEntryFileDTO {
     private DamageEntry damageEntry;
     private EffectSourceType effectSourceType;
     private CastableInstanceFileDTO castableInstance;
-    private StatusEffectInstanceDTO lostStatusEffectInstance;
-    private StatusEffectInstanceDTO receivedStatusEffectInstance;
+    private ConditionInstanceDTO lostConditionInstance;
+    private ConditionInstanceDTO receivedConditionInstance;
 
     private List<StatCalculationBreakdown> statCalculationBreakdowns;
     

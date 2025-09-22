@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import com.freund.tabletop_assistant.dto.CastableInstanceFileDTO;
 import com.freund.tabletop_assistant.dto.EffectSourceDTO;
 import com.freund.tabletop_assistant.dto.LogEntryFileDTO;
-import com.freund.tabletop_assistant.dto.StatusEffectInstanceDTO;
+import com.freund.tabletop_assistant.dto.ConditionInstanceDTO;
 import com.freund.tabletop_assistant.model.castable.CastableInstance;
+import com.freund.tabletop_assistant.model.condition.ConditionInstance;
 import com.freund.tabletop_assistant.model.gamelog.LogEntry;
 import com.freund.tabletop_assistant.model.gamelog.types.CastableDamageLogEntry;
 import com.freund.tabletop_assistant.model.gamelog.types.CastablePingedLogEntry;
@@ -25,7 +26,6 @@ import com.freund.tabletop_assistant.model.gamelog.types.ReceivedConditionFromCa
 import com.freund.tabletop_assistant.model.gamelog.types.ReceivedConditionLogEntry;
 import com.freund.tabletop_assistant.model.gamelog.types.ReceivedEffectLogEntry;
 import com.freund.tabletop_assistant.model.source.EffectSource;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffectInstance;
 
 @Service
 public class LogEntryReconstructorService {
@@ -110,7 +110,7 @@ public class LogEntryReconstructorService {
 
     private void mapReceivedConditionFields(ReceivedConditionLogEntry entry, LogEntryFileDTO dto) {
         mapReceivedEffectFields(entry, dto);
-        entry.setReceivedStatusEffectInstance(mapStatusEffectInstance(dto.getReceivedStatusEffectInstance()));
+        entry.setReceivedConditionInstance(mapConditionInstance(dto.getReceivedConditionInstance()));
     }
 
     private CastableInstance mapCastableInstance(CastableInstanceFileDTO dto) {
@@ -122,12 +122,12 @@ public class LogEntryReconstructorService {
         return castableIntance;
     }
 
-    private StatusEffectInstance mapStatusEffectInstance(StatusEffectInstanceDTO dto) {
-        StatusEffectInstance statusEffectInstance = new StatusEffectInstance();
-        statusEffectInstance.setStatusEffect(dto.getStatusEffect());
-        statusEffectInstance.setDuration(dto.getDuration());
-        statusEffectInstance.setEffectSource(mapEffectSource(dto.getEffectSourceDTO()));
-        return statusEffectInstance;
+    private ConditionInstance mapConditionInstance(ConditionInstanceDTO dto) {
+        ConditionInstance conditionInstance = new ConditionInstance();
+        conditionInstance.setCondition(dto.getCondition());
+        conditionInstance.setDuration(dto.getDuration());
+        conditionInstance.setEffectSource(mapEffectSource(dto.getEffectSourceDTO()));
+        return conditionInstance;
     }
 
     private EffectSource mapEffectSource(EffectSourceDTO dto) {
@@ -176,7 +176,7 @@ public class LogEntryReconstructorService {
         LostConditionLogEntry entry = new LostConditionLogEntry();
         mapBaseFields(entry, dto);
         entry.setTargetCreature(creatureService.getCreature(dto.getTargetCreatureId()));
-        entry.setLostStatusEffectInstance(mapStatusEffectInstance(dto.getLostStatusEffectInstance()));
+        entry.setLostConditionInstance(mapConditionInstance(dto.getLostConditionInstance()));
         return entry;
     }
 

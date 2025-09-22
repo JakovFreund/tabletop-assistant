@@ -7,8 +7,8 @@ import com.freund.tabletop_assistant.model.ability.Ability;
 import com.freund.tabletop_assistant.model.castable.CastableDamageComponent;
 import com.freund.tabletop_assistant.model.castable.CastableType;
 import com.freund.tabletop_assistant.model.castable.EffectTarget;
+import com.freund.tabletop_assistant.model.condition.Condition;
 import com.freund.tabletop_assistant.model.duration.Duration;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffect;
 import com.freund.tabletop_assistant.model.turnresource.TurnResourceType;
 
 import lombok.Data;
@@ -28,6 +28,6 @@ public class CastableDTO {
     private Map<TurnResourceType, Integer> costs;
     private List<CastableDamageComponent> castableDamageComponents;
     private Map<Integer, String> healAtSlotLevel;
-    private List<StatusEffect> appliesStatusEffects;
+    private List<Condition> appliesConditions;
     private List<String> description;
 }

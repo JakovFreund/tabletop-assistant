@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EffectSource { // used for damageinstance, statuseffect
+public class EffectSource { // used for damageinstance, condition
     private EffectSourceType effectSourceType;
     private Creature creature;
 }

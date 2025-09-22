@@ -62,8 +62,8 @@ public class LogEntryFileMapper {
 
     private static void mapReceivedConditionFields(LogEntryFileDTO dto, ReceivedConditionLogEntry logEntry) {
         mapReceivedEffectFields(dto, logEntry);
-        dto.setReceivedStatusEffectInstance(
-                StatusEffectInstanceMapper.toDTO(logEntry.getReceivedStatusEffectInstance()));
+        dto.setReceivedConditionInstance(
+                ConditionInstanceMapper.toDTO(logEntry.getReceivedConditionInstance()));
     }
 
     public static LogEntryFileDTO toDTO(DamageLogEntry logEntry) {
@@ -120,9 +120,9 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapBaseFields(dto, logEntry);
         dto.setTargetCreatureId(logEntry.getTargetCreature().getCreatureId());
-        dto.setLostStatusEffectInstance(StatusEffectInstanceMapper.toDTO(logEntry.getLostStatusEffectInstance()));
+        dto.setLostConditionInstance(ConditionInstanceMapper.toDTO(logEntry.getLostConditionInstance()));
         dto.setText(logEntry.getTargetCreature().getName() + " lost condition "
-                + logEntry.getLostStatusEffectInstance().getStatusEffect().toString());
+                + logEntry.getLostConditionInstance().getCondition().toString());
         return dto;
     }
 
@@ -131,7 +131,7 @@ public class LogEntryFileMapper {
         mapReceivedConditionFields(dto, logEntry);
         dto.setCastableUsedLogEntryId(logEntry.getCastableUsedLogEntry().getLogEntryId());
         dto.setText(logEntry.getTargetCreature().getName() + " received condition "
-                + logEntry.getReceivedStatusEffectInstance().toString() + " from "
+                + logEntry.getReceivedConditionInstance().toString() + " from "
                 + logEntry.getCastableUsedLogEntry().getCastableInstance().getCastable().getCastableType().CASTABLE_NAME
                 + " - "
                 + logEntry.getCastableUsedLogEntry().getCastableInstance().getCaster().getName());
@@ -142,7 +142,7 @@ public class LogEntryFileMapper {
         LogEntryFileDTO dto = new LogEntryFileDTO();
         mapReceivedConditionFields(dto, logEntry);
         dto.setText(logEntry.getTargetCreature().getName() + " received condition "
-                + logEntry.getReceivedStatusEffectInstance().toString() + " from " + logEntry.getEffectSourceType());
+                + logEntry.getReceivedConditionInstance().toString() + " from " + logEntry.getEffectSourceType());
         return dto;
     }
 }

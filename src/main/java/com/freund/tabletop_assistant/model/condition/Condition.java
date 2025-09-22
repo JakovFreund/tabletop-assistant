@@ -1,4 +1,4 @@
-package com.freund.tabletop_assistant.model.statuseffect;
+package com.freund.tabletop_assistant.model.condition;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public enum StatusEffect {
+public enum Condition {
     // @formatter:off
 
     // Immunities, Resistances, Vulnerabilities
@@ -441,7 +441,7 @@ public enum StatusEffect {
     // https://bg3.wiki/wiki/Feats
     // https://baldursgate3.wiki.fextralife.com/Traits+and+Features
 
-    // check if each class action is possible (do necessary turnresources and statuseffects exist):
+    // check if each class action is possible (do necessary turnresources and conditions exist):
 
     // for the effects you can't proc because of unknown variables or impossible implementation: print out what must happen to log (with a #needsDMaction tag or something)
 
@@ -459,17 +459,17 @@ public enum StatusEffect {
     // https://bg3.wiki/wiki/Template:WizardNavbox
 
 
-    private final static List<StatusEffect> CHARMED_STATUS_GROUP = List.of(CHARMED, DOMINATED, FRIENDS, HYPNOTIC_GAZE, HYPNOTIZED, IRRESISTIBLE_DANCE, LURED, PLANAR_BINDING);
-    private final static List<StatusEffect> FRIGHTENED_STATUS_GROUP = List.of(FRIGHTENED, FEARFUL);
-    private final static List<StatusEffect> DISEASED_STATUS_GROUP = List.of(CRAWLING_GNAW, HARM, INFECTED, SEPTIC, CONTAGION_BLINDING_SICKNESS, CONTAGION_FILTH_FEVER, CONTAGION_FLESH_ROT, CONTAGION_MINDFIRE, CONTAGION_SEIZURE, CONTAGION_SLIMY_DOOM);
-    private final static List<StatusEffect> HELPABLE_STATUS_GROUP = List.of(BURNING, DAZED, DOWNED, FEIGNING_DEATH, HYPNOTIZED, OFF_BALANCE, SLEEPING, WEAK_GRIP);
-    private final static List<StatusEffect> PARALYZED_STATUS_GROUP = List.of(); // TODO https://bg3.wiki/wiki/SG_Paralyzed
+    private final static List<Condition> CHARMED_STATUS_GROUP = List.of(CHARMED, DOMINATED, FRIENDS, HYPNOTIC_GAZE, HYPNOTIZED, IRRESISTIBLE_DANCE, LURED, PLANAR_BINDING);
+    private final static List<Condition> FRIGHTENED_STATUS_GROUP = List.of(FRIGHTENED, FEARFUL);
+    private final static List<Condition> DISEASED_STATUS_GROUP = List.of(CRAWLING_GNAW, HARM, INFECTED, SEPTIC, CONTAGION_BLINDING_SICKNESS, CONTAGION_FILTH_FEVER, CONTAGION_FLESH_ROT, CONTAGION_MINDFIRE, CONTAGION_SEIZURE, CONTAGION_SLIMY_DOOM);
+    private final static List<Condition> HELPABLE_STATUS_GROUP = List.of(BURNING, DAZED, DOWNED, FEIGNING_DEATH, HYPNOTIZED, OFF_BALANCE, SLEEPING, WEAK_GRIP);
+    private final static List<Condition> PARALYZED_STATUS_GROUP = List.of(); // TODO https://bg3.wiki/wiki/SG_Paralyzed
 
 
     final String DESCRIPTION;
-    final List<StatusEffect> INCLUDED_EFFECTS;
+    final List<Condition> INCLUDED_EFFECTS;
 
-    StatusEffect(String description, List<StatusEffect> includedEffects) {
+    Condition(String description, List<Condition> includedEffects) {
         this.DESCRIPTION = description;
         this.INCLUDED_EFFECTS = includedEffects;
     }
@@ -500,34 +500,34 @@ public enum StatusEffect {
     }
 
     @JsonIgnore
-    public List<StatusEffect> getAllIncludedEffects(){
-        Set<StatusEffect> allIncludedEffects = new HashSet<StatusEffect>();
+    public List<Condition> getAllIncludedEffects(){
+        Set<Condition> allIncludedEffects = new HashSet<Condition>();
         allIncludedEffects.add(this);
         boolean eachIncludedEffectIsEmpty;
         do {
-            for(StatusEffect statusEffect : allIncludedEffects){
-                for(StatusEffect includedEffect : statusEffect.INCLUDED_EFFECTS){
+            for(Condition condition : allIncludedEffects){
+                for(Condition includedEffect : condition.INCLUDED_EFFECTS){
                     allIncludedEffects.add(includedEffect);
                 }
             }
             eachIncludedEffectIsEmpty = true;
-            for(StatusEffect statusEffect : allIncludedEffects){
-                if(!statusEffect.INCLUDED_EFFECTS.isEmpty()){
+            for(Condition condition : allIncludedEffects){
+                if(!condition.INCLUDED_EFFECTS.isEmpty()){
                     eachIncludedEffectIsEmpty = false;
                 }
             }
         }
         while(!eachIncludedEffectIsEmpty);
-        List<StatusEffect> returnList = new ArrayList<StatusEffect>();
+        List<Condition> returnList = new ArrayList<Condition>();
         returnList.addAll(allIncludedEffects);
         return returnList;
     }
 
-    public boolean includesEffect(StatusEffect includedEffect){
+    public boolean includesEffect(Condition includedEffect){
         if (this.equals(includedEffect)){
             return true;
         }
-        for (StatusEffect effect : this.INCLUDED_EFFECTS){
+        for (Condition effect : this.INCLUDED_EFFECTS){
             if (effect.includesEffect(includedEffect)){
                 return true;
             }

@@ -27,8 +27,8 @@ public class CreatureMapper {
         dto.setSavingThrowProficiencies(creature.getSavingThrowProficiencies());
         dto.setClasses(creature.getClasses());
         dto.setSubclasses(creature.getSubclasses());
-        dto.setStatusEffectInstances(creature.getStatusEffectInstances().stream()
-                .map(StatusEffectInstanceMapper::toDTO).collect(Collectors.toCollection(ArrayList::new)));
+        dto.setConditionInstances(creature.getConditionInstances().stream()
+                .map(ConditionInstanceMapper::toDTO).collect(Collectors.toCollection(ArrayList::new)));
         dto.setTurnResources(creature.getTurnResources());
         //dto.setInventory(creature.getInventory());
         dto.setEquiped(creature.getEquiped());

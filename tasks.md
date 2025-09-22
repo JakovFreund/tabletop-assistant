@@ -1,5 +1,4 @@
 ### TASKS
-- rename StatusEffect (and all mentions, variable names) to Condition
 - define each class levelup
     - fill in bg3 classes to docx
     - compare bg3 and dnd subclasses
@@ -42,16 +41,16 @@
 - the castable always gets resolved immediately, meaning CastableUsedLogEntry and ReceivedEffectFromCastableLogEntry have to come together.
 - implement loading a limited number of LogEntries from log file
 - add a CastableHeal object aswell - because of source and drag n dropping
-- pressing CastableUsedLogEntry on DM sandbox screen copies all Damage and StatusEffect objects there
+- pressing CastableUsedLogEntry on DM sandbox screen copies all Damage and Condition objects there
 - a the bottom of the screen is a log (player pings, DM pings, DM actions/changes all go there), has ability to filter only DM actions
 - add a clickable damage object in log that auto copies the damage into calculator (or just queues text pointer on appropriate damage types)
-- when a player pings a spell, the log prints out all the info and buttons for the DM which i can use to autosubtract turnresources, autofocus damage textboxes (by drag n droping damage on the target creature and just entering appropriate amounts for each type, also autofill in if not dice notation) autoapply statuseffect by drag n drop (with info about the target type [self, enemy...] for clearer gameflow)
+- when a player pings a spell, the log prints out all the info and buttons for the DM which i can use to autosubtract turnresources, autofocus damage textboxes (by drag n droping damage on the target creature and just entering appropriate amounts for each type, also autofill in if not dice notation) autoapply condition by drag n drop (with info about the target type [self, enemy...] for clearer gameflow)
 - the players see colored labels instead of buttons so they can't use them
-- when taking damage and checking StatusEffects (ex. resistances) there is an empty list of possible procs and procs get added if true so output can be ˇˇ
+- when taking damage and checking Conditions (ex. resistances) there is an empty list of possible procs and procs get added if true so output can be ˇˇ
 - "(0, 10, 0, 6, 0, 0, 0) -> Goblin has taken 8 damage (COLD_RESISTANCE, POISON_RESISTANCE)"
 - Creature.cast() ?
 - change LogEntryFrontendDTO.itemId and itemName to ItemDTO (definetly need description and maybe other stuff)
-- players can also ping consumables (prints clickable heal/addStatusEffect, consume item, TurnResource costs)
+- players can also ping consumables (prints clickable heal/addCondition, consume item, TurnResource costs)
 - players don't have to ping just to get information (it's already calculated for each spell)
 - creature end turn displays in combat log (and start of next creature's turn)
 - maybe implement log calculations info later
@@ -106,9 +105,9 @@
 4. i fill in result
 5. (if saving throw needed individual enemies roll saving throws)
 6. enemies get hit
-    - loop through all enemies, damages and statusEffects and ouput logentries one by one for each
+    - loop through all enemies, damages and conditions and ouput logentries one by one for each
     - creatureService.hitCreatureWithCastableInstance(creature, castableInstance) -> creatureService.damageCreature(creature, damageInstance(castableInstance))
-    - creatureService.addStatusEffectInstance(creature, statusEffectInstance(castableInstance))
+    - creatureService.addConditionInstance(creature, conditionInstance(castableInstance))
     ^^ #todo i should name these functions better
 7. log entries
 
@@ -131,7 +130,7 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - probably need GameState.List<Item> similar to creatures - since items don't have to be on creatures, especially unknown to players
 - make a proof-of-concept frontend combat simulator
     - integrate the whole combat system with backend (castables/actions, )
-    - apply statuseffect to creature
+    - apply condition to creature
     - implement weapon modifiers
 
 - color scheme for frontend ? (dark red, black + desaturated yellow parchment)
@@ -143,7 +142,7 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - mounts will work like creatures attached to the creature riding them (boosting their speed?), they have a turn in combat but cannot move if somebody is riding them.
 - Mount.java (class for mounts from 5e-Equipment.json with all stats (speed, capacity...))
 - search all files for HashMaps and ArrayLists and consider converting to Maps and Lists (research best practices for Java in general and Jackson specifically)
-- shorten StatusEffects by finding common denominators (ex. can't take Actions)
+- shorten Conditions by finding common denominators (ex. can't take Actions)
 - combat scene boolean: inside OR outside (apply wet if outside and raining)
 - combat scene lighting that automatically applies disadvantage if no-one is holding a torch (takes into consideration darkvision, weather and time of day if outside) 
 - announce in global log if time-of-day, lighting or weather changes
@@ -151,14 +150,14 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - go through all spells and make status effects if there isn't one
 - how to get the local ipv4 automatically to auto connect to backend (remove hardcoded ip from WebConfig.java and api.ts) OR move it to a config file
 - add connection error UI on fetch gamestate fail
-- do i need StatusEffectInstance.removedOnSourceLostConcentration
-- for the statuseffects you can't proc because of unknown variables or impossible implementation: print out what must happen to log (with a #needsDMaction tag or something) if StatusEffect isn't programmed in or requires player action (add special ui/notification for that)
-- implement the StatusEffectInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
-- implement concentration loss and removal of statuseffects from other creatures
-- should i implement statuseffect procs with Spring @EventListener
-- i can implement the status effects related to caster (ex. Friends) using statuseffectinstance.source.creatureId 
+- do i need ConditionInstance.removedOnSourceLostConcentration
+- for the conditions you can't proc because of unknown variables or impossible implementation: print out what must happen to log (with a #needsDMaction tag or something) if Condition isn't programmed in or requires player action (add special ui/notification for that)
+- implement the ConditionInstance dependsUpon() (careful for multiple sources) and removeOnSourceLostConcentration() ?
+- implement concentration loss and removal of conditions from other creatures
+- should i implement condition procs with Spring @EventListener
+- i can implement the status effects related to caster (ex. Friends) using conditioninstance.source.creatureId 
 - add unique slot icons (full and empty) to each TurnResource (also for custom)
-- add addictions (statuseffects) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
+- add addictions (conditions) to alcohol, {customLoreNarcotic} (where players get a buff until short rest when they use it, but then get a debuff for a week)
 - maybe move api.ts requests to seperate files ?
 - research and possibly implement store.useAppDispatch
 - fix and cleanup frontend completely
@@ -168,11 +167,11 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
     - redux store
     - sync types with backend DTOs
     - does gamestate/gamelog/device syncing re-render components?
-- CreatureService.removeConcentration(Creature) - check other creatures for matching statuseffects that need to be removed
-- when you drag a statuseffect on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
+- CreatureService.removeConcentration(Creature) - check other creatures for matching conditions that need to be removed
+- when you drag a condition on a creature, specify if saving throw is needed, what DC, and if affected creature has proficiency in that saving throw
 - ^^ If saving throw needed, pop-up that inputs roll amount and adds proficiency, skill modifier or whatever is needed. (log "Saving throw failed..." with all info)
 - implement remove status effect on lost concentration
-- add rogue expertise statuseffect for all skills
+- add rogue expertise condition for all skills
 - add fantasy datetime to gamestate (check dnd lore, should i use 12 months and 365 days of something else?)
 - fill in race movement speeds
 - finish races & subraces enums
@@ -182,7 +181,7 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - add default actions (Grab, Shove, Throw, Help, Dash...) - DefaultActions.java ?
 - you can extend Spell for a special case/functionality like with DefaultAction
 - implement existing ItemEffects
-- go through MagicItems descriptions and add ItemEffects and StatusEffects
+- go through MagicItems descriptions and add ItemEffects and Conditions
 - WeaponProperties functionality and calculations (different scaling/damage)
 - fill in MagicItems weapons and armour stats
 - add generateRandomItem() + on weapon/armour creation randomly determine rarity upgrade (yes or no boolean) and then add 1 effect or none
@@ -191,16 +190,16 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - DM also has a seperate inventory
 - https://bg3.wiki/wiki/Weapon_actions (add them to WeaponType and WeaponAttributes)
 - add auto-calculation of base damage (stats + equipped weapon), AC, and a bunch of other stats
-- finish all statuseffects enum
-- double check each StatusEffect included effects
+- finish all conditions enum
+- double check each Condition included effects
 - make a static playable races list in Race enum
 - change "Elemental Weapon" spell so it doesn't give +1 to both Attack roll and damgae roll, but only to attack roll
-- check out weapon StatusEffect implementation (MAGIC_WEAPON, PACT_WEAPON...). Can items have StatusEffects?
-- also need a appliesStatusEffect property of spell (clickable in log and can be dragged to a creature)
+- check out weapon Condition implementation (MAGIC_WEAPON, PACT_WEAPON...). Can items have Conditions?
+- also need a appliesCondition property of spell (clickable in log and can be dragged to a creature)
 - move gamestate to folder (rename to save-DD-MM-YY or something)
 - periodic gamestate saving (saves both to "latest.json" and "backups/21-02-24-12-37-30.json", on start autoloads latest) ~ saves every 2 minutes
 - render different damage types and heals differently (create react objects for them?)
-- go look through monsters statblocks for missing statuseffects
+- go look through monsters statblocks for missing conditions
 - Creature.spellbook (will need primary ability of source of learned spell to calculate save DC), sort spellbook by school, ability to favourite spells
 - prepared spells (how different classes do it)
 - maybe sort race and class TurnResource counters to different objects/classes ?
@@ -215,13 +214,13 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - time controls (play, pause, speed, increment a specific amount in either direction, undo(gamestate rollback))
 - manually check SpellData if spell upcast booleans are accurate
 - spells that have multiple damage types were wrong in the json, fix manually in SpellData
-- on combat end convert currently active castable costs (channeling) to a custom StatusEffect "CASTING_SPELL" with the same Duration
-- ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING statuseffect that prohibits use of action)
+- on combat end convert currently active castable costs (channeling) to a custom Condition "CASTING_SPELL" with the same Duration
+- ^^ or maybe do that immidietly for any channeling (instead of using an action every turn just have a CHANNELING condition that prohibits use of action)
 - css google when should i target element by tag/type vs className
 - go through all css classNames and change them accordingly
-- add monochrome icons (display in corner) and descriptions to StatusEffect Status Groups
+- add monochrome icons (display in corner) and descriptions to Condition Status Groups
 - spirit guardians spell aoe wrong in json
-- add all wild magic statuseffects from 5e
+- add all wild magic conditions from 5e
 - subracial default images (duochrome outlines with different colors - similar to icons from https://www.dndbeyond.com/monsters)
 - have the same-race subraces have similar colors
 - ^^ same for item categories (note: weapons have a default icon of an axe crossed with a sword if there is no difference between weapon types (swords, axes...))
@@ -236,15 +235,15 @@ Goblin1 received condition: BURNING from Main Hand Attack - Shadowheart
 - pre-map the finished creatures to deviceNicknames
 - geographical areas aoe buffs and debuffs yugioh field spell style
 - add a hungry status effect that gives a small debuff
-- the DM can edit items, statuseffects, characters stats, and everything you can think of (need to add interfaces/menus for all that)
-- for dm screen make a "DmObject" class that gets extended by StatusEffectInstanceDmObject, CreatureDmObject... This way I can bundle different object types together in "folders"
-- DM can search all ItemData, SpellData and StatusEffects and add them to his inventory where they can be edited (items get random id on clone - itemIDs in ItemData don't matter)
+- the DM can edit items, conditions, characters stats, and everything you can think of (need to add interfaces/menus for all that)
+- for dm screen make a "DmObject" class that gets extended by ConditionInstanceDmObject, CreatureDmObject... This way I can bundle different object types together in "folders"
+- DM can search all ItemData, SpellData and Conditions and add them to his inventory where they can be edited (items get random id on clone - itemIDs in ItemData don't matter)
 - use Jackson to save ItemData and SpellData to jsons and load them on startup (add "outdated" comment to .py scripts)
 - advanced character sheet (when you click on a stat it shows you how it got that nunber - formula and subnumbers)
 - backend custom errors/exceptions and remove/replace all System.out.println with exceptions
-- each creature has a known spell list/statuseffect list and when they view another creature they see "unknown" status effects
-- PCs can learn of a statusEffect, subrace or item by reading a book about it, and they gain it to the known list (also gained if another PC tells them about it)
-- creature.knownStatusEffects (StatusEffect), knownSubraces (Subrace), knownItems (UUID for Items with item.needsIdentify: true)
+- each creature has a known spell list/condition list and when they view another creature they see "unknown" status effects
+- PCs can learn of a condition, subrace or item by reading a book about it, and they gain it to the known list (also gained if another PC tells them about it)
+- creature.knownConditions (Condition), knownSubraces (Subrace), knownItems (UUID for Items with item.needsIdentify: true)
 
 
 #### STATS/PROFILE + INVENTORY TAB
@@ -321,11 +320,11 @@ function MyComponent() {
 
 ### LOW PRIORITY IDEAS FOR LATER
 - have premade scenes (ex. Cave, Room, Dark Room, Outside Night, Outside Day) with stuff like lighting premade
-- players roll investigation checks on combat start for each new creature type to see their stats and abilities in combat (like homm4 few, band, scores...), on failed roll -> statuseffects and stats greyed out
-- add icons to statuseffects, spells, abilities
+- players roll investigation checks on combat start for each new creature type to see their stats and abilities in combat (like homm4 few, band, scores...), on failed roll -> conditions and stats greyed out
+- add icons to conditions, spells, abilities
 - add Artificer class
 - convert to 5.5e
-- move SpellData, StatusEffects and similar to json
+- move SpellData, Conditions and similar to json
 - modify high level spells with a high material cost (or which the spell consumes) to have some sort of penalty/limitation so PCs can't spam them
 - keep monster AC secret (TODO maybe reveal it either on hit or if a character has some proficiency when he gets closer) instead describe the armour that he is wearing and maybe his class
 - the ability to generate a character sheet A4 pdf (print them out before session) if somebody doesnt have a phone
@@ -366,7 +365,7 @@ mklink "E:\Alexandria\D&D\tabletop-assistant-tasks-copy.md" "E:\Programming\tabl
 - https://bg3.wiki/wiki/List_of_all_spells
 - dodaj spellove koji fale (izlistano dolje u ### BG3 spells missing from 5eSpells.json) u SpellData.java na dno postojece liste (ne abecedno)
 - pregledaj te bg3 spellove jesu li isti efekti u bg3 i 5e, i ako nisu odabrat koji se cini bolji
-- povezi spellove i status effecte u kodu (SpellData.java -> Spell.statusEffects List<StatusEffect>)
+- povezi spellove i status effecte u kodu (SpellData.java -> Spell.conditions List<Condition>)
 - zaokruzi feet koji nisu djeljivi sa 5
 - frontend css
 

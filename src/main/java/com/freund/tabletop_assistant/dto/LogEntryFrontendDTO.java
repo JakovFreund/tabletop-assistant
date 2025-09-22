@@ -38,8 +38,8 @@ public class LogEntryFrontendDTO {
     private DamageEntry damageEntry;
     private EffectSourceType effectSourceType;
     private CastableInstanceFrontendDTO castableInstance;
-    private StatusEffectInstanceDTO lostStatusEffectInstance;
-    private StatusEffectInstanceDTO receivedStatusEffectInstance;
+    private ConditionInstanceDTO lostConditionInstance;
+    private ConditionInstanceDTO receivedConditionInstance;
 
     private List<StatCalculationBreakdown> statCalculationBreakdowns;
 

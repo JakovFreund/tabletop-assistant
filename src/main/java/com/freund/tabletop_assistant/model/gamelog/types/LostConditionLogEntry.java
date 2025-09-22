@@ -1,9 +1,9 @@
 package com.freund.tabletop_assistant.model.gamelog.types;
 
+import com.freund.tabletop_assistant.model.condition.ConditionInstance;
 import com.freund.tabletop_assistant.model.creature.Creature;
 import com.freund.tabletop_assistant.model.gamelog.LogEntry;
 import com.freund.tabletop_assistant.model.gamelog.LogVisibility;
-import com.freund.tabletop_assistant.model.statuseffect.StatusEffectInstance;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class LostConditionLogEntry extends LogEntry {
     private Creature targetCreature;
-    private StatusEffectInstance LostStatusEffectInstance;
+    private ConditionInstance LostConditionInstance;
 
-    public LostConditionLogEntry (boolean isNested, Creature targetCreature, StatusEffectInstance LostStatusEffectInstance){
+    public LostConditionLogEntry (boolean isNested, Creature targetCreature, ConditionInstance LostConditionInstance){
         super(LogVisibility.SCENE, isNested);
         this.targetCreature = targetCreature;
-        this.LostStatusEffectInstance = LostStatusEffectInstance;
+        this.LostConditionInstance = LostConditionInstance;
     }
 }

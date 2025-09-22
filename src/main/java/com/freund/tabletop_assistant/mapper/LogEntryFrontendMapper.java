@@ -65,8 +65,8 @@ public class LogEntryFrontendMapper {
 
     private static void mapReceivedConditionFields(LogEntryFrontendDTO dto, ReceivedConditionLogEntry logEntry) {
         mapReceivedEffectFields(dto, logEntry);
-        dto.setReceivedStatusEffectInstance(
-                StatusEffectInstanceMapper.toDTO(logEntry.getReceivedStatusEffectInstance()));
+        dto.setReceivedConditionInstance(
+                ConditionInstanceMapper.toDTO(logEntry.getReceivedConditionInstance()));
     }
 
     public static LogEntryFrontendDTO toDTO(DamageLogEntry logEntry) {
@@ -109,7 +109,7 @@ public class LogEntryFrontendMapper {
         mapBaseFields(dto, logEntry);
         dto.setTargetCreatureId(logEntry.getTargetCreature().getCreatureId());
         dto.setTargetCreatureName(logEntry.getTargetCreature().getName());
-        dto.setLostStatusEffectInstance(StatusEffectInstanceMapper.toDTO(logEntry.getLostStatusEffectInstance()));
+        dto.setLostConditionInstance(ConditionInstanceMapper.toDTO(logEntry.getLostConditionInstance()));
         return dto;
     }
 

@@ -19,7 +19,7 @@ public class CastableMapper {
         dto.setCosts(castable.getCosts());
         dto.setCastableDamageComponents(castable.getCastableDamageComponents());
         dto.setHealAtSlotLevel(castable.getHealAtSlotLevel());
-        dto.setAppliesStatusEffects(castable.getAppliesStatusEffects());
+        dto.setAppliesConditions(castable.getAppliesConditions());
         dto.setDescription(castable.getDescription());
         return dto;
     }

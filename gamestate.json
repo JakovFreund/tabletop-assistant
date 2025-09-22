@@ -45,7 +45,7 @@
             },
             "classes": {},
             "subclasses": [],
-            "statusEffectInstances": [],
+            "conditionInstances": [],
             "turnResources": [
                 {
                     "type": "ACTION",
@@ -157,9 +157,9 @@
             },
             "classes": {},
             "subclasses": [],
-            "statusEffectInstances": [
+            "conditionInstances": [
                 {
-                    "statusEffect": "BLINDED",
+                    "condition": "BLINDED",
                     "duration": {
                         "durationType": "INDEFINITE",
                         "turnsDuration": 0
@@ -278,9 +278,9 @@
             },
             "classes": {},
             "subclasses": [],
-            "statusEffectInstances": [
+            "conditionInstances": [
                 {
-                    "statusEffect": "BLESS",
+                    "condition": "BLESS",
                     "duration": {
                         "durationType": "LONG_REST",
                         "turnsDuration": 0
@@ -288,7 +288,7 @@
                     "effectSource": null
                 },
                 {
-                    "statusEffect": "BARKSKIN",
+                    "condition": "BARKSKIN",
                     "duration": {
                         "durationType": "LONG_REST",
                         "turnsDuration": 0
@@ -407,9 +407,9 @@
             },
             "classes": {},
             "subclasses": [],
-            "statusEffectInstances": [
+            "conditionInstances": [
                 {
-                    "statusEffect": "CHILLED",
+                    "condition": "CHILLED",
                     "duration": {
                         "durationType": "TURNS",
                         "turnsDuration": 3
